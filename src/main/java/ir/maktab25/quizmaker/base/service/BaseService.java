@@ -6,15 +6,15 @@ import org.springframework.data.domain.Pageable;
 import java.io.Serializable;
 import java.util.List;
 
-public interface BaseService<T, PK extends Serializable>  {
+public interface BaseService<E, PK extends Serializable>  {
 
-    T save(T t);
+    E save(E t);
 
-    Page<T> findAll(Pageable pageable);
+    Page<E> findAll(Pageable pageable);
 
-    List<T> findAll();
+    List<E> findAll();
 
-    T findOne(PK id);
+    E findOne(PK id);
 
     void delete(PK id);
 
