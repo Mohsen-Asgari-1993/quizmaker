@@ -47,7 +47,7 @@ public class BaseUser extends BaseEntity<Long> implements Serializable {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

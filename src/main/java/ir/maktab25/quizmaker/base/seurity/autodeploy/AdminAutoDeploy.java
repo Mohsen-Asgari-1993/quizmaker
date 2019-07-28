@@ -27,12 +27,12 @@ public class AdminAutoDeploy {
 
     @PostConstruct
     public void initialize() {
-        Role admin = roleService.findByName(RoleName.ROLE_ADMIN.toString());
+        Role admin = roleService.findByName(RoleName.ROLE_ADMIN);
         if (admin == null)
             admin = roleService.save(new Role(null, RoleName.ROLE_ADMIN, null));
-        if (roleService.findByName(RoleName.ROLE_TEACHER.toString()) == null)
+        if (roleService.findByName(RoleName.ROLE_TEACHER) == null)
             roleService.save(new Role(null, RoleName.ROLE_TEACHER, null));
-        if (roleService.findByName(RoleName.ROLE_STUDENT.toString()) == null)
+        if (roleService.findByName(RoleName.ROLE_STUDENT) == null)
             roleService.save(new Role(null, RoleName.ROLE_STUDENT, null));
 
         BaseUser roleAdmin = baseUserService.findByUserName("admin");
@@ -45,6 +45,17 @@ public class AdminAutoDeploy {
             roles.add(admin);
             roleAdmin.setRoles(roles);
             baseUserService.save(roleAdmin);
+        }
+        BaseUser roleSt = baseUserService.findByUserName("st");
+        if (roleSt == null) {
+            roleSt = new BaseUser();
+            roleSt.setUserName("st");
+            roleSt.setPassword(passwordEncoder.encode("student25"));
+            roleSt.setIsActive(false);
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleService.findByName(RoleName.ROLE_STUDENT));
+            roleSt.setRoles(roles);
+            baseUserService.save(roleSt);
         }
     }
 }
