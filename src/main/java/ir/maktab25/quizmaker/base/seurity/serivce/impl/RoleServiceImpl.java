@@ -17,6 +17,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long, RoleRepository>
 
     @Override
     public Role findByName(String name) {
-        return baseRepository.findByName(name);
+        return baseRepository.findByRoleName(name);
     }
 }
