@@ -1,7 +1,6 @@
 package ir.maktab25.quizmaker.base.seurity.serivce.impl;
 
 import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
-import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.repository.BaseUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,7 +42,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities(BaseUser baseUser) {
-        String[] userRoles = baseUser.getRoles().stream().map(Role::getName).toArray(String[]::new);
+        String[] userRoles = baseUser.getRoles().stream().map(Role -> Role.getRoleName().toString()).toArray(String[]::new);
         return AuthorityUtils.createAuthorityList(userRoles);
     }
 }
