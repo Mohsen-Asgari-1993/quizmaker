@@ -1,11 +1,11 @@
 package ir.maktab25.quizmaker.base.seurity.repository;
 
-import ir.maktab25.quizmaker.base.seurity.domian.User;
+import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface BaseUserRepository extends JpaRepository<BaseUser, Long> {
 
-    User findByUserName(String username);
+    BaseUser findByUserName(String username);
 }

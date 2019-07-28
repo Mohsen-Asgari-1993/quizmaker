@@ -36,6 +36,6 @@ public class Role extends BaseEntity<Long> implements Serializable {
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<User> usersYas = new HashSet<>();
+    private Set<BaseUser> users = new HashSet<>();
 
 }

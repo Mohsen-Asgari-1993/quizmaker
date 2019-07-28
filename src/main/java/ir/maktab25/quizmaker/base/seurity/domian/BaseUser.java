@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User extends BaseEntity<Long> implements Serializable {
+public class BaseUser extends BaseEntity<Long> implements Serializable {
 
 
     @Id
