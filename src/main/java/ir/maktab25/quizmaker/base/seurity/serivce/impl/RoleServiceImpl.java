@@ -2,6 +2,7 @@ package ir.maktab25.quizmaker.base.seurity.serivce.impl;
 
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
+import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.repository.RoleRepository;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long, RoleRepository>
     }
 
     @Override
-    public Role findByName(String name) {
-        return baseRepository.findByRoleName(name);
+    public Role findByName(RoleName roleName) {
+        return baseRepository.findByRoleName(roleName);
     }
 }
