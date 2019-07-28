@@ -2,6 +2,7 @@ package ir.maktab25.quizmaker.base.seurity.domian;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.maktab25.quizmaker.base.domain.BaseEntity;
+import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -30,8 +31,9 @@ public class Role extends BaseEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", unique = true)
-    private String name;
+    @Column(name = "role_name")
+    @Enumerated(EnumType.STRING)
+    private RoleName roleName;
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
