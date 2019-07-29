@@ -1,6 +1,7 @@
 package ir.maktab25.quizmaker.base.seurity.config;
 
 import ir.maktab25.quizmaker.base.seurity.serivce.impl.UserDetailServiceImpl;
+import ir.maktab25.quizmaker.base.seurity.successurlhandler.CustomSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,6 +16,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailServiceImpl userDetailService;
+
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
+
     private final String loginPageUrl = "/form/login.html";
 
     @Bean
@@ -41,8 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .formLogin()
-//                .loginPage("/form/login.html")
-                .defaultSuccessUrl("/");
-//                .permitAll();
+                .successHandler(customSuccessHandler);
     }
 }
