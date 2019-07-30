@@ -13,10 +13,10 @@ public interface CourseService extends BaseService<Course, Long> {
 
     List<Course> findAllByStudents(BaseUser students);
 
-    Course addTeacher(BaseUser teacher);
+    Course addTeacher(BaseUser teacher, Long id);
 
-    Course addStudent(BaseUser student);
+    Course addStudent(BaseUser student, Long id);
 
-    Course addStudents(Set<BaseUser> students);
+    Course addStudents(Set<BaseUser> students, Long id);
 
 }
