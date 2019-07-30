@@ -9,16 +9,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
-
-import static org.hibernate.id.IdentifierGenerator.ENTITY_NAME;
 
 @Setter
 @Getter
@@ -59,31 +54,27 @@ public class BaseRestFulService<E extends BaseEntity<PK>, D extends BaseDTO<PK>,
     @GetMapping("/pageable")
     public ResponseEntity<List<D>> getAll(@ApiParam Pageable pageable) {
         Page<E> page = baseService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "*/getAll");
-        return new ResponseEntity<>(convertListEntityToDTO(page.getContent()), headers, HttpStatus.OK);
+        return ResponseEntity.ok(baseMapper.entityToDTOList(page.getContent()));
     }
 
     @GetMapping
-    @Timed
     public ResponseEntity<List<D>> getAllNotPageable() {
         List<E> page = baseService.findAll();
-//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "*/getAll");
-        return new ResponseEntity<>(convertListEntityToDTO(page), HttpStatus.OK);
+        return ResponseEntity.ok(baseMapper.entityToDTOList(page));
     }
 
     @GetMapping("/{id}")
-    @Timed
     public ResponseEntity<D> getById(@PathVariable PK id) {
         E e = baseService.findOne(id);
-
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(convertEntityToDTO(e)));
+        if (e != null)
+            return ResponseEntity.ok(baseMapper.toDTO(e));
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    @Timed
     public ResponseEntity<Void> deleteById(@PathVariable PK id) {
         baseService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().header("deleted", "successful").build();
     }
 
 }
