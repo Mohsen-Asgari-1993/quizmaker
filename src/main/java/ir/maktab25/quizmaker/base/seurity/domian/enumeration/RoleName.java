@@ -1,6 +1,7 @@
 package ir.maktab25.quizmaker.base.seurity.domian.enumeration;
 
 public enum RoleName {
+    ROLE_SUPER,
     ROLE_ADMIN,
     ROLE_TEACHER,
     ROLE_STUDENT;
