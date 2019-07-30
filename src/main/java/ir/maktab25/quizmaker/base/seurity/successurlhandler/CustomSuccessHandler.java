@@ -33,6 +33,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
     private String determineTargetUrl(Authentication authentication) {
         boolean isAdmin = false;
+        boolean isSuperUser = false;
         boolean isTeacher = false;
         boolean isStudent = false;
         Collection<? extends GrantedAuthority> authorities
@@ -52,15 +53,21 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                     isStudent = true;
                     break label;
                 }
+                case "ROLE_SUPER": {
+                    isSuperUser = true;
+                    break label;
+                }
             }
         }
 
         if (isAdmin) {
-            return "/form/redirect/admin.html";
+            return "/redirect/admin.html";
         } else if (isTeacher) {
-            return "/form/redirect/teacher.html";
+            return "/redirect/teacher.html";
         } else if (isStudent) {
-            return "/form/redirect/student.html";
+            return "/redirect/student.html";
+        } else if (isSuperUser) {
+            return "/redirect//swagger-ui.html";
         } else {
             throw new IllegalStateException();
         }
