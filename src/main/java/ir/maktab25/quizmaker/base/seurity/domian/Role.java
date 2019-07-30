@@ -24,7 +24,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
-public class Role extends BaseEntity<Long> implements Serializable {
+public class Role extends BaseEntity<Long>{
 
 
     @Id
