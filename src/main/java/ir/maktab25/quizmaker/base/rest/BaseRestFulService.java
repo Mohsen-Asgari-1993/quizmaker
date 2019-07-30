@@ -20,8 +20,8 @@ import java.util.List;
 public class BaseRestFulService<E extends BaseEntity<PK>, D extends BaseDTO<PK>, PK extends Serializable,
         Service extends BaseService<E, PK>> {
 
-    private final Service baseService;
-    private BaseMapper<E, D> baseMapper;
+    protected final Service baseService;
+    protected BaseMapper<E, D> baseMapper;
 
     public BaseRestFulService(Service baseService) {
         this.baseService = baseService;
