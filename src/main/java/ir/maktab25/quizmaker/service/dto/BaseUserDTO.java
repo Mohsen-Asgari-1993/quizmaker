@@ -1,5 +1,6 @@
 package ir.maktab25.quizmaker.service.dto;
 
+import ir.maktab25.quizmaker.base.dto.BaseDTO;
 import lombok.*;
 
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class BaseUserDTO {
+public class BaseUserDTO extends BaseDTO<Long> {
 
     private Long id;
 
