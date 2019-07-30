@@ -28,8 +28,11 @@ public class AdminAutoDeploy {
     @PostConstruct
     public void initialize() {
         Role admin = roleService.findByName(RoleName.ROLE_ADMIN);
+        Role superUser = roleService.findByName(RoleName.ROLE_SUPER);
         if (admin == null)
             admin = roleService.save(new Role(null, RoleName.ROLE_ADMIN, null));
+        if (superUser == null)
+            superUser = roleService.save(new Role(null, RoleName.ROLE_SUPER, null));
         if (roleService.findByName(RoleName.ROLE_TEACHER) == null)
             roleService.save(new Role(null, RoleName.ROLE_TEACHER, null));
         if (roleService.findByName(RoleName.ROLE_STUDENT) == null)
@@ -46,6 +49,19 @@ public class AdminAutoDeploy {
             roleAdmin.setRoles(roles);
             baseUserService.save(roleAdmin);
         }
+
+        BaseUser roleSuper = baseUserService.findByUserName("superUser");
+        if (roleSuper == null) {
+            roleSuper = new BaseUser();
+            roleSuper.setUserName("superUser");
+            roleSuper.setPassword(passwordEncoder.encode("superUser"));
+            roleSuper.setIsActive(true);
+            Set<Role> roles = new HashSet<>();
+            roles.add(superUser);
+            roleSuper.setRoles(roles);
+            baseUserService.save(roleSuper);
+        }
+
         BaseUser roleSt = baseUserService.findByUserName("st");
         if (roleSt == null) {
             roleSt = new BaseUser();
