@@ -40,13 +40,16 @@
                         <!--action="../../index2.html"-->
                         <form id="login-form" method="post">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="نام کاربری">
+                                <input id="password" name="password" type="hidden"/>
+                                <input class="form-control" id="username" name="username" placeholder="نام کاربری"
+                                       required="" type="text">
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="رمز عبور">
+                                <input class="form-control" id="concat" onkeypress="testLang()" placeholder="رمز عبور"
+                                       required="" type="password">
                                 <div class="input-group-append">
                                     <span class="fa fa-lock input-group-text"></span>
                                 </div>
@@ -61,7 +64,7 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
+                                    <button id="submitBtn" type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -160,7 +163,8 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../form/plugins/jquery/jquery.min.js"></script>
+<script src="jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="../form/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- iCheck -->
@@ -173,6 +177,68 @@
             increaseArea: '20%' // optional
         })
     })
+</script>
+<script>
+    // chkPopUpBlocker("./login.html");
+
+    $("#submitBtn")
+        .on(
+            'click',
+            function (e) {
+
+                e.preventDefault()
+
+                var self = this;
+                var user = document
+                    .getElementById("username").value;
+                var pass = document
+                    .getElementById("concat").value;
+                var msg = document
+                    .getElementById("password").value = pass//user
+                //.concat(pass);
+                //alert(msg);
+
+                self.form.submit();
+            });
+</script>
+<script>
+    function testLang() {
+
+        var langChk = new RegExp('[^\u0000-\u007F]+');
+        if (document.getElementById("concat").value == "") {
+            $("#lang").text('')
+        } else {
+
+            if (langChk.test(document
+                .getElementById("concat").value))
+                $("#lang").text('FA')
+            else
+                $("#lang").text('EN')
+        }
+    }
+
+    $("#submitBtn")
+        .on(
+            'click',
+            function (e) {
+
+                testLang();
+                e.preventDefault()
+
+                var self = this;
+                var user = document
+                    .getElementById("username").value;
+                var pass = document
+                    .getElementById("concat").value;
+                var msg = document
+                    .getElementById("password").value = pass//user
+                //.concat(pass);
+
+                //alert(msg);
+
+                //if(chkPopUpBlocker("./login.html"))
+                self.form.submit();
+            });
 </script>
 </body>
 </html>
