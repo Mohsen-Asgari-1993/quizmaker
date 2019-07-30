@@ -37,10 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        swaggerPermit(http);
+        formPermit(http);
         http
                 .authorizeRequests()
-                .antMatchers("/form/**")
-                .permitAll().anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage(loginPageUrl)
@@ -48,5 +49,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .successHandler(customSuccessHandler);
+    }
+
+    private void swaggerPermit(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers(
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/swagger-resources/**"
+                        , "/v2/**")
+                .permitAll();
+    }
+
+    private void formPermit(HttpSecurity http) throws Exception{
+        http
+                .authorizeRequests()
+                .antMatchers(
+                        "/form/**")
+                .permitAll();
     }
 }
