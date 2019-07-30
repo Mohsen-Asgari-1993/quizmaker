@@ -41,19 +41,19 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         label:
         for (GrantedAuthority grantedAuthority : authorities) {
             switch (grantedAuthority.getAuthority()) {
-                case "ROLE_ADMIN": {
+                case "ADMIN": {
                     isAdmin = true;
                     break label;
                 }
-                case "ROLE_TEACHER": {
+                case "TEACHER": {
                     isTeacher = true;
                     break label;
                 }
-                case "ROLE_STUDENT": {
+                case "STUDENT": {
                     isStudent = true;
                     break label;
                 }
-                case "ROLE_SUPER": {
+                case "SUPER": {
                     isSuperUser = true;
                     break label;
                 }
@@ -67,7 +67,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         } else if (isStudent) {
             return "/redirect/student.html";
         } else if (isSuperUser) {
-            return "/redirect//swagger-ui.html";
+            return "/swagger-ui.html";
         } else {
             throw new IllegalStateException();
         }

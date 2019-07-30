@@ -32,7 +32,7 @@ public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUse
 
     @Override
     public BaseUser saveTeacher(BaseUser baseUser) {
-        Role role = roleService.findByName(RoleName.ROLE_TEACHER);
+        Role role = roleService.findByName(RoleName.TEACHER);
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
         baseUser.setRoles(roleSet);
@@ -41,7 +41,7 @@ public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUse
 
     @Override
     public BaseUser saveStudent(BaseUser baseUser) {
-        Role role = roleService.findByName(RoleName.ROLE_STUDENT);
+        Role role = roleService.findByName(RoleName.STUDENT);
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
         baseUser.setRoles(roleSet);

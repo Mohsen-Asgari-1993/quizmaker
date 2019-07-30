@@ -27,16 +27,16 @@ public class AdminAutoDeploy {
 
     @PostConstruct
     public void initialize() {
-        Role admin = roleService.findByName(RoleName.ROLE_ADMIN);
-        Role superUser = roleService.findByName(RoleName.ROLE_SUPER);
+        Role admin = roleService.findByName(RoleName.ADMIN);
+        Role superUser = roleService.findByName(RoleName.SUPER);
         if (admin == null)
-            admin = roleService.save(new Role(null, RoleName.ROLE_ADMIN, null));
+            admin = roleService.save(new Role(null, RoleName.ADMIN, null));
         if (superUser == null)
-            superUser = roleService.save(new Role(null, RoleName.ROLE_SUPER, null));
-        if (roleService.findByName(RoleName.ROLE_TEACHER) == null)
-            roleService.save(new Role(null, RoleName.ROLE_TEACHER, null));
-        if (roleService.findByName(RoleName.ROLE_STUDENT) == null)
-            roleService.save(new Role(null, RoleName.ROLE_STUDENT, null));
+            superUser = roleService.save(new Role(null, RoleName.SUPER, null));
+        if (roleService.findByName(RoleName.TEACHER) == null)
+            roleService.save(new Role(null, RoleName.TEACHER, null));
+        if (roleService.findByName(RoleName.STUDENT) == null)
+            roleService.save(new Role(null, RoleName.STUDENT, null));
 
         BaseUser roleAdmin = baseUserService.findByUserName("admin");
         if (roleAdmin == null) {
@@ -69,7 +69,7 @@ public class AdminAutoDeploy {
             roleSt.setPassword(passwordEncoder.encode("student25"));
             roleSt.setIsActive(false);
             Set<Role> roles = new HashSet<>();
-            roles.add(roleService.findByName(RoleName.ROLE_STUDENT));
+            roles.add(roleService.findByName(RoleName.STUDENT));
             roleSt.setRoles(roles);
             baseUserService.save(roleSt);
         }
