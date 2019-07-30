@@ -9,7 +9,8 @@ import java.util.Set;
 
 public interface CourseService extends BaseService<Course, Long> {
 
-    List<Course> findAllByTeacher(BaseUser teacher);
+
+    List<Course> findAllByTeacher(Long teacher_id);
 
     List<Course> findAllByStudents(BaseUser students);
 

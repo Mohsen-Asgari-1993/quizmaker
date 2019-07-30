@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    List<Course> findAllByTeacher(BaseUser teacher);
+    List<Course> findAllByTeacher_Id(Long teacher_id);
 
     List<Course> findAllByStudents(BaseUser students);
 

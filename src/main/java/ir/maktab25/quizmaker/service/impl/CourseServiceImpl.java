@@ -21,8 +21,8 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public List<Course> findAllByTeacher(BaseUser teacher) {
-        return baseRepository.findAllByTeacher(teacher);
+    public List<Course> findAllByTeacher(Long teacher_id) {
+        return baseRepository.findAllByTeacher_Id(teacher_id);
     }
 
     @Override
