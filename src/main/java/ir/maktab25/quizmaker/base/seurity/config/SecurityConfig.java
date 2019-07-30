@@ -39,13 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         swaggerPermit(http);
         formPermit(http);
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage(loginPageUrl)
                 .permitAll()
+                .usernameParameter("username").passwordParameter("password")
                 .and()
                 .formLogin()
                 .successHandler(customSuccessHandler);
@@ -62,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    private void formPermit(HttpSecurity http) throws Exception{
+    private void formPermit(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers(
