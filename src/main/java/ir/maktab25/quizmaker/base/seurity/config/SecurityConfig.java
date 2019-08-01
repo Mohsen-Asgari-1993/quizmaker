@@ -1,5 +1,6 @@
 package ir.maktab25.quizmaker.base.seurity.config;
 
+import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.serivce.impl.UserDetailServiceImpl;
 import ir.maktab25.quizmaker.base.seurity.successurlhandler.CustomSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        swaggerPermit(http);
         formPermit(http);
-        http.csrf().disable()
+        http
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
+                .anyRequest().authenticated();
+        swaggerPermit(http);
+        adminPermit(http);
+
+
+        http.csrf().disable()
                 .formLogin()
                 .loginPage(loginPageUrl)
                 .permitAll()
@@ -60,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/swagger-resources/**"
                         , "/v2/**")
-                .permitAll();
+                .hasAuthority(RoleName.SUPER.toString());
     }
 
     private void formPermit(HttpSecurity http) throws Exception {
@@ -70,4 +74,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/form/**")
                 .permitAll();
     }
+
+    private void adminPermit(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/redirect/admin.html")
+                .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.ADMIN.toString());
+    }
+
 }
