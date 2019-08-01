@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -39,6 +40,11 @@ public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUse
         BaseUser baseUser = super.findOne(id);
         baseUser.setIsActive(true);
         return super.save(baseUser);
+    }
+
+    @Override
+    public List<BaseUser> findAllByIsActive(Boolean isActive) {
+        return baseRepository.findAllByIsActive(isActive);
     }
 
     @Override
