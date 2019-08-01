@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/form/**")
                 .permitAll()
-                .antMatchers("/BaseUser/teacher", "/BaseUser/student")
+                .antMatchers("/BaseUser/save")
                 .permitAll();
     }
 
