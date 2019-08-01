@@ -8,6 +8,8 @@ import ir.maktab25.quizmaker.service.mapper.BaseUserMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/BaseUser")
 public class BaseUserResource extends BaseRestFulService<BaseUser, BaseUserDTO, Long, BaseUserService, BaseUserMapper> {
@@ -34,6 +36,18 @@ public class BaseUserResource extends BaseRestFulService<BaseUser, BaseUserDTO, 
     public ResponseEntity<BaseUserDTO> enableUser(@PathVariable Long id) {
         BaseUser baseUser = baseService.enable(id);
         return ResponseEntity.ok(baseMapper.toDTO(baseUser));
+    }
+
+    @GetMapping("/findAllEnable")
+    public ResponseEntity<List<BaseUserDTO>> findAllEnables() {
+        List<BaseUser> active = baseService.findAllByIsActive(true);
+        return ResponseEntity.ok(baseMapper.entityToDTOList(active));
+    }
+
+    @GetMapping("/findAllDisable")
+    public ResponseEntity<List<BaseUserDTO>> findAllDisable() {
+        List<BaseUser> disable = baseService.findAllByIsActive(false);
+        return ResponseEntity.ok(baseMapper.entityToDTOList(disable));
     }
 
 }
