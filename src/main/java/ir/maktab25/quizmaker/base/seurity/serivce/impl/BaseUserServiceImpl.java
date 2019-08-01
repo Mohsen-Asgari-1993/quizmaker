@@ -35,6 +35,13 @@ public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUse
     }
 
     @Override
+    public BaseUser enable(Long id) {
+        BaseUser baseUser = super.findOne(id);
+        baseUser.setIsActive(true);
+        return super.save(baseUser);
+    }
+
+    @Override
     public BaseUser save(BaseUser baseUser) {
         checkRole(baseUser);
         baseUser.setIsActive(false);
