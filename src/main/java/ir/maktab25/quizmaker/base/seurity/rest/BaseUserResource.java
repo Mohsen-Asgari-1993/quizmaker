@@ -50,4 +50,18 @@ public class BaseUserResource extends BaseRestFulService<BaseUser, BaseUserDTO, 
         return ResponseEntity.ok(baseMapper.entityToDTOList(disable));
     }
 
+    @GetMapping("/getAllByRoleName/{name}")
+    public ResponseEntity<List<BaseUserDTO>> findAllByRoleName(@PathVariable String name) {
+        return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByRoleName(name)));
+    }
+
+    @GetMapping("/getAllByFirstName/{name}")
+    public ResponseEntity<List<BaseUserDTO>> findAllByFirstName(@PathVariable String name) {
+        return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByFirstName(name)));
+    }
+
+    @GetMapping("/getAllByLastName/{name}")
+    public ResponseEntity<List<BaseUserDTO>> findAllByLastName(@PathVariable String name) {
+        return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByLastName(name)));
+    }
 }
