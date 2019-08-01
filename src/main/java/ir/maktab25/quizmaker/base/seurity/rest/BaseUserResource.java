@@ -22,7 +22,7 @@ public class BaseUserResource extends BaseRestFulService<BaseUser, BaseUserDTO, 
     }
 
 
-    @PostMapping("/teacher")
+    @PostMapping("/save")
     public ResponseEntity<BaseUserDTO> createTeacher(@RequestBody BaseUserDTO userDTO) {
         if (userDTO.getId() != null) {
             return ResponseEntity
@@ -30,20 +30,32 @@ public class BaseUserResource extends BaseRestFulService<BaseUser, BaseUserDTO, 
                     .header("id exists", "A new entity cannot already have an ID")
                     .build();
         }
-        BaseUser baseUser = baseService.saveTeacher(baseMapper.toEntity(userDTO));
+        BaseUser baseUser = baseService.save(baseMapper.toEntity(userDTO));
         return ResponseEntity.ok(baseMapper.toDTO(baseUser));
     }
 
-    @PostMapping("/student")
-    public ResponseEntity<BaseUserDTO> createStudent(@RequestBody BaseUserDTO userDTO) {
-        if (userDTO.getId() != null) {
-            return ResponseEntity
-                    .badRequest()
-                    .header("id exists", "A new entity cannot already have an ID")
-                    .build();
-        }
-        BaseUser baseUser = baseService.saveStudent(baseMapper.toEntity(userDTO));
-        return ResponseEntity.ok(baseMapper.toDTO(baseUser));
-    }
+//    @PostMapping("/teacher")
+//    public ResponseEntity<BaseUserDTO> createTeacher(@RequestBody BaseUserDTO userDTO) {
+//        if (userDTO.getId() != null) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .header("id exists", "A new entity cannot already have an ID")
+//                    .build();
+//        }
+//        BaseUser baseUser = baseService.saveTeacher(baseMapper.toEntity(userDTO));
+//        return ResponseEntity.ok(baseMapper.toDTO(baseUser));
+//    }
+//
+//    @PostMapping("/student")
+//    public ResponseEntity<BaseUserDTO> createStudent(@RequestBody BaseUserDTO userDTO) {
+//        if (userDTO.getId() != null) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .header("id exists", "A new entity cannot already have an ID")
+//                    .build();
+//        }
+//        BaseUser baseUser = baseService.saveStudent(baseMapper.toEntity(userDTO));
+//        return ResponseEntity.ok(baseMapper.toDTO(baseUser));
+//    }
 
 }

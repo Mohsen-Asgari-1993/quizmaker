@@ -7,8 +7,4 @@ public interface BaseUserService extends BaseService<BaseUser, Long> {
 
     BaseUser findByUserName(String username);
 
-    BaseUser saveTeacher(BaseUser baseUser);
-
-    BaseUser saveStudent(BaseUser baseUser);
-
 }
