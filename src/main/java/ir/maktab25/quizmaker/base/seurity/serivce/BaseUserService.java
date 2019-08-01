@@ -7,4 +7,5 @@ public interface BaseUserService extends BaseService<BaseUser, Long> {
 
     BaseUser findByUserName(String username);
 
+    BaseUser enable(Long id);
 }
