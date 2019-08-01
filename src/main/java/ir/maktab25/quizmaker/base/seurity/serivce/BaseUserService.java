@@ -13,4 +13,11 @@ public interface BaseUserService extends BaseService<BaseUser, Long> {
 
     List<BaseUser> findAllByIsActive(Boolean isActive);
 
+
+    List<BaseUser> findAllByRoleName(String roleName);
+
+    List<BaseUser> findAllByFirstName(String firstName);
+
+    List<BaseUser> findAllByLastName(String lastName);
+
 }
