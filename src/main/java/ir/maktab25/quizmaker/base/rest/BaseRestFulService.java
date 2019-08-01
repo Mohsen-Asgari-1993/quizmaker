@@ -18,13 +18,15 @@ import java.util.List;
 @Setter
 @Getter
 public class BaseRestFulService<E extends BaseEntity<PK>, D extends BaseDTO<PK>, PK extends Serializable,
-        Service extends BaseService<E, PK>> {
+        Service extends BaseService<E, PK>, Mapper extends BaseMapper<E, D>> {
 
     protected final Service baseService;
-    protected BaseMapper<E, D> baseMapper;
+    protected final Mapper baseMapper;
+//    protected BaseMapper<E, D> baseMapper;
 
-    public BaseRestFulService(Service baseService) {
+    public BaseRestFulService(Service baseService, Mapper baseMapper) {
         this.baseService = baseService;
+        this.baseMapper = baseMapper;
     }
 
     @PostMapping

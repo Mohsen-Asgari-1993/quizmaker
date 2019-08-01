@@ -5,6 +5,7 @@ import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.service.CourseService;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
+import ir.maktab25.quizmaker.service.mapper.CourseMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +14,11 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/Course")
-public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, CourseService> {
+public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, CourseService, CourseMapper> {
 
-    public CourseResource(CourseService baseService) {
-        super(baseService);
+
+    public CourseResource(CourseService baseService, CourseMapper baseMapper) {
+        super(baseService, baseMapper);
     }
 
     @GetMapping("/findByTeacher/{id}")
