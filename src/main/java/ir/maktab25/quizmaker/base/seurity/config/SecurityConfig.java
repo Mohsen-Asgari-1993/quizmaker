@@ -1,6 +1,5 @@
 package ir.maktab25.quizmaker.base.seurity.config;
 
-import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.serivce.impl.UserDetailServiceImpl;
 import ir.maktab25.quizmaker.base.seurity.successurlhandler.CustomSuccessHandler;
@@ -39,16 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        formPermit(http);
-
+        permit(http);
         swaggerPermit(http);
         adminPermit(http);
 
         http
                 .authorizeRequests()
-                .anyRequest().authenticated();
-
-        http.csrf().disable()
+                .anyRequest().authenticated().and()
                 .formLogin()
                 .loginPage(loginPageUrl)
                 .permitAll()
@@ -56,34 +52,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .successHandler(customSuccessHandler);
+        
     }
 
     private void swaggerPermit(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
                         "/swagger-ui.html",
                         "/webjars/**",
                         "/swagger-resources/**"
-                        , "/v2/**").hasAuthority(RoleName.SUPER.toString()).anyRequest().authenticated();
-//                .hasAuthority(RoleName.SUPER.toString());
+                        , "/v2/**").hasAuthority(RoleName.SUPER.toString());
 
     }
 
-    private void formPermit(HttpSecurity http) throws Exception {
-        http
+    private void permit(HttpSecurity http) throws Exception {
+        http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(
-                        "/form/**")
+                .antMatchers("/form/**")
+                .permitAll()
+                .antMatchers("/BaseUser/teacher", "/BaseUser/student")
                 .permitAll();
     }
 
     private void adminPermit(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/redirect/admin.html")
-                .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.ADMIN.toString())
-                .anyRequest().authenticated();
+                .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.ADMIN.toString());
     }
 
 }
