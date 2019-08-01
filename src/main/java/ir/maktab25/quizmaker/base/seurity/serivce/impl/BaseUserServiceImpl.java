@@ -48,6 +48,26 @@ public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUse
     }
 
     @Override
+    public List<BaseUser> findAllByRoleName(String roleName) {
+        RoleName name = null;
+        if (roleName.equalsIgnoreCase("teacher"))
+            name = RoleName.TEACHER;
+        if (roleName.equalsIgnoreCase("student"))
+            name = RoleName.STUDENT;
+        return baseRepository.findAllByRoles_RoleName(name);
+    }
+
+    @Override
+    public List<BaseUser> findAllByFirstName(String firstName) {
+        return baseRepository.findAllByFirstName(firstName);
+    }
+
+    @Override
+    public List<BaseUser> findAllByLastName(String lastName) {
+        return baseRepository.findAllByLastName(lastName);
+    }
+
+    @Override
     public BaseUser save(BaseUser baseUser) {
         checkRole(baseUser);
         baseUser.setIsActive(false);
