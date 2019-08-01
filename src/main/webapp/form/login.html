@@ -64,7 +64,9 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-4">
-                                    <button id="submitBtn" type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
+                                    <button id="submitBtn" type="submit" class="btn btn-primary btn-block btn-flat">
+                                        ورود
+                                    </button>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -96,40 +98,40 @@
                         <form id="register-form" method="post">
                             <div class="input-group mb-3">
                                 <!--<input type="text" class="form-control" placeholder="نقش کاربر" list="roleList"/>-->
-                                <select id="roleList" class="form-control">
-                                    <option value="ROLE_TEACHER">استاد
-                                    <option value="ROLE_STUDENT">کاروند
+                                <select id="role" class="form-control">
+                                    <option type="text" value="TEACHER">استاد
+                                    <option type="text" value="STUDENT">کاروند
                                 </select>
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="نام">
+                                <input type="text" id="firstNameReg" class="form-control" placeholder="نام">
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="نام خانوادگی">
+                                <input type="text" id="lastNameReg" class="form-control" placeholder="نام خانوادگی">
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="نام کاربری">
+                                <input type="text" id="usernameReg" class="form-control" placeholder="نام کاربری">
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="email" class="form-control" placeholder="ایمیل">
+                                <input type="email" id="emailReg" class="form-control" placeholder="ایمیل">
                                 <div class="input-group-append">
                                     <span class="fa fa-envelope input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="رمز عبور">
+                                <input type="password" id="passwordReg" class="form-control" placeholder="رمز عبور">
                                 <div class="input-group-append">
                                     <span class="fa fa-lock input-group-text"></span>
                                 </div>
@@ -145,7 +147,10 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block btn-flat">ثبت نام</button>
+                                    <button id="registerBtn" onclick="register()" type="submit"
+                                            class="btn btn-primary btn-block btn-flat">
+                                        ثبت نام
+                                    </button>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -239,6 +244,44 @@
                 //if(chkPopUpBlocker("./login.html"))
                 self.form.submit();
             });
+</script>
+<script>
+    function register() {
+        var type = document.getElementById("role").value;
+        var firstname = document.getElementById("firstNameReg").value;
+        var lastname = document.getElementById("lastNameReg").value;
+        var username = document.getElementById("usernameReg").value;
+        var password = document.getElementById("passwordReg").value;
+        var email = document.getElementById("emailReg").value;
+        var data = {
+            email: email,
+            firstName: firstname,
+            lastName: lastname,
+            password: password,
+            roles: [
+                {
+                    roleName: type
+                }
+            ],
+            userName: username
+        };
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: "http://localhost:8080/BaseUser",
+                data: JSON.stringify(data),
+                success: function () {
+                    alert('wow');
+                },
+                error: function () {
+                    alert("error");
+                }
+
+            });
+
+
+    }
 </script>
 </body>
 </html>
