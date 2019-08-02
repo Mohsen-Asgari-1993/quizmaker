@@ -1,7 +1,10 @@
 package ir.maktab25.quizmaker.service.impl;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
 import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.Role;
+import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.repository.CourseRepository;
 import ir.maktab25.quizmaker.service.CourseService;
@@ -33,27 +36,53 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Course addTeacher(BaseUser teacher, Long id) {
         Course course = baseRepository.getOne(id);
-        course.setTeacher(teacher);
-        return super.save(course);
+        if (checkTeacher(teacher)) {
+            course.setTeacher(teacher);
+            return super.save(course);
+        } else {
+            throw new RuntimeException("Cant add another role as teacher");
+        }
     }
 
     @Override
     public Course addStudent(BaseUser student, Long id) {
         Course course = baseRepository.getOne(id);
-        Set<BaseUser> students = course.getStudents();
-        if (student == null)
-            students = new HashSet<>();
-        students.add(student);
+        Set<BaseUser> courseStudents = course.getStudents();
+        if (courseStudents == null)
+            courseStudents = new HashSet<>();
+        if (checkStudent(student))
+            courseStudents.add(student);
         return super.save(course);
     }
 
     @Override
     public Course addStudents(Set<BaseUser> students, Long id) {
         Course course = baseRepository.getOne(id);
-        Set<BaseUser> couresStudents = course.getStudents();
-        if (couresStudents == null)
-            couresStudents = new HashSet<>();
-        couresStudents.addAll(students);
+        Set<BaseUser> courseStudents = course.getStudents();
+        if (courseStudents == null)
+            courseStudents = new HashSet<>();
+        for (BaseUser student: students){
+            if (checkStudent(student))
+                courseStudents.add(student);
+        }
         return super.save(course);
+    }
+
+    private Boolean checkTeacher(BaseUser teacher) {
+        Set<Role> roles = teacher.getRoles();
+        for (Role r : roles) {
+            if (r.getRoleName().equals(RoleName.TEACHER))
+                return true;
+        }
+        return false;
+    }
+
+    private Boolean checkStudent(BaseUser teacher) {
+        Set<Role> roles = teacher.getRoles();
+        for (Role r : roles) {
+            if (r.getRoleName().equals(RoleName.STUDENT))
+                return true;
+        }
+        return false;
     }
 }
