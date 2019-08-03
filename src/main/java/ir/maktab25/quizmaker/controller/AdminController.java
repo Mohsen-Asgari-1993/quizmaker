@@ -17,7 +17,7 @@ public class AdminController {
     @Autowired
     CourseResource courseResource;
 
-    @GetMapping("/courses")
+    @GetMapping("/course")
     public String getCourses(Model model) {
         List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
         model.addAttribute("courses", body );
