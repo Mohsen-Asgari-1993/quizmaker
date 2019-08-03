@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomSuccessHandler customSuccessHandler;
 
-    private final String loginPageUrl = "/form/login.html";
+    private final String loginPageUrl = "/templates/login.html";
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -69,6 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private void permit(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/templates/**")
+                .permitAll()
                 .antMatchers("/form/**")
                 .permitAll()
                 .antMatchers("/BaseUser/save")
@@ -78,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private void adminPermit(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/redirect/admin.html")
+                .antMatchers("/templates/redirect/admin/admin.html")
                 .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.ADMIN.toString());
     }
 

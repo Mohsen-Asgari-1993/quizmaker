@@ -65,7 +65,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         } else if (isTeacher) {
             return "/redirect/teacher/teacher.html";
         } else if (isStudent) {
-            return "/redirect/teacher/student.html";
+            return "/redirect/student/student.html";
         } else if (isSuperUser) {
             return "/swagger-ui.html";
         } else {
