@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../form/dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
     <link rel="stylesheet" href="../form/dist/css/custom-style.css">
+    <link rel="stylesheet" href="an.css" th:href="@{an.css}">
 </head>
 <body class="hold-transition login-page">
 
@@ -95,65 +96,65 @@
                         <p class="login-box-msg">ثبت نام کاربر جدید</p>
 
                         <!--action="../../index.html"-->
-                        <form id="register-form" method="post"">
-                            <div class="input-group mb-3">
-                                <!--<input type="text" class="form-control" placeholder="نقش کاربر" list="roleList"/>-->
-                                <select id="role" class="form-control">
-                                    <option type="text" value="TEACHER">استاد
-                                    <option type="text" value="STUDENT">کاروند
-                                </select>
-                                <div class="input-group-append">
-                                    <span class="fa fa-user input-group-text"></span>
-                                </div>
+                        <form id="register-form" method="post">
+                        <div class="input-group mb-3">
+                            <!--<input type="text" class="form-control" placeholder="نقش کاربر" list="roleList"/>-->
+                            <select id="role" class="form-control">
+                                <option type="text" value="TEACHER">استاد
+                                <option type="text" value="STUDENT">کاروند
+                            </select>
+                            <div class="input-group-append">
+                                <span class="fa fa-user input-group-text"></span>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="text" id="firstNameReg" class="form-control" placeholder="نام">
-                                <div class="input-group-append">
-                                    <span class="fa fa-user input-group-text"></span>
-                                </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="firstNameReg" class="form-control" placeholder="نام">
+                            <div class="input-group-append">
+                                <span class="fa fa-user input-group-text"></span>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="text" id="lastNameReg" class="form-control" placeholder="نام خانوادگی">
-                                <div class="input-group-append">
-                                    <span class="fa fa-user input-group-text"></span>
-                                </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="lastNameReg" class="form-control" placeholder="نام خانوادگی">
+                            <div class="input-group-append">
+                                <span class="fa fa-user input-group-text"></span>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="text" id="usernameReg" class="form-control" placeholder="نام کاربری">
-                                <div class="input-group-append">
-                                    <span class="fa fa-user input-group-text"></span>
-                                </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="usernameReg" class="form-control" placeholder="نام کاربری">
+                            <div class="input-group-append">
+                                <span class="fa fa-user input-group-text"></span>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="email" id="emailReg" class="form-control" placeholder="ایمیل">
-                                <div class="input-group-append">
-                                    <span class="fa fa-envelope input-group-text"></span>
-                                </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="email" id="emailReg" class="form-control" placeholder="ایمیل">
+                            <div class="input-group-append">
+                                <span class="fa fa-envelope input-group-text"></span>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="password" id="passwordReg" class="form-control" placeholder="رمز عبور">
-                                <div class="input-group-append">
-                                    <span class="fa fa-lock input-group-text"></span>
-                                </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="passwordReg" class="form-control" placeholder="رمز عبور">
+                            <div class="input-group-append">
+                                <span class="fa fa-lock input-group-text"></span>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="تکرار رمز عبور">
-                                <div class="input-group-append">
-                                    <span class="fa fa-lock input-group-text"></span>
-                                </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" placeholder="تکرار رمز عبور">
+                            <div class="input-group-append">
+                                <span class="fa fa-lock input-group-text"></span>
                             </div>
-                            <div class="row">
-                                <div class="col-8">
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-4">
-                                    <button id="registerBtn" onclick="register()" type="submit"
-                                            class="btn btn-primary btn-block btn-flat">
-                                        ثبت نام
-                                    </button>
-                                </div>
-                                <!-- /.col -->
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
                             </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button id="registerBtn" onclick="register()" type="submit"
+                                        class="btn btn-primary btn-block btn-flat">
+                                    ثبت نام
+                                </button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
                         </form>
 
 
@@ -265,20 +266,20 @@
             ],
             userName: username
         };
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                url: "http://localhost:8080/BaseUser/save",
-                data: JSON.stringify(data),
-                success: function () {
-                    alert('successful');
-                },
-                error: function () {
-                    alert("error");
-                }
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            url: "http://localhost:8080/BaseUser/save",
+            data: JSON.stringify(data),
+            success: function () {
+                alert('successful');
+            },
+            error: function () {
+                alert("error");
+            }
 
-            });
+        });
 
 
     }

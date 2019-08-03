@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomSuccessHandler customSuccessHandler;
 
-    private final String loginPageUrl = "/templates/login.html";
+    private final String loginPageUrl = "/login.html";
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .successHandler(customSuccessHandler);
-        
+
     }
 
     private void swaggerPermit(HttpSecurity http) throws Exception {

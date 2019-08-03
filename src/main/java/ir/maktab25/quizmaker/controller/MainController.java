@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/templates/login.html")
+    @GetMapping("/login.html")
     public String login(BaseUserDTO baseUserDTO){
         return "login";
     }
