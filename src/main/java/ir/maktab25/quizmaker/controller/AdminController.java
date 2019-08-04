@@ -1,6 +1,6 @@
 package ir.maktab25.quizmaker.controller;
 
-import ir.maktab25.quizmaker.resource.CourseResource;
+import ir.maktab25.quizmaker.rest.CourseResource;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

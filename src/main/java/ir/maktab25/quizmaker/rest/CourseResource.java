@@ -1,4 +1,4 @@
-package ir.maktab25.quizmaker.resource;
+package ir.maktab25.quizmaker.rest;
 
 import ir.maktab25.quizmaker.base.rest.BaseRestFulService;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
