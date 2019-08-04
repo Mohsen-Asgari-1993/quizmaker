@@ -29,5 +29,7 @@ public class UserDTO extends BaseDTO<Long> {
 
     private Boolean isActive;
 
+    private String role;
+
     private Set<RoleDTO> roles = new HashSet<>();
 }
