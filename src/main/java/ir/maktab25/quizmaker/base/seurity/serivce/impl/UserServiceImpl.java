@@ -5,7 +5,7 @@ import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.repository.UserRepository;
-import ir.maktab25.quizmaker.base.seurity.serivce.BaseUserService;
+import ir.maktab25.quizmaker.base.seurity.serivce.UserService;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,9 +18,9 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class BaseUserServiceImpl extends BaseServiceImpl<User, Long, UserRepository> implements BaseUserService {
+public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository> implements UserService {
 
-    public BaseUserServiceImpl(UserRepository baseRepository) {
+    public UserServiceImpl(UserRepository baseRepository) {
         super(baseRepository);
     }
 

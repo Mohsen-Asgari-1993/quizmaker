@@ -3,7 +3,7 @@ package ir.maktab25.quizmaker.base.seurity.autodeploy;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
-import ir.maktab25.quizmaker.base.seurity.serivce.BaseUserService;
+import ir.maktab25.quizmaker.base.seurity.serivce.UserService;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class AdminAutoDeploy {
 
     @Autowired
-    BaseUserService baseUserService;
+    UserService userService;
 
     @Autowired
     RoleService roleService;
@@ -43,7 +43,7 @@ public class AdminAutoDeploy {
     }
 
     private void userDeploy(String username, String password, boolean active, RoleName roleName) {
-        User user = baseUserService.findByUserName(username);
+        User user = userService.findByUserName(username);
         if (user == null) {
             user = new User();
             user.setUserName(username);
@@ -53,7 +53,7 @@ public class AdminAutoDeploy {
             Role name = roleService.findByName(roleName);
             roles.add(name);
             user.setRoles(roles);
-            baseUserService.save(user);
+            userService.save(user);
         }
     }
 }

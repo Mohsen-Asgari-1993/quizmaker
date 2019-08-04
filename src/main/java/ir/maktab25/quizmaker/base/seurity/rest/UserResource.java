@@ -2,7 +2,7 @@ package ir.maktab25.quizmaker.base.seurity.rest;
 
 import ir.maktab25.quizmaker.base.rest.BaseRestFulService;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
-import ir.maktab25.quizmaker.base.seurity.serivce.BaseUserService;
+import ir.maktab25.quizmaker.base.seurity.serivce.UserService;
 import ir.maktab25.quizmaker.service.dto.BaseUserDTO;
 import ir.maktab25.quizmaker.service.mapper.BaseUserMapper;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/BaseUser")
-public class UserResource extends BaseRestFulService<User, BaseUserDTO, Long, BaseUserService, BaseUserMapper> {
+public class UserResource extends BaseRestFulService<User, BaseUserDTO, Long, UserService, BaseUserMapper> {
 
 
-    public UserResource(BaseUserService baseService, BaseUserMapper baseMapper) {
+    public UserResource(UserService baseService, BaseUserMapper baseMapper) {
         super(baseService, baseMapper);
     }
 
