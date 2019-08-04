@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -95,10 +95,10 @@
                         <p class="login-box-msg">ثبت نام کاربر جدید</p>
 
                         <!--action="../../index.html"-->
-                        <form id="register-form" method="post">
+                        <form action="#" id="register-form" th:action="@{/register}" method="post" th:object="${user}">
                             <div class="input-group mb-3">
                                 <!--<input type="text" class="form-control" placeholder="نقش کاربر" list="roleList"/>-->
-                                <select id="role" class="form-control">
+                                <select id="role" class="form-control" th:field="*{role}">
                                     <option type="text" value="TEACHER">استاد
                                     <option type="text" value="STUDENT">کاروند
                                 </select>
@@ -107,37 +107,31 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" id="firstNameReg" class="form-control" placeholder="نام">
+                                <input type="text" id="firstNameReg" th:field="*{firstName}" class="form-control" placeholder="نام">
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" id="lastNameReg" class="form-control" placeholder="نام خانوادگی">
+                                <input type="text" id="lastNameReg" th:field="*{lastName}" class="form-control" placeholder="نام خانوادگی">
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" id="usernameReg" class="form-control" placeholder="نام کاربری">
+                                <input type="text" id="usernameReg" th:field="*{userName}" class="form-control" placeholder="نام کاربری">
                                 <div class="input-group-append">
                                     <span class="fa fa-user input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="email" id="emailReg" class="form-control" placeholder="ایمیل">
+                                <input type="email" id="emailReg" th:field="*{email}" class="form-control" placeholder="ایمیل">
                                 <div class="input-group-append">
                                     <span class="fa fa-envelope input-group-text"></span>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" id="passwordReg" class="form-control" placeholder="رمز عبور">
-                                <div class="input-group-append">
-                                    <span class="fa fa-lock input-group-text"></span>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="تکرار رمز عبور">
+                                <input type="password" id="passwordReg" th:field="*{password}" class="form-control" placeholder="رمز عبور">
                                 <div class="input-group-append">
                                     <span class="fa fa-lock input-group-text"></span>
                                 </div>
@@ -147,10 +141,9 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-4">
-                                    <button id="registerBtn" onclick="register()" type="submit"
-                                            class="btn btn-primary btn-block btn-flat">
-                                        ثبت نام
-                                    </button>
+                                    <input type="submit"
+                                            class="btn btn-primary btn-block btn-flat" value="ثبت نام">
+
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -191,7 +184,7 @@
             'click',
             function (e) {
 
-                e.preventDefault()
+                e.preventDefault();
 
                 var self = this;
                 var user = document
@@ -199,7 +192,7 @@
                 var pass = document
                     .getElementById("concat").value;
                 var msg = document
-                    .getElementById("password").value = pass//user
+                    .getElementById("password").value = pass;//user
                 //.concat(pass);
                 //alert(msg);
 
@@ -216,7 +209,7 @@
 
             if (langChk.test(document
                 .getElementById("concat").value))
-                $("#lang").text('FA')
+                $("#lang").text('FA');
             else
                 $("#lang").text('EN')
         }
@@ -228,7 +221,7 @@
             function (e) {
 
                 testLang();
-                e.preventDefault()
+                e.preventDefault();
 
                 var self = this;
                 var user = document
@@ -236,7 +229,7 @@
                 var pass = document
                     .getElementById("concat").value;
                 var msg = document
-                    .getElementById("password").value = pass//user
+                    .getElementById("password").value = pass;//user
                 //.concat(pass);
 
                 //alert(msg);
@@ -246,14 +239,18 @@
             });
 </script>
 <script>
+
+
+
     function register() {
-        var type = document.getElementById("role").value;
-        var firstname = document.getElementById("firstNameReg").value;
-        var lastname = document.getElementById("lastNameReg").value;
-        var username = document.getElementById("usernameReg").value;
-        var password = document.getElementById("passwordReg").value;
-        var email = document.getElementById("emailReg").value;
-        var data = {
+        debugger;
+        let type = document.getElementById("role").value;
+        let firstname = document.getElementById("firstNameReg").value;
+        let lastname = document.getElementById("lastNameReg").value;
+        let username = document.getElementById("usernameReg").value;
+        let password = document.getElementById("passwordReg").value;
+        let email = document.getElementById("emailReg").value;
+        let data = {
             email: email,
             firstName: firstname,
             lastName: lastname,
@@ -265,6 +262,7 @@
             ],
             userName: username
         };
+
         if (type === "TEACHER") {
             $.ajax({
                 type: "POST",
