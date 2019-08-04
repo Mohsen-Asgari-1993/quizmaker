@@ -1,31 +1,36 @@
-//package ir.maktab25.quizmaker.config;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.ComponentScan;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-//import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//import org.thymeleaf.spring5.SpringTemplateEngine;
-//import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-//import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-//import org.thymeleaf.templatemode.TemplateMode;
-//
-//@Configuration
-//@EnableWebMvc
-//@ComponentScan
-//public class ThymleafMvcConfig implements WebMvcConfigurer {
-//
-//    @Autowired
-//    private ApplicationContext applicationContext;
-//
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/form/**").addResourceLocations("/form/");
-//    }
-//
+package ir.maktab25.quizmaker.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan
+public class ThymleafMvcConfig implements WebMvcConfigurer {
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler(
+                        "/dist/**",
+                        "/jquery/**",
+                        "/other/**",
+                        "/plugins/**")
+                .addResourceLocations(
+                        "classpath:/static/dist/",
+                        "classpath:/static/jquery/",
+                        "classpath:/static/other/",
+                        "classpath:/static/plugins/");
+    }
+
 //    @Bean
 //    public SpringResourceTemplateResolver templateResolver() {
 //        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -51,4 +56,4 @@
 //        viewResolver.setTemplateEngine(templateEngine());
 //        return viewResolver;
 //    }
-//}
+}

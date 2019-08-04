@@ -12,14 +12,14 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../form/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../static/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <!-- bootstrap rtl -->
-    <link rel="stylesheet" href="../form/dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="../static/dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
-    <link rel="stylesheet" href="../form/dist/css/custom-style.css">
+    <link rel="stylesheet" href="../static/dist/css/custom-style.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -136,7 +136,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="../../admin/admin.html" class="brand-link">
-            <img src="../form/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+            <img src="../static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">پنل مدیریت</span>
@@ -293,7 +293,7 @@
                                                     <td th:text="${course.code}">Trident</td>
                                                     <td th:text="${course.title}">Internet Explorer ۷</td>
                                                     <td th:text="${course.begin}">Win XP SP۲+</td>
-                                                    <td th:text="${course.getTeacher().getLastName()}">استادی انتخاب نشده</td>
+                                                    <td th:if="${course.teacher != null}" th:text="${course.getTeacher().getLastName()}">استادی انتخاب نشده</td>
                                                     <td>
                                                         <button type="submit"
                                                                 class="btn btn-primary btn-flat d-inline">
@@ -409,14 +409,14 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../form/plugins/jquery/jquery.min.js"></script>
+<script src="../static/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../form/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- FastClick -->
-<script src="../form/plugins/fastclick/fastclick.js"></script>
+<script src="../static/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../form/dist/js/adminlte.min.js"></script>
+<script src="../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../form/dist/js/demo.js"></script>
+<script src="../static/dist/js/demo.js"></script>
 </body>
 </html>

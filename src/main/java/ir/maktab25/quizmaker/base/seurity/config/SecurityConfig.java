@@ -62,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**",
                         "/swagger-resources/**"
-                        , "/v2/**").hasAuthority(RoleName.SUPER.toString());
+                        , "/v2/**").permitAll();
+//                .hasAuthority(RoleName.SUPER.toString());
 
     }
 
@@ -75,6 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/BaseUser/save")
                 .permitAll();
+    }
+
+    private void superUser(HttpSecurity http) throws Exception{
+        http.authorizeRequests()
+                .antMatchers("/Course/**").hasAnyAuthority(RoleName.SUPER.toString());
     }
 
     private void adminPermit(HttpSecurity http) throws Exception {
