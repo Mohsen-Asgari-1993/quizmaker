@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface BaseUserMapper extends BaseMapper<User, UserDTO> {
+public interface UserMapper extends BaseMapper<User, UserDTO> {
 
     @Override
     User toEntity(UserDTO userDTO);
