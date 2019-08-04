@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @NoRepositoryBean
-public interface UserRepository<E extends User, PK extends Serializable> extends JpaRepository<E, PK> {
+public interface BasicUserRepository<E extends User, PK extends Serializable> extends JpaRepository<E, PK> {
 
     E findByUserName(String username);
 
