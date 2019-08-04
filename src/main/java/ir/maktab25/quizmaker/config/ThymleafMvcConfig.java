@@ -20,6 +20,7 @@ public class ThymleafMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler(
+                        "/static/**",
                         "/dist/**",
                         "/jquery/**",
                         "/other/**",
