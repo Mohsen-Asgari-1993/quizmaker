@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -149,41 +150,32 @@
                             <div class="tab-content">
                                 <div class="tab-pane" id="enablesTeachers">
                                     <div class="card-body">
-                                        <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="example2_wrapper">
+                                        <div class="dataTables_wrapper container-fluid dt-bootstrap4">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6"></div>
                                                 <div class="col-sm-12 col-md-6"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <table class="table table-bordered table-hover dataTable" id="example2"
+                                                    <table class="table table-bordered table-hover dataTable"
                                                            role="grid">
                                                         <thead>
                                                         <tr role="row">
                                                             <th tabindex="0" class="sorting" aria-controls="example2"
                                                                 aria-label="شماره دوره: activate to sort column ascending"
-                                                                rowspan="1" colspan="1">شماره دوره
+                                                                rowspan="1" colspan="1">نام
                                                             </th>
                                                             <th tabindex="0" class="sorting" aria-controls="example2"
                                                                 aria-label="عنوان دوره: activate to sort column ascending"
-                                                                rowspan="1" colspan="1">عنوان دوره
+                                                                rowspan="1" colspan="1">نام خانوادگی
                                                             </th>
                                                             <th tabindex="0" class="sorting" aria-controls="example2"
                                                                 aria-label="تاریخ شروع: activate to sort column ascending"
-                                                                rowspan="1" colspan="1">تاریخ شروع
-                                                            </th>
-                                                            <th tabindex="0" class="sorting" aria-controls="example2"
-                                                                aria-label="استاد دوره: activate to sort column ascending"
-                                                                rowspan="1"
-                                                                colspan="1">استاد دوره
-                                                            </th>
-                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
-                                                                aria-label="کاروندان دوره: activate to sort column descending"
-                                                                aria-sort="ascending" rowspan="1" colspan="1">کاروندان دوره
+                                                                rowspan="1" colspan="1">کد
                                                             </th>
                                                             <th tabindex="0" class="sorting_asc" aria-controls="example2"
                                                                 aria-label="ویرایش: activate to sort column descending"
-                                                                aria-sort="ascending" rowspan="1" colspan="1">ویرایش
+                                                                aria-sort="ascending" rowspan="1" colspan="1"> ویرایش نقش
                                                             </th>
                                                             <th tabindex="0" class="sorting_asc" aria-controls="example2"
                                                                 aria-label="حذف: activate to sort column descending"
@@ -192,24 +184,18 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr class="odd" role="row" th:each="course : ${courses}">
-                                                            <td th:text="${course.code}">Trident</td>
-                                                            <td th:text="${course.title}">Internet Explorer ۷</td>
-                                                            <td th:text="${course.begin}">Win XP SP۲+</td>
-                                                            <td th:if="${course.teacher != null}" th:text="${course.getTeacher().getLastName()}">استادی انتخاب نشده</td>
-                                                            <td>
-                                                                <button type="submit"
-                                                                        class="btn btn-primary btn-flat d-inline">
-                                                                    نمایش کاروندان
-                                                                </button>
-                                                            </td>
+                                                        <tr class="odd" role="row" th:each="teacher : ${enables}">
+                                                            <td th:text="${teacher.firstName}">Trident</td>
+                                                            <td th:text="${teacher.lastName}">Internet Explorer ۷</td>
+                                                            <td th:text="${teacher.code}">Win XP SP۲+</td>
+                                                            <td th:href="@{}"></td>
                                                             <td>
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
                                                                 </button>
                                                             </td>
-                                                            <td>
+                                                            <td th:href="@{}">
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     حذف
@@ -222,10 +208,8 @@
                                                             <th rowspan="1" colspan="1">شماره دوره</th>
                                                             <th rowspan="1" colspan="1">عنوان دوره</th>
                                                             <th rowspan="1" colspan="1">تاریخ شروع</th>
-                                                            <th rowspan="1" colspan="1">استاد دوره</th>
-                                                            <th rowspan="1" colspan="1">کاروندان دوره</th>
-                                                            <th rowspan="1" colspan="1">ویرایش</th>
-                                                            <th rowspan="1" colspan="1">حذف</th>
+                                                            <th rowspan="1" colspan="1">ویرایش نقش</th>
+                                                            <th rowspan="1" colspan="1">خذف</th>
                                                         </tr>
                                                         </tfoot>
                                                     </table>
@@ -235,10 +219,10 @@
                                                 <div class="col-sm-12 col-md-5"></div>
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="dataTables_paginate paging_simple_numbers"
-                                                         id="example2_paginate">
+                                                         >
                                                         <ul class="pagination">
                                                             <li class="paginate_button page-item previous disabled"
-                                                                id="example2_previous"><a tabindex="0" class="page-link"
+                                                                ><a tabindex="0" class="page-link"
                                                                                           aria-controls="example2" href="#"
                                                                                           data-dt-idx="0">قبلی</a></li>
                                                             <li class="paginate_button page-item active"><a tabindex="0"
@@ -272,7 +256,7 @@
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
                                                                                                       data-dt-idx="6">۶</a></li>
-                                                            <li class="paginate_button page-item next" id="example2_next"><a
+                                                            <li class="paginate_button page-item next"><a
                                                                     tabindex="0" class="page-link" aria-controls="example2"
                                                                     href="#" data-dt-idx="7">بعدی</a></li>
                                                         </ul>
@@ -285,41 +269,36 @@
                                 </div>
                                 <div class="tab-pane" id="disablesTeachers">
                                     <div class="card-body">
-                                        <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="example2_wrapper">
+                                        <div class="dataTables_wrapper container-fluid dt-bootstrap4">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6"></div>
                                                 <div class="col-sm-12 col-md-6"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <table class="table table-bordered table-hover dataTable" id="example2"
+                                                    <table class="table table-bordered table-hover dataTable"
                                                            role="grid">
                                                         <thead>
                                                         <tr role="row">
                                                             <th tabindex="0" class="sorting" aria-controls="example2"
                                                                 aria-label="شماره دوره: activate to sort column ascending"
-                                                                rowspan="1" colspan="1">شماره دوره
+                                                                rowspan="1" colspan="1">نام
                                                             </th>
                                                             <th tabindex="0" class="sorting" aria-controls="example2"
                                                                 aria-label="عنوان دوره: activate to sort column ascending"
-                                                                rowspan="1" colspan="1">عنوان دوره
+                                                                rowspan="1" colspan="1">نام خانوادگی
                                                             </th>
                                                             <th tabindex="0" class="sorting" aria-controls="example2"
                                                                 aria-label="تاریخ شروع: activate to sort column ascending"
-                                                                rowspan="1" colspan="1">تاریخ شروع
-                                                            </th>
-                                                            <th tabindex="0" class="sorting" aria-controls="example2"
-                                                                aria-label="استاد دوره: activate to sort column ascending"
-                                                                rowspan="1"
-                                                                colspan="1">استاد دوره
-                                                            </th>
-                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
-                                                                aria-label="کاروندان دوره: activate to sort column descending"
-                                                                aria-sort="ascending" rowspan="1" colspan="1">کاروندان دوره
+                                                                rowspan="1" colspan="1">کد
                                                             </th>
                                                             <th tabindex="0" class="sorting_asc" aria-controls="example2"
                                                                 aria-label="ویرایش: activate to sort column descending"
-                                                                aria-sort="ascending" rowspan="1" colspan="1">ویرایش
+                                                                aria-sort="ascending" rowspan="1" colspan="1"> ویرایش نقش
+                                                            </th>
+                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
+                                                                aria-label="حذف: activate to sort column descending"
+                                                                aria-sort="ascending" rowspan="1" colspan="1">فعال کردن
                                                             </th>
                                                             <th tabindex="0" class="sorting_asc" aria-controls="example2"
                                                                 aria-label="حذف: activate to sort column descending"
@@ -328,24 +307,24 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr class="odd" role="row" th:each="course : ${courses}">
-                                                            <td th:text="${course.code}">Trident</td>
-                                                            <td th:text="${course.title}">Internet Explorer ۷</td>
-                                                            <td th:text="${course.begin}">Win XP SP۲+</td>
-                                                            <td th:if="${course.teacher != null}" th:text="${course.getTeacher().getLastName()}">استادی انتخاب نشده</td>
-                                                            <td>
-                                                                <button type="submit"
-                                                                        class="btn btn-primary btn-flat d-inline">
-                                                                    نمایش کاروندان
-                                                                </button>
-                                                            </td>
+                                                        <tr class="odd" role="row" th:each="teacher : ${enables}">
+                                                            <td th:text="${teacher.firstName}">Trident</td>
+                                                            <td th:text="${teacher.lastName}">Internet Explorer ۷</td>
+                                                            <td th:text="${teacher.code}">Win XP SP۲+</td>
+                                                            <td th:href="@{}"></td>
                                                             <td>
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
                                                                 </button>
                                                             </td>
-                                                            <td>
+                                                            <td th:href="@{/enable/{id}(id=${teacher.id})}">
+                                                                <button type="submit"
+                                                                        class="btn btn-primary btn-flat d-inline">
+                                                                    فعال کردن
+                                                                </button>
+                                                            </td>
+                                                            <td th:href="@{}">
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     حذف
@@ -358,23 +337,23 @@
                                                             <th rowspan="1" colspan="1">شماره دوره</th>
                                                             <th rowspan="1" colspan="1">عنوان دوره</th>
                                                             <th rowspan="1" colspan="1">تاریخ شروع</th>
-                                                            <th rowspan="1" colspan="1">استاد دوره</th>
-                                                            <th rowspan="1" colspan="1">کاروندان دوره</th>
-                                                            <th rowspan="1" colspan="1">ویرایش</th>
-                                                            <th rowspan="1" colspan="1">حذف</th>
+                                                            <th rowspan="1" colspan="1">ویرایش نقش</th>
+                                                            <th rowspan="1" colspan="1">فعال کردن</th>
+                                                            <th rowspan="1" colspan="1">خذف</th>
                                                         </tr>
                                                         </tfoot>
                                                     </table>
+
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-5"></div>
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="dataTables_paginate paging_simple_numbers"
-                                                         id="example2_paginate">
+                                                         >
                                                         <ul class="pagination">
                                                             <li class="paginate_button page-item previous disabled"
-                                                                id="example2_previous"><a tabindex="0" class="page-link"
+                                                                ><a tabindex="0" class="page-link"
                                                                                           aria-controls="example2" href="#"
                                                                                           data-dt-idx="0">قبلی</a></li>
                                                             <li class="paginate_button page-item active"><a tabindex="0"
@@ -408,7 +387,7 @@
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
                                                                                                       data-dt-idx="6">۶</a></li>
-                                                            <li class="paginate_button page-item next" id="example2_next"><a
+                                                            <li class="paginate_button page-item next"><a
                                                                     tabindex="0" class="page-link" aria-controls="example2"
                                                                     href="#" data-dt-idx="7">بعدی</a></li>
                                                         </ul>

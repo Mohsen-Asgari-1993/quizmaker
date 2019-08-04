@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -35,6 +36,18 @@ public class AdminController {
         List<TeacherDTO> disables = teacherResource.findAllDisable().getBody();
         model.addAttribute("enables", enables);
         model.addAttribute("disables", disables);
+        return "adminTeachers";
+    }
+
+    @GetMapping("/enable/{id}")
+    public String enable(@PathVariable Long id){
+        teacherResource.enableUser(id);
+        return "adminTeachers";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        teacherResource.deleteById(id);
         return "adminTeachers";
     }
 }
