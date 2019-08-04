@@ -1,7 +1,7 @@
 package ir.maktab25.quizmaker.domain;
 
 import ir.maktab25.quizmaker.base.domain.BaseEntity;
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,8 +34,8 @@ public class Course extends BaseEntity<Long> {
     private Date end;
 
     @OneToOne
-    private BaseUser teacher;
+    private User teacher;
 
     @OneToMany
-    private Set<BaseUser> students;
+    private Set<User> students;
 }

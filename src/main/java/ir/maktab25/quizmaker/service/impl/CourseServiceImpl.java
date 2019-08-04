@@ -1,8 +1,7 @@
 package ir.maktab25.quizmaker.service.impl;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.domain.Course;
@@ -29,12 +28,12 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public List<Course> findAllByStudents(BaseUser students) {
+    public List<Course> findAllByStudents(User students) {
         return baseRepository.findAllByStudents(students);
     }
 
     @Override
-    public Course addTeacher(BaseUser teacher, Long id) {
+    public Course addTeacher(User teacher, Long id) {
         Course course = baseRepository.getOne(id);
         if (checkTeacher(teacher)) {
             course.setTeacher(teacher);
@@ -45,9 +44,9 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public Course addStudent(BaseUser student, Long id) {
+    public Course addStudent(User student, Long id) {
         Course course = baseRepository.getOne(id);
-        Set<BaseUser> courseStudents = course.getStudents();
+        Set<User> courseStudents = course.getStudents();
         if (courseStudents == null)
             courseStudents = new HashSet<>();
         if (checkStudent(student))
@@ -56,19 +55,19 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public Course addStudents(Set<BaseUser> students, Long id) {
+    public Course addStudents(Set<User> students, Long id) {
         Course course = baseRepository.getOne(id);
-        Set<BaseUser> courseStudents = course.getStudents();
+        Set<User> courseStudents = course.getStudents();
         if (courseStudents == null)
             courseStudents = new HashSet<>();
-        for (BaseUser student: students){
+        for (User student: students){
             if (checkStudent(student))
                 courseStudents.add(student);
         }
         return super.save(course);
     }
 
-    private Boolean checkTeacher(BaseUser teacher) {
+    private Boolean checkTeacher(User teacher) {
         Set<Role> roles = teacher.getRoles();
         for (Role r : roles) {
             if (r.getRoleName().equals(RoleName.TEACHER))
@@ -77,7 +76,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
         return false;
     }
 
-    private Boolean checkStudent(BaseUser teacher) {
+    private Boolean checkStudent(User teacher) {
         Set<Role> roles = teacher.getRoles();
         for (Role r : roles) {
             if (r.getRoleName().equals(RoleName.STUDENT))

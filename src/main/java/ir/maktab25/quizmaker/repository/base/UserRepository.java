@@ -1,6 +1,6 @@
 package ir.maktab25.quizmaker.repository.base;
 
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @NoRepositoryBean
-public interface UserRepository<E extends BaseUser, PK extends Serializable> extends JpaRepository<E, PK> {
+public interface UserRepository<E extends User, PK extends Serializable> extends JpaRepository<E, PK> {
 
     E findByUserName(String username);
 

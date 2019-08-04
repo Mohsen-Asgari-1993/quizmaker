@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BaseUser extends BaseEntity<Long>{
+public class User extends BaseEntity<Long>{
 
 
     @Id

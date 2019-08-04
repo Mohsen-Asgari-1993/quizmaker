@@ -1,7 +1,7 @@
 package ir.maktab25.quizmaker.base.seurity.serivce.impl;
 
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.repository.BaseUserRepository;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUserRepository> implements BaseUserService {
+public class BaseUserServiceImpl extends BaseServiceImpl<User, Long, BaseUserRepository> implements BaseUserService {
 
     public BaseUserServiceImpl(BaseUserRepository baseRepository) {
         super(baseRepository);
@@ -31,24 +31,24 @@ public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUse
     PasswordEncoder passwordEncoder;
 
     @Override
-    public BaseUser findByUserName(String username) {
+    public User findByUserName(String username) {
         return baseRepository.findByUserName(username);
     }
 
     @Override
-    public BaseUser enable(Long id) {
-        BaseUser baseUser = super.findOne(id);
-        baseUser.setIsActive(true);
-        return super.save(baseUser);
+    public User enable(Long id) {
+        User user = super.findOne(id);
+        user.setIsActive(true);
+        return super.save(user);
     }
 
     @Override
-    public List<BaseUser> findAllByIsActive(Boolean isActive) {
+    public List<User> findAllByIsActive(Boolean isActive) {
         return baseRepository.findAllByIsActive(isActive);
     }
 
     @Override
-    public List<BaseUser> findAllByRoleName(String roleName) {
+    public List<User> findAllByRoleName(String roleName) {
         RoleName name = null;
         if (roleName.equalsIgnoreCase("teacher"))
             name = RoleName.TEACHER;
@@ -58,39 +58,39 @@ public class BaseUserServiceImpl extends BaseServiceImpl<BaseUser, Long, BaseUse
     }
 
     @Override
-    public List<BaseUser> findAllByFirstName(String firstName) {
+    public List<User> findAllByFirstName(String firstName) {
         return baseRepository.findAllByFirstName(firstName);
     }
 
     @Override
-    public List<BaseUser> findAllByLastName(String lastName) {
+    public List<User> findAllByLastName(String lastName) {
         return baseRepository.findAllByLastName(lastName);
     }
 
     @Override
-    public BaseUser save(BaseUser baseUser) {
-        checkRole(baseUser);
-        baseUser.setIsActive(false);
-        baseUser.setPassword(passwordEncoder.encode(baseUser.getPassword()));
-        return super.save(baseUser);
+    public User save(User user) {
+        checkRole(user);
+        user.setIsActive(false);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return super.save(user);
     }
 
-    private BaseUser setRole(BaseUser baseUser, Role role) {
+    private User setRole(User user, Role role) {
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
-        baseUser.setRoles(roleSet);
-        baseUser.setIsActive(false);
-        return super.save(baseUser);
+        user.setRoles(roleSet);
+        user.setIsActive(false);
+        return super.save(user);
     }
 
-    private void checkRole(BaseUser baseUser) {
-        baseUser.getRoles().forEach(role -> {
+    private void checkRole(User user) {
+        user.getRoles().forEach(role -> {
             Set<Role> roles = new HashSet<>();
             if (role.getRoleName().equals(RoleName.STUDENT))
                 roles.add(roleService.findByName(RoleName.STUDENT));
             else if (role.getRoleName().equals(RoleName.TEACHER))
                 roles.add(roleService.findByName(RoleName.TEACHER));
-            baseUser.setRoles(roles);
+            user.setRoles(roles);
         });
     }
 }

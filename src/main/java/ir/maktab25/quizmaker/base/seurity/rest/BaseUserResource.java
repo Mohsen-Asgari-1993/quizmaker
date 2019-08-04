@@ -1,7 +1,7 @@
 package ir.maktab25.quizmaker.base.seurity.rest;
 
 import ir.maktab25.quizmaker.base.rest.BaseRestFulService;
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.serivce.BaseUserService;
 import ir.maktab25.quizmaker.service.dto.BaseUserDTO;
 import ir.maktab25.quizmaker.service.mapper.BaseUserMapper;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/BaseUser")
-public class BaseUserResource extends BaseRestFulService<BaseUser, BaseUserDTO, Long, BaseUserService, BaseUserMapper> {
+public class BaseUserResource extends BaseRestFulService<User, BaseUserDTO, Long, BaseUserService, BaseUserMapper> {
 
 
     public BaseUserResource(BaseUserService baseService, BaseUserMapper baseMapper) {
@@ -28,25 +28,25 @@ public class BaseUserResource extends BaseRestFulService<BaseUser, BaseUserDTO, 
                     .header("id exists", "A new entity cannot already have an ID")
                     .build();
         }
-        BaseUser baseUser = baseService.save(baseMapper.toEntity(userDTO));
-        return ResponseEntity.ok(baseMapper.toDTO(baseUser));
+        User user = baseService.save(baseMapper.toEntity(userDTO));
+        return ResponseEntity.ok(baseMapper.toDTO(user));
     }
 
     @GetMapping("/enable/{id}")
     public ResponseEntity<BaseUserDTO> enableUser(@PathVariable Long id) {
-        BaseUser baseUser = baseService.enable(id);
-        return ResponseEntity.ok(baseMapper.toDTO(baseUser));
+        User user = baseService.enable(id);
+        return ResponseEntity.ok(baseMapper.toDTO(user));
     }
 
     @GetMapping("/findAllEnable")
     public ResponseEntity<List<BaseUserDTO>> findAllEnables() {
-        List<BaseUser> active = baseService.findAllByIsActive(true);
+        List<User> active = baseService.findAllByIsActive(true);
         return ResponseEntity.ok(baseMapper.entityToDTOList(active));
     }
 
     @GetMapping("/findAllDisable")
     public ResponseEntity<List<BaseUserDTO>> findAllDisable() {
-        List<BaseUser> disable = baseService.findAllByIsActive(false);
+        List<User> disable = baseService.findAllByIsActive(false);
         return ResponseEntity.ok(baseMapper.entityToDTOList(disable));
     }
 

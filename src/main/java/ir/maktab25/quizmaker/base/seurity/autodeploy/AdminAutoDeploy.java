@@ -1,6 +1,6 @@
 package ir.maktab25.quizmaker.base.seurity.autodeploy;
 
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.serivce.BaseUserService;
@@ -43,9 +43,9 @@ public class AdminAutoDeploy {
     }
 
     private void userDeploy(String username, String password, boolean active, RoleName roleName) {
-        BaseUser user = baseUserService.findByUserName(username);
+        User user = baseUserService.findByUserName(username);
         if (user == null) {
-            user = new BaseUser();
+            user = new User();
             user.setUserName(username);
             user.setPassword(passwordEncoder.encode(password));
             user.setIsActive(active);

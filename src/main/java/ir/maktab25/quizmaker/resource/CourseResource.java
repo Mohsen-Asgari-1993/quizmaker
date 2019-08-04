@@ -1,7 +1,7 @@
 package ir.maktab25.quizmaker.resource;
 
 import ir.maktab25.quizmaker.base.rest.BaseRestFulService;
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.service.CourseService;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
@@ -30,7 +30,7 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
     }
 
     @PostMapping("/findByStudent")
-    public ResponseEntity<List<CourseDTO>> findAllByStudents(@RequestBody BaseUser students) {
+    public ResponseEntity<List<CourseDTO>> findAllByStudents(@RequestBody User students) {
         List<Course> courses = baseService.findAllByStudents(students);
         if (courses == null)
             return ResponseEntity.notFound().build();
@@ -38,19 +38,19 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
     }
 
     @PostMapping("/addTeacher/{courseId}")
-    public ResponseEntity<CourseDTO> addTeacher(@RequestBody BaseUser teacher, @PathVariable("courseId") Long id) {
+    public ResponseEntity<CourseDTO> addTeacher(@RequestBody User teacher, @PathVariable("courseId") Long id) {
         Course course = baseService.addTeacher(teacher, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
     @PostMapping("/addSingleStudent/{courseId}")
-    public ResponseEntity<CourseDTO> addStudent(@RequestBody BaseUser student, @PathVariable("courseId") Long id) {
+    public ResponseEntity<CourseDTO> addStudent(@RequestBody User student, @PathVariable("courseId") Long id) {
         Course course = baseService.addStudent(student, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
     @PostMapping("/addStudents/{courseId}")
-    public ResponseEntity<CourseDTO> addStudents(@RequestBody Set<BaseUser> students, @PathVariable("courseId") Long id) {
+    public ResponseEntity<CourseDTO> addStudents(@RequestBody Set<User> students, @PathVariable("courseId") Long id) {
         Course course = baseService.addStudents(students, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }

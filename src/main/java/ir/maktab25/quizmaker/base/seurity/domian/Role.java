@@ -8,7 +8,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,6 +37,6 @@ public class Role extends BaseEntity<Long>{
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<BaseUser> users = new HashSet<>();
+    private Set<User> users = new HashSet<>();
 
 }

@@ -1,6 +1,6 @@
 package ir.maktab25.quizmaker.service.mapper;
 
-import ir.maktab25.quizmaker.base.seurity.domian.BaseUser;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.service.dto.BaseUserDTO;
 import ir.maktab25.quizmaker.service.mapper.base.BaseMapper;
 import org.mapstruct.Mapper;
@@ -8,17 +8,17 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface BaseUserMapper extends BaseMapper<BaseUser, BaseUserDTO> {
+public interface BaseUserMapper extends BaseMapper<User, BaseUserDTO> {
 
     @Override
-    BaseUser toEntity(BaseUserDTO baseUserDTO);
+    User toEntity(BaseUserDTO baseUserDTO);
 
     @Override
-    BaseUserDTO toDTO(BaseUser baseUser);
+    BaseUserDTO toDTO(User user);
 
     @Override
-    List<BaseUserDTO> entityToDTOList(List<BaseUser> list);
+    List<BaseUserDTO> entityToDTOList(List<User> list);
 
     @Override
-    List<BaseUser> DTOtoEntityList(List<BaseUserDTO> list);
+    List<User> DTOtoEntityList(List<BaseUserDTO> list);
 }
