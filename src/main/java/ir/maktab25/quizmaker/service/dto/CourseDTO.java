@@ -23,7 +23,7 @@ public class CourseDTO extends BaseDTO<Long> {
 
     private Date end;
 
-    private BaseUserDTO teacher;
+    private UserDTO teacher;
 
-    private Set<BaseUserDTO> students;
+    private Set<UserDTO> students;
 }

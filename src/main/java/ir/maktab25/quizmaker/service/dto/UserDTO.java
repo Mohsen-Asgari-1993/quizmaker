@@ -11,7 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class BaseUserDTO extends BaseDTO<Long> {
+public class UserDTO extends BaseDTO<Long> {
 
     private Long id;
 
