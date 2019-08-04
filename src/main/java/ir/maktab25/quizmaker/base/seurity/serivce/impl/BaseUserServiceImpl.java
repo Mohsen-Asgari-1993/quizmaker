@@ -4,7 +4,7 @@ import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
-import ir.maktab25.quizmaker.base.seurity.repository.BaseUserRepository;
+import ir.maktab25.quizmaker.base.seurity.repository.UserRepository;
 import ir.maktab25.quizmaker.base.seurity.serivce.BaseUserService;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,9 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class BaseUserServiceImpl extends BaseServiceImpl<User, Long, BaseUserRepository> implements BaseUserService {
+public class BaseUserServiceImpl extends BaseServiceImpl<User, Long, UserRepository> implements BaseUserService {
 
-    public BaseUserServiceImpl(BaseUserRepository baseRepository) {
+    public BaseUserServiceImpl(UserRepository baseRepository) {
         super(baseRepository);
     }
 

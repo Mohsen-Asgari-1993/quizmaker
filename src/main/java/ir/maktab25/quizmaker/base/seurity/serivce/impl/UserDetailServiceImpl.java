@@ -1,7 +1,7 @@
 package ir.maktab25.quizmaker.base.seurity.serivce.impl;
 
 import ir.maktab25.quizmaker.base.seurity.domian.User;
-import ir.maktab25.quizmaker.base.seurity.repository.BaseUserRepository;
+import ir.maktab25.quizmaker.base.seurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,11 +18,11 @@ import java.util.Set;
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
-    BaseUserRepository baseUserRepository;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = baseUserRepository.findByUserName(username);
+        User user = userRepository.findByUserName(username);
         if (user == null)
             throw new UsernameNotFoundException("there is no user with " + username + " username");
 
