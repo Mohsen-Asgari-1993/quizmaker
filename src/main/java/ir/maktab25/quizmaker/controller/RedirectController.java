@@ -8,20 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/redirect")
 public class RedirectController {
 
-    @GetMapping("/admin.html")
+    @GetMapping("/admin")
     public String adminPage() {
-        return "/admin.html";
+        return "admin";
     }
 
-    @GetMapping("/teacher.html")
+    @GetMapping("/teacher")
     public String teacherPage() {
-        return "/teacher.html";
-
+        return "teacher";
     }
 
-    @GetMapping("/student.html")
+    @GetMapping("/student")
     public String studentPage() {
-        return "/student.html";
-
+        return "student";
     }
 }
