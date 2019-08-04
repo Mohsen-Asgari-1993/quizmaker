@@ -5,6 +5,8 @@ import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.repository.base.BasicUserRepository;
 import ir.maktab25.quizmaker.service.base.BasicUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,15 @@ public class BasicUserServiceImpl<E extends User, PK extends Serializable, Repo 
 
     public BasicUserServiceImpl(Repo baseRepository) {
         super(baseRepository);
+    }
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Override
+    public E save(E t) {
+        t.setPassword(passwordEncoder.encode(t.getPassword()));
+        return super.save(t);
     }
 
     @Override
