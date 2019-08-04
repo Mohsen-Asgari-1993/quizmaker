@@ -72,9 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/templates/**")
                 .permitAll()
-                .antMatchers("/webapp/**","/form/**","/dist/**","/jquery/**","/plugins/**")
+                .antMatchers("/webapp/**","/static/**","/dist/**","/jquery/**","/plugins/**")
                 .permitAll()
-                .antMatchers("/User/save")
+                .antMatchers("/register")
                 .permitAll();
     }
 
@@ -86,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private void adminPermit(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/templates/redirect/admin/admin.html")
+                .antMatchers("/admin/**")
                 .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.ADMIN.toString());
     }
 
