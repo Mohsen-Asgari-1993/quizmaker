@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/BaseUser")
-public class BaseUserResource extends BaseRestFulService<User, BaseUserDTO, Long, BaseUserService, BaseUserMapper> {
+public class UserResource extends BaseRestFulService<User, BaseUserDTO, Long, BaseUserService, BaseUserMapper> {
 
 
-    public BaseUserResource(BaseUserService baseService, BaseUserMapper baseMapper) {
+    public UserResource(BaseUserService baseService, BaseUserMapper baseMapper) {
         super(baseService, baseMapper);
     }
 
