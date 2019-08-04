@@ -38,7 +38,7 @@ public class AdminAutoDeploy {
 
         userDeploy("admin", "admin", true, RoleName.ADMIN);
         userDeploy("super", "super", true, RoleName.SUPER);
-        userDeploy("st", "st", false, RoleName.STUDENT);
+//        userDeploy("st", "st", false, RoleName.STUDENT);
 
     }
 
