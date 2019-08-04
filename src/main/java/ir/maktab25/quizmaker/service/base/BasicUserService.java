@@ -5,7 +5,7 @@ import ir.maktab25.quizmaker.base.service.BaseService;
 import java.io.Serializable;
 import java.util.List;
 
-public interface UserService<E, PK extends Serializable> extends BaseService<E, PK> {
+public interface BasicUserService<E, PK extends Serializable> extends BaseService<E, PK> {
     E findByUserName(String username);
 
     E enable(PK id);
