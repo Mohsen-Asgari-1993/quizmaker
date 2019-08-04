@@ -27,51 +27,33 @@ public class AdminAutoDeploy {
 
     @PostConstruct
     public void initialize() {
-        Role admin = roleService.findByName(RoleName.ADMIN);
-        Role superUser = roleService.findByName(RoleName.SUPER);
-        if (admin == null)
-            admin = roleService.save(new Role(null, RoleName.ADMIN, null));
-        if (superUser == null)
-            superUser = roleService.save(new Role(null, RoleName.SUPER, null));
+        if (roleService.findByName(RoleName.ADMIN) == null)
+            roleService.save(new Role(null, RoleName.ADMIN, null));
+        if (roleService.findByName(RoleName.SUPER) == null)
+            roleService.save(new Role(null, RoleName.SUPER, null));
         if (roleService.findByName(RoleName.TEACHER) == null)
             roleService.save(new Role(null, RoleName.TEACHER, null));
         if (roleService.findByName(RoleName.STUDENT) == null)
             roleService.save(new Role(null, RoleName.STUDENT, null));
 
-        BaseUser roleAdmin = baseUserService.findByUserName("admin");
-        if (roleAdmin == null) {
-            roleAdmin = new BaseUser();
-            roleAdmin.setUserName("admin");
-            roleAdmin.setPassword(passwordEncoder.encode("maktab25"));
-            roleAdmin.setIsActive(true);
-            Set<Role> roles = new HashSet<>();
-            roles.add(admin);
-            roleAdmin.setRoles(roles);
-            baseUserService.save(roleAdmin);
-        }
+        userDeploy("admin", "admin", true, RoleName.ADMIN);
+        userDeploy("super", "super", true, RoleName.SUPER);
+        userDeploy("st", "st", false, RoleName.STUDENT);
 
-        BaseUser roleSuper = baseUserService.findByUserName("superUser");
-        if (roleSuper == null) {
-            roleSuper = new BaseUser();
-            roleSuper.setUserName("superUser");
-            roleSuper.setPassword(passwordEncoder.encode("superUser"));
-            roleSuper.setIsActive(true);
-            Set<Role> roles = new HashSet<>();
-            roles.add(superUser);
-            roleSuper.setRoles(roles);
-            baseUserService.save(roleSuper);
-        }
+    }
 
-        BaseUser roleSt = baseUserService.findByUserName("st");
-        if (roleSt == null) {
-            roleSt = new BaseUser();
-            roleSt.setUserName("st");
-            roleSt.setPassword(passwordEncoder.encode("student25"));
-            roleSt.setIsActive(false);
+    private void userDeploy(String username, String password, boolean active, RoleName roleName) {
+        BaseUser user = baseUserService.findByUserName(username);
+        if (user == null) {
+            user = new BaseUser();
+            user.setUserName(username);
+            user.setPassword(passwordEncoder.encode(password));
+            user.setIsActive(active);
             Set<Role> roles = new HashSet<>();
-            roles.add(roleService.findByName(RoleName.STUDENT));
-            roleSt.setRoles(roles);
-            baseUserService.save(roleSt);
+            Role name = roleService.findByName(roleName);
+            roles.add(name);
+            user.setRoles(roles);
+            baseUserService.save(user);
         }
     }
 }
