@@ -96,64 +96,64 @@
 
                         <!--action="../../index.html"-->
                         <form id="register-form" method="post">
-                        <div class="input-group mb-3">
-                            <!--<input type="text" class="form-control" placeholder="نقش کاربر" list="roleList"/>-->
-                            <select id="role" class="form-control">
-                                <option type="text" value="TEACHER">استاد
-                                <option type="text" value="STUDENT">کاروند
-                            </select>
-                            <div class="input-group-append">
-                                <span class="fa fa-user input-group-text"></span>
+                            <div class="input-group mb-3">
+                                <!--<input type="text" class="form-control" placeholder="نقش کاربر" list="roleList"/>-->
+                                <select id="role" class="form-control">
+                                    <option type="text" value="TEACHER">استاد
+                                    <option type="text" value="STUDENT">کاروند
+                                </select>
+                                <div class="input-group-append">
+                                    <span class="fa fa-user input-group-text"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" id="firstNameReg" class="form-control" placeholder="نام">
-                            <div class="input-group-append">
-                                <span class="fa fa-user input-group-text"></span>
+                            <div class="input-group mb-3">
+                                <input type="text" id="firstNameReg" class="form-control" placeholder="نام">
+                                <div class="input-group-append">
+                                    <span class="fa fa-user input-group-text"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" id="lastNameReg" class="form-control" placeholder="نام خانوادگی">
-                            <div class="input-group-append">
-                                <span class="fa fa-user input-group-text"></span>
+                            <div class="input-group mb-3">
+                                <input type="text" id="lastNameReg" class="form-control" placeholder="نام خانوادگی">
+                                <div class="input-group-append">
+                                    <span class="fa fa-user input-group-text"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" id="usernameReg" class="form-control" placeholder="نام کاربری">
-                            <div class="input-group-append">
-                                <span class="fa fa-user input-group-text"></span>
+                            <div class="input-group mb-3">
+                                <input type="text" id="usernameReg" class="form-control" placeholder="نام کاربری">
+                                <div class="input-group-append">
+                                    <span class="fa fa-user input-group-text"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="email" id="emailReg" class="form-control" placeholder="ایمیل">
-                            <div class="input-group-append">
-                                <span class="fa fa-envelope input-group-text"></span>
+                            <div class="input-group mb-3">
+                                <input type="email" id="emailReg" class="form-control" placeholder="ایمیل">
+                                <div class="input-group-append">
+                                    <span class="fa fa-envelope input-group-text"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" id="passwordReg" class="form-control" placeholder="رمز عبور">
-                            <div class="input-group-append">
-                                <span class="fa fa-lock input-group-text"></span>
+                            <div class="input-group mb-3">
+                                <input type="password" id="passwordReg" class="form-control" placeholder="رمز عبور">
+                                <div class="input-group-append">
+                                    <span class="fa fa-lock input-group-text"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="تکرار رمز عبور">
-                            <div class="input-group-append">
-                                <span class="fa fa-lock input-group-text"></span>
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" placeholder="تکرار رمز عبور">
+                                <div class="input-group-append">
+                                    <span class="fa fa-lock input-group-text"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
+                            <div class="row">
+                                <div class="col-8">
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-4">
+                                    <button id="registerBtn" onclick="register()" type="submit"
+                                            class="btn btn-primary btn-block btn-flat">
+                                        ثبت نام
+                                    </button>
+                                </div>
+                                <!-- /.col -->
                             </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button id="registerBtn" onclick="register()" type="submit"
-                                        class="btn btn-primary btn-block btn-flat">
-                                    ثبت نام
-                                </button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
                         </form>
 
 
@@ -265,21 +265,38 @@
             ],
             userName: username
         };
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            url: "http://localhost:8080/BaseUser/save",
-            data: JSON.stringify(data),
-            success: function () {
-                alert('successful');
-            },
-            error: function () {
-                alert("error");
-            }
+        if (type === "TEACHER") {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: "http://localhost:8080/Teacher",
+                data: JSON.stringify(data),
+                success: function () {
+                    alert('successful');
+                },
+                error: function () {
+                    alert("error");
+                }
 
-        });
+            });
+        } else {
 
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: "http://localhost:8080/Student",
+                data: JSON.stringify(data),
+                success: function () {
+                    alert('successful');
+                },
+                error: function () {
+                    alert("error");
+                }
+
+            });
+        }
 
     }
 </script>
