@@ -35,11 +35,11 @@ public class MainController {
                 saveStudent(userDTO);
             else
                 throw new Exception("fail");
-            model.addAttribute("msg", "ثبت نام شما با موفقیت انجام شد");
+            return "successRegister";
         } catch (Exception e) {
-            model.addAttribute("msg", " \n متاسفانه ثبت نام تکمیل نشد" + "\n" + e.getMessage());
+            return "failRegister";
         }
-        return "registerResult";
+
     }
 
     private void saveTeacher(UserDTO userDTO) {
