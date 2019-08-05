@@ -13,14 +13,14 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <!-- bootstrap rtl -->
-    <link rel="stylesheet" href="../dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap-rtl.min.css}">
     <!-- template rtl version -->
-    <link rel="stylesheet" href="../dist/css/custom-style.css">
+    <link rel="stylesheet" th:href="@{/dist/css/custom-style.css}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -177,17 +177,18 @@
                                                             <td th:text="${teacher.firstName}">Trident</td>
                                                             <td th:text="${teacher.lastName}">Internet Explorer ۷</td>
                                                             <td th:text="${teacher.code}">Win XP SP۲+</td>
-                                                            <td th:href="@{}">
+                                                            <td>
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
                                                                 </button>
                                                             </td>
-                                                            <td th:href="@{}">
-                                                                <button type="submit"
+                                                            <td>
+                                                                <a type="submit"
+                                                                        th:href="@{/admin/delete/{id}(id=${teacher.id})}"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     حذف
-                                                                </button>
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -305,36 +306,38 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr class="odd" role="row" th:each="teacher : ${enables}">
+                                                        <tr class="odd" role="row" th:each="teacher : ${disables}">
                                                             <td th:text="${teacher.firstName}">Trident</td>
                                                             <td th:text="${teacher.lastName}">Internet Explorer ۷</td>
                                                             <td th:text="${teacher.code}">Win XP SP۲+</td>
-                                                            <td th:href="@{}">
-                                                                <button type="submit"
-                                                                        class="btn btn-primary btn-flat d-inline">
+                                                            <td>
+                                                                <a type="submit"
+                                                                   class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
-                                                                </button>
+                                                                </a>
                                                             </td>
 
-                                                            <td th:href="@{/admin/enable/{id}(id=${teacher.id})}">
-                                                                <button type="submit"
-                                                                        class="btn btn-primary btn-flat d-inline">
+                                                            <td>
+                                                                <a type="submit"
+                                                                   th:href="@{/admin/enable/{id}(id=${teacher.id})}"
+                                                                   class="btn btn-primary btn-flat d-inline">
                                                                     فعال کردن
-                                                                </button>
+                                                                </a>
                                                             </td>
-                                                            <td th:href="@{/admin/delete/{id}(id=${teacher.id})">
-                                                                <button type="submit"
-                                                                        class="btn btn-primary btn-flat d-inline">
+                                                            <td>
+                                                                <a type="submit"
+                                                                   th:href="@{/admin/delete/{id}(id=${teacher.id})}"
+                                                                   class="btn btn-primary btn-flat d-inline">
                                                                     حذف
-                                                                </button>
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
                                                         <tfoot>
                                                         <tr>
-                                                            <th rowspan="1" colspan="1">شماره دوره</th>
-                                                            <th rowspan="1" colspan="1">عنوان دوره</th>
-                                                            <th rowspan="1" colspan="1">تاریخ شروع</th>
+                                                            <th rowspan="1" colspan="1">نام</th>
+                                                            <th rowspan="1" colspan="1">نام خانوادگی</th>
+                                                            <th rowspan="1" colspan="1">کد</th>
                                                             <th rowspan="1" colspan="1">ویرایش نقش</th>
                                                             <th rowspan="1" colspan="1">فعال کردن</th>
                                                             <th rowspan="1" colspan="1">خذف</th>
@@ -427,14 +430,14 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
-<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- FastClick -->
-<script src="../plugins/fastclick/fastclick.js"></script>
+<script th:src="@{/plugins/fastclick/fastclick.js}"></script>
 <!-- AdminLTE App -->
-<script src="../dist/js/adminlte.min.js"></script>
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
+<script th:src="@{/dist/js/demo.js}"></script>
 </body>
 </html>
