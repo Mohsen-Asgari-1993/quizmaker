@@ -22,9 +22,6 @@ public class AdminAutoDeploy {
     @Autowired
     RoleService roleService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
     @PostConstruct
     public void initialize() {
         if (roleService.findByName(RoleName.ADMIN) == null)
@@ -47,7 +44,7 @@ public class AdminAutoDeploy {
         if (user == null) {
             user = new User();
             user.setUserName(username);
-            user.setPassword(passwordEncoder.encode(password));
+            user.setPassword(password);
             user.setIsActive(active);
             Set<Role> roles = new HashSet<>();
             Role name = roleService.findByName(roleName);
