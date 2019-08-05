@@ -36,14 +36,15 @@
         <!-- Main content -->
         <section class="content">
             <div class="error-page">
-                <h2 class="headline text-danger"></h2>
-
-                <div class="error-content background-color-aqua">
-                    <h3 th:text="${msg}"><i class="fa fa-warning text-danger"></i></h3>
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fa fa-ban"></i> توجه!</h5>
+                    متاسفانه ثبت نام شما تکمیل نشد<br>
+                    <button type="submit" th:href="@{/login.html}"
+                            class="btn btn-primary btn-flat d-inline">
+                        صفحه ثبت نام
+                    </button>
                 </div>
-            </div>
-            <!-- /.error-page -->
-
         </section>
         <!-- /.content -->
     </div>

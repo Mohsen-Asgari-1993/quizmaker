@@ -126,8 +126,10 @@
                     <div class="col-12">
                         <div class="card-header p-2">
                             <ul class="nav nav-pills justify-content-center">
-                                <li class="nav-item"><a class="nav-link" href="#enablesTeachers" data-toggle="tab">اساتید ثبت شده</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#disablesTeachers" data-toggle="tab">اساتید در انتظار تایید</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#enablesTeachers" data-toggle="tab">اساتید
+                                    ثبت شده</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#disablesTeachers" data-toggle="tab">اساتید
+                                    در انتظار تایید</a></li>
                             </ul>
                         </div>
                         <div class="card-body">
@@ -157,11 +159,14 @@
                                                                 aria-label="تاریخ شروع: activate to sort column ascending"
                                                                 rowspan="1" colspan="1">کد
                                                             </th>
-                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
+                                                            <th tabindex="0" class="sorting_asc"
+                                                                aria-controls="example2"
                                                                 aria-label="ویرایش: activate to sort column descending"
-                                                                aria-sort="ascending" rowspan="1" colspan="1"> ویرایش نقش
+                                                                aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
+                                                                نقش
                                                             </th>
-                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
+                                                            <th tabindex="0" class="sorting_asc"
+                                                                aria-controls="example2"
                                                                 aria-label="حذف: activate to sort column descending"
                                                                 aria-sort="ascending" rowspan="1" colspan="1">حذف
                                                             </th>
@@ -172,8 +177,7 @@
                                                             <td th:text="${teacher.firstName}">Trident</td>
                                                             <td th:text="${teacher.lastName}">Internet Explorer ۷</td>
                                                             <td th:text="${teacher.code}">Win XP SP۲+</td>
-                                                            <td th:href="@{}"></td>
-                                                            <td>
+                                                            <td th:href="@{}">
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
@@ -189,9 +193,9 @@
                                                         </tbody>
                                                         <tfoot>
                                                         <tr>
-                                                            <th rowspan="1" colspan="1">شماره دوره</th>
-                                                            <th rowspan="1" colspan="1">عنوان دوره</th>
-                                                            <th rowspan="1" colspan="1">تاریخ شروع</th>
+                                                            <th rowspan="1" colspan="1">نام</th>
+                                                            <th rowspan="1" colspan="1">نام خانوادگی</th>
+                                                            <th rowspan="1" colspan="1">کد</th>
                                                             <th rowspan="1" colspan="1">ویرایش نقش</th>
                                                             <th rowspan="1" colspan="1">خذف</th>
                                                         </tr>
@@ -203,12 +207,12 @@
                                                 <div class="col-sm-12 col-md-5"></div>
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="dataTables_paginate paging_simple_numbers"
-                                                         >
+                                                    >
                                                         <ul class="pagination">
                                                             <li class="paginate_button page-item previous disabled"
-                                                                ><a tabindex="0" class="page-link"
-                                                                                          aria-controls="example2" href="#"
-                                                                                          data-dt-idx="0">قبلی</a></li>
+                                                            ><a tabindex="0" class="page-link"
+                                                                aria-controls="example2" href="#"
+                                                                data-dt-idx="0">قبلی</a></li>
                                                             <li class="paginate_button page-item active"><a tabindex="0"
                                                                                                             class="page-link"
                                                                                                             aria-controls="example2"
@@ -219,29 +223,35 @@
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="2">۲</a></li>
+                                                                                                      data-dt-idx="2">۲</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="3">۳</a></li>
+                                                                                                      data-dt-idx="3">۳</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="4">۴</a></li>
+                                                                                                      data-dt-idx="4">۴</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="5">۵</a></li>
+                                                                                                      data-dt-idx="5">۵</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="6">۶</a></li>
+                                                                                                      data-dt-idx="6">۶</a>
+                                                            </li>
                                                             <li class="paginate_button page-item next"><a
-                                                                    tabindex="0" class="page-link" aria-controls="example2"
+                                                                    tabindex="0" class="page-link"
+                                                                    aria-controls="example2"
                                                                     href="#" data-dt-idx="7">بعدی</a></li>
                                                         </ul>
                                                     </div>
@@ -276,15 +286,19 @@
                                                                 aria-label="تاریخ شروع: activate to sort column ascending"
                                                                 rowspan="1" colspan="1">کد
                                                             </th>
-                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
+                                                            <th tabindex="0" class="sorting_asc"
+                                                                aria-controls="example2"
                                                                 aria-label="ویرایش: activate to sort column descending"
-                                                                aria-sort="ascending" rowspan="1" colspan="1"> ویرایش نقش
+                                                                aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
+                                                                نقش
                                                             </th>
-                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
+                                                            <th tabindex="0" class="sorting_asc"
+                                                                aria-controls="example2"
                                                                 aria-label="حذف: activate to sort column descending"
                                                                 aria-sort="ascending" rowspan="1" colspan="1">فعال کردن
                                                             </th>
-                                                            <th tabindex="0" class="sorting_asc" aria-controls="example2"
+                                                            <th tabindex="0" class="sorting_asc"
+                                                                aria-controls="example2"
                                                                 aria-label="حذف: activate to sort column descending"
                                                                 aria-sort="ascending" rowspan="1" colspan="1">حذف
                                                             </th>
@@ -295,20 +309,20 @@
                                                             <td th:text="${teacher.firstName}">Trident</td>
                                                             <td th:text="${teacher.lastName}">Internet Explorer ۷</td>
                                                             <td th:text="${teacher.code}">Win XP SP۲+</td>
-                                                            <td th:href="@{}"></td>
-                                                            <td>
+                                                            <td th:href="@{}">
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
                                                                 </button>
                                                             </td>
-                                                            <td th:href="@{/enable/{id}(id=${teacher.id})}">
+
+                                                            <td th:href="@{/admin/enable/{id}(id=${teacher.id})}">
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     فعال کردن
                                                                 </button>
                                                             </td>
-                                                            <td th:href="@{}">
+                                                            <td th:href="@{/admin/delete/{id}(id=${teacher.id})">
                                                                 <button type="submit"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     حذف
@@ -334,12 +348,12 @@
                                                 <div class="col-sm-12 col-md-5"></div>
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="dataTables_paginate paging_simple_numbers"
-                                                         >
+                                                    >
                                                         <ul class="pagination">
                                                             <li class="paginate_button page-item previous disabled"
-                                                                ><a tabindex="0" class="page-link"
-                                                                                          aria-controls="example2" href="#"
-                                                                                          data-dt-idx="0">قبلی</a></li>
+                                                            ><a tabindex="0" class="page-link"
+                                                                aria-controls="example2" href="#"
+                                                                data-dt-idx="0">قبلی</a></li>
                                                             <li class="paginate_button page-item active"><a tabindex="0"
                                                                                                             class="page-link"
                                                                                                             aria-controls="example2"
@@ -350,29 +364,35 @@
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="2">۲</a></li>
+                                                                                                      data-dt-idx="2">۲</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="3">۳</a></li>
+                                                                                                      data-dt-idx="3">۳</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="4">۴</a></li>
+                                                                                                      data-dt-idx="4">۴</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="5">۵</a></li>
+                                                                                                      data-dt-idx="5">۵</a>
+                                                            </li>
                                                             <li class="paginate_button page-item "><a tabindex="0"
                                                                                                       class="page-link"
                                                                                                       aria-controls="example2"
                                                                                                       href="#"
-                                                                                                      data-dt-idx="6">۶</a></li>
+                                                                                                      data-dt-idx="6">۶</a>
+                                                            </li>
                                                             <li class="paginate_button page-item next"><a
-                                                                    tabindex="0" class="page-link" aria-controls="example2"
+                                                                    tabindex="0" class="page-link"
+                                                                    aria-controls="example2"
                                                                     href="#" data-dt-idx="7">بعدی</a></li>
                                                         </ul>
                                                     </div>
