@@ -1,6 +1,5 @@
 package ir.maktab25.quizmaker.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import ir.maktab25.quizmaker.rest.CourseResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
@@ -34,7 +33,7 @@ public class AdminController {
     }
 
     @PostMapping("/addCourse")
-    public String addCourse(Model model, CourseDTO courseDTO){
+    public String addCourse(Model model, CourseDTO courseDTO) {
         courseResource.create(courseDTO);
         List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
         model.addAttribute("courses", body);
@@ -43,21 +42,37 @@ public class AdminController {
     }
 
     @GetMapping("/course/show/{id}")
-    public String showCourse(@PathVariable Long id, Model model){
+    public String showCourse(@PathVariable Long id, Model model) {
+        model.addAttribute("teachers", teacherResource.findAllEnables().getBody());
         model.addAttribute("course", courseResource.getById(id).getBody());
-        model.addAttribute("dto", new CourseDTO());
         return "adminSingleCourse";
     }
 
-    @GetMapping("/course/delete/{id}")
-    public String deleteCourse(@PathVariable Long id, Model model){
-        courseResource.deleteById(id);
+    @PostMapping("/course/update/{id}")
+    public String updateCourse(@PathVariable Long id, Model model, CourseDTO courseDTO) {
+        courseResource.update(courseDTO);
         List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
         model.addAttribute("courses", body);
         model.addAttribute("dto", new CourseDTO());
         return "adminCourse";
     }
 
+    @PostMapping("/course/addTeacher/{courseId}/{teacherId}")
+    public String addTeacherToCourse(@PathVariable Long courseId, @PathVariable Long teacherId, Model model) {
+        courseResource.addTeacher(teacherId, courseId);
+        model.addAttribute("teachers", teacherResource.findAllEnables().getBody());
+        model.addAttribute("course", courseResource.getById(courseId).getBody());
+        return "adminCourse";
+    }
+
+    @GetMapping("/course/delete/{id}")
+    public String deleteCourse(@PathVariable Long id, Model model) {
+        courseResource.deleteById(id);
+        List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
+        model.addAttribute("courses", body);
+        model.addAttribute("dto", new CourseDTO());
+        return "adminCourse";
+    }
 
 
     @GetMapping("/teacher")
@@ -67,20 +82,20 @@ public class AdminController {
     }
 
     @GetMapping("/teacher/enable/{id}")
-    public String enable(@PathVariable Long id, Model model){
+    public String enable(@PathVariable Long id, Model model) {
         teacherResource.enableUser(id);
         bindDateForAdminTeachers(model);
         return "adminTeachers";
     }
 
     @GetMapping("/teacher/delete/{id}")
-    public String delete(@PathVariable Long id, Model model){
+    public String delete(@PathVariable Long id, Model model) {
         teacherResource.deleteById(id);
         bindDateForAdminTeachers(model);
         return "adminTeachers";
     }
 
-    private void bindDateForAdminTeachers(Model model){
+    private void bindDateForAdminTeachers(Model model) {
         List<TeacherDTO> enables = teacherResource.findAllEnables().getBody();
         List<TeacherDTO> disables = teacherResource.findAllDisable().getBody();
         model.addAttribute("enables", enables);
