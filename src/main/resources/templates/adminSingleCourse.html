@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>پنل مدیریت | پروفایل کاربری</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <!-- bootstrap rtl -->
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap-rtl.min.css}">
+    <!-- template rtl version -->
+    <link rel="stylesheet" th:href="@{/dist/css/custom-style.css}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="../templates/admin.html" class="nav-link">خانه</a>
+            </li>
+        </ul>
+
+        <!-- SEARCH FORM -->
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/logout" class="nav-link">خروج</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="../templates/admin.html" class="brand-link">
+            <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">پنل مدیریت</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div>
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="info">
+                        <a href="#" class="d-block">حسام موسوی</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview">
+                            <a href="#" th:href="@{/admin/course}" class="nav-link">
+                                <i class="nav-icon fa fa-dashboard"></i>
+                                <p>
+                                    دوره ها
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item has-treeview ">
+                            <a href="#" th:href="@{/admin/teacher}" class="nav-link">
+                                <i class="nav-icon fa fa-pie-chart"></i>
+                                <p>
+                                    اساتید
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-tree"></i>
+                                <p>
+                                    کاروندان
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row mb-2 justify-content-center align-items-center">
+                    <div class="card-body col-6">
+                        <form id="register-form" method="post" th:object="${course}"
+                              th:action="@{/admin/course/update/{id}(id=${course.id})}">
+                            <!-- Date dd/mm/yyyy -->
+                            <div class="form-group">
+                                <label>عنوان: </label>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control ltr" th:field="*{title}">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <div class="form-group">
+                                <label>شماره دوره:</label>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control ltr" th:field="*{code}">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <div class="form-group">
+                                <label>تاریخ آغاز دوره:</label>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control ltr" th:field="*{begin}">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <div class="form-group">
+                                <label>تاریخ پایان دوره:</label>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control ltr" th:field="*{end}">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+
+                            <!-- phone mask -->
+                            <div class="form-group">
+                                <label>استاد دوره:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control"
+                                           th:field="*{teacher.firstName + teacher.lastName}">استادی انتخاب نشده است
+                                    <button type="button" class="btn btn-primary btn-flat d-inline float-left"
+                                            data-toggle="modal" data-target="#myModal">ویرایش
+                                    </button>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">افزودن استاد</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="input-group mb-3">
+                                                        <div class="col-sm-12">
+                                                            <table class="table table-bordered table-hover dataTable"
+                                                                   role="grid">
+                                                                <thead>
+                                                                <tr role="row">
+                                                                    <th tabindex="0" class="sorting w-25"
+                                                                        aria-controls="example2"
+                                                                        aria-label="شماره دوره: activate to sort column ascending"
+                                                                        rowspan="1" colspan="1">نام
+                                                                    </th>
+                                                                    <th tabindex="0" class="sorting"
+                                                                        aria-controls="example2"
+                                                                        aria-label="شماره دوره: activate to sort column ascending"
+                                                                        rowspan="1" colspan="1">نام خانوادگی
+                                                                    </th>
+                                                                    <th tabindex="0" class="sorting_asc w-25"
+                                                                        aria-controls="example2"
+                                                                        aria-label="حذف: activate to sort column descending"
+                                                                        aria-sort="ascending" rowspan="1"
+                                                                        colspan="1">انتخاب
+                                                                    </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr class="odd" role="row"
+                                                                    th:each="teacher : ${teachers}">
+                                                                    <td th:text="${teacher.firstName}"></td>
+                                                                    <td th:text="${teacher.lastName}"></td>
+                                                                    <td>
+                                                                        <a type="submit"
+                                                                           th:href="@{/admin/course/addTeacher/{courseId}/{teacherId}
+                                                                           (courseId=${course.id},teacherId=${teacher.id})}"
+                                                                           class="btn btn-primary btn-flat d-inline text-white">
+                                                                            انتخاب
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                                <tfoot>
+                                                                <tr>
+                                                                    <th rowspan="1" colspan="1">نام</th>
+                                                                    <th rowspan="1" colspan="1">نام خانوادگی</th>
+                                                                    <th rowspan="1" colspan="1">انتخاب</th>
+                                                                </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+
+                            <!-- IP mask -->
+                            <div class="form-group">
+                                <label class="float-right float-right">کاروندان:</label>
+                                <a type="submit"
+                                   class="btn btn-primary btn-flat float-left text-white mb-1 ml-1">
+                                    افزودن کاروند جدید
+                                </a>
+
+                                <div class="input-group mt-1">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered table-hover dataTable" id="example2"
+                                               role="grid">
+                                            <thead>
+                                            <tr role="row">
+                                                <th tabindex="0" class="sorting w-25" aria-controls="example2"
+                                                    aria-label="شماره دوره: activate to sort column ascending"
+                                                    rowspan="1" colspan="1">نام
+                                                </th>
+                                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                                    aria-label="شماره دوره: activate to sort column ascending"
+                                                    rowspan="1" colspan="1">نام خانوادگی
+                                                </th>
+                                                <th tabindex="0" class="sorting_asc w-25" aria-controls="example2"
+                                                    aria-label="حذف: activate to sort column descending"
+                                                    aria-sort="ascending" rowspan="1" colspan="1">حذف
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="odd" role="row" th:each="course : ${courses}">
+                                                <td th:text="${course.code}"></td>
+                                                <td th:text="${course.title}"></td>
+                                                <td>
+                                                    <a type="submit"
+                                                       th:href="@{/admin/course/delete/{id}(id=${course.id})}"
+                                                       class="btn btn-primary btn-flat d-inline text-white">
+                                                        حذف
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th rowspan="1" colspan="1">نام</th>
+                                                <th rowspan="1" colspan="1">نام خانوادگی</th>
+                                                <th rowspan="1" colspan="1">حذف</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+                            <!-- /.col -->
+                            <div class="m-1 float-right">
+                                <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">بازگشت
+                                </button>
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="m-1 float-left">
+                                <input type="submit" class="btn btn-primary" value="ذخیره">
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسام موسوی</a>.</strong>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/dist/js/demo.js}"></script>
+</body>
+</html>
