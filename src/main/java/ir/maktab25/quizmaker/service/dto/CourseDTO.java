@@ -17,7 +17,7 @@ public class CourseDTO extends BaseDTO<Long> {
 
     private String title;
 
-    private String code;
+    private Integer code;
 
     private String begin;
 

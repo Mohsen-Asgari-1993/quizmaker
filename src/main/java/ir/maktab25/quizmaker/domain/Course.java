@@ -25,7 +25,7 @@ public class Course extends BaseEntity<Long> {
     private String title;
 
     @Column(name = "code", unique = true)
-    private String code;
+    private Integer code;
 
     @Column(name = "begin")
     private String begin;
