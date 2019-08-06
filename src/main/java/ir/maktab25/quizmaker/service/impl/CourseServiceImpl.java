@@ -18,9 +18,6 @@ import java.util.Set;
 @Transactional
 public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepository> implements CourseService {
 
-    private final Integer min = 10000;
-    private final Integer max = 99999;
-
     public CourseServiceImpl(CourseRepository baseRepository) {
         super(baseRepository);
     }
@@ -28,7 +25,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Course save(Course t) {
         if (existByCode(t.getCode()))
-            t.setCode(Integer.parseInt(findTop().getCode()) + 1 + "");
+            t.setCode(findTop().getCode() + 1 );
         return super.save(t);
     }
 
@@ -78,7 +75,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public Boolean existByCode(String code) {
+    public Boolean existByCode(Integer code) {
         return baseRepository.existsByCode(code);
     }
 
