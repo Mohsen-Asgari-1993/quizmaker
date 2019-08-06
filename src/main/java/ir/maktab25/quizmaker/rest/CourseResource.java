@@ -37,9 +37,9 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(baseMapper.entityToDTOList(courses));
     }
 
-    @PostMapping("/addTeacher/{courseId}")
-    public ResponseEntity<CourseDTO> addTeacher(@RequestBody User teacher, @PathVariable("courseId") Long id) {
-        Course course = baseService.addTeacher(teacher, id);
+    @PostMapping("/addTeacher/{courseId}/{teacherId}")
+    public ResponseEntity<CourseDTO> addTeacher(@PathVariable Long teacherId, @PathVariable("courseId") Long id) {
+        Course course = baseService.addTeacher(teacherId, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
