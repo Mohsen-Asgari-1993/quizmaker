@@ -42,20 +42,38 @@ public class AdminController {
         return "adminCourse";
     }
 
+    @GetMapping("/course/show/{id}")
+    public String showCourse(@PathVariable Long id, Model model){
+        model.addAttribute("course", courseResource.getById(id).getBody());
+        model.addAttribute("dto", new CourseDTO());
+        return "adminSingleCourse";
+    }
+
+    @GetMapping("/course/delete/{id}")
+    public String deleteCourse(@PathVariable Long id, Model model, CourseDTO courseDTO){
+        courseResource.deleteById(id);
+        List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
+        model.addAttribute("courses", body);
+        model.addAttribute("dto", courseDTO);
+        return "adminCourse";
+    }
+
+
+
     @GetMapping("/teacher")
     public String getTeachers(Model model) {
         bindDateForAdminTeachers(model);
         return "adminTeachers";
     }
 
-    @GetMapping("/enable/{id}")
+    @GetMapping("/teacher/enable/{id}")
     public String enable(@PathVariable Long id, Model model){
         teacherResource.enableUser(id);
         bindDateForAdminTeachers(model);
         return "adminTeachers";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/teacher/delete/{id}")
     public String delete(@PathVariable Long id, Model model){
         teacherResource.deleteById(id);
         bindDateForAdminTeachers(model);
