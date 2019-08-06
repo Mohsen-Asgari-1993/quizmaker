@@ -62,8 +62,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**",
                         "/swagger-resources/**"
-                        , "/v2/**").permitAll();
-//                .hasAuthority(RoleName.SUPER.toString());
+                        , "/v2/**")
+//                .permitAll();
+                .hasAuthority(RoleName.SUPER.toString());
 
     }
 
@@ -72,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/templates/**")
                 .permitAll()
-                .antMatchers("/webapp/**","/static/**","/dist/**","/jquery/**","/plugins/**")
+                .antMatchers("/webapp/**","/static/**","/dist/**","/jquery/**","/plugins/**", "/jalali/**")
                 .permitAll()
                 .antMatchers("/register")
                 .permitAll();
