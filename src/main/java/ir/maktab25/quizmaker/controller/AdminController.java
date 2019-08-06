@@ -50,11 +50,11 @@ public class AdminController {
     }
 
     @GetMapping("/course/delete/{id}")
-    public String deleteCourse(@PathVariable Long id, Model model, CourseDTO courseDTO){
+    public String deleteCourse(@PathVariable Long id, Model model){
         courseResource.deleteById(id);
         List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
         model.addAttribute("courses", body);
-        model.addAttribute("dto", courseDTO);
+        model.addAttribute("dto", new CourseDTO());
         return "adminCourse";
     }
 
