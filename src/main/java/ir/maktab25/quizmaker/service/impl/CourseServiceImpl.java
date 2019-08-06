@@ -7,6 +7,7 @@ import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.repository.CourseRepository;
 import ir.maktab25.quizmaker.service.CourseService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +25,6 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
 
     @Override
     public Course save(Course t) {
-        if (existByCode(t.getCode()))
-            t.setCode(findTop().getCode() + 1 );
         return super.save(t);
     }
 
@@ -77,11 +76,6 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Boolean existByCode(Integer code) {
         return baseRepository.existsByCode(code);
-    }
-
-    @Override
-    public Course findTop() {
-        return baseRepository.findTop();
     }
 
     private Boolean checkTeacher(User teacher) {

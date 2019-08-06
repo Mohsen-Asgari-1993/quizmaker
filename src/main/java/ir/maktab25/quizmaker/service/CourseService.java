@@ -22,5 +22,4 @@ public interface CourseService extends BaseService<Course, Long> {
 
     Boolean existByCode(Integer code);
 
-    Course findTop();
 }
