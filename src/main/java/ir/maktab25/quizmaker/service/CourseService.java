@@ -14,7 +14,7 @@ public interface CourseService extends BaseService<Course, Long> {
 
     List<Course> findAllByStudents(User students);
 
-    Course addTeacher(User teacher, Long id);
+    Course addTeacher(Long teacherId, Long id);
 
     Course addStudent(User student, Long id);
 

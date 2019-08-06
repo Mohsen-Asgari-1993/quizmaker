@@ -5,8 +5,11 @@ import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.domain.Course;
+import ir.maktab25.quizmaker.domain.Teacher;
 import ir.maktab25.quizmaker.repository.CourseRepository;
 import ir.maktab25.quizmaker.service.CourseService;
+import ir.maktab25.quizmaker.service.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,9 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     public CourseServiceImpl(CourseRepository baseRepository) {
         super(baseRepository);
     }
+
+    @Autowired
+    TeacherService teacherService;
 
     @Override
     public Course save(Course t) {
@@ -39,14 +45,11 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public Course addTeacher(User teacher, Long id) {
+    public Course addTeacher(Long teacherId, Long id) {
         Course course = baseRepository.getOne(id);
-        if (checkTeacher(teacher)) {
-            course.setTeacher(teacher);
-            return super.save(course);
-        } else {
-            throw new RuntimeException("Cant add another role as teacher");
-        }
+        Teacher teacher = teacherService.findOne(teacherId);
+        course.setTeacher(teacher);
+        return super.save(course);
     }
 
     @Override
