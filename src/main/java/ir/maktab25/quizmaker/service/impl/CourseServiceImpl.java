@@ -27,14 +27,8 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
 
     @Override
     public Course save(Course t) {
-        boolean check = true;
-        while (check) {
-            int x = (int) ((Math.random() * ((max - min) + 1)) + min);
-            if (!existByCode(Integer.toString(x))) {
-                check = false;
-                t.setCode(Integer.toString(x));
-            }
-        }
+        if (existByCode(t.getCode()))
+            t.setCode(Integer.parseInt(findTop().getCode()) + 1 + "");
         return super.save(t);
     }
 
@@ -86,6 +80,11 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Boolean existByCode(String code) {
         return baseRepository.existsByCode(code);
+    }
+
+    @Override
+    public Course findTop() {
+        return baseRepository.findTop();
     }
 
     private Boolean checkTeacher(User teacher) {

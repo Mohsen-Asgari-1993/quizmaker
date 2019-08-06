@@ -21,4 +21,6 @@ public interface CourseService extends BaseService<Course, Long> {
     Course addStudents(Set<User> students, Long id);
 
     Boolean existByCode(String code);
+
+    Course findTop();
 }

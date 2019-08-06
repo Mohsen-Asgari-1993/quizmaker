@@ -16,4 +16,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Boolean existsByCode(String code);
 
+    Course findTop();
+
 }
