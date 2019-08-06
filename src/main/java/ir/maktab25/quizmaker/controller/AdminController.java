@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -25,9 +26,19 @@ public class AdminController {
     TeacherResource teacherResource;
 
     @GetMapping("/course")
-    public String getCourses(Model model) {
+    public String getCourses(Model model, CourseDTO courseDTO) {
         List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
         model.addAttribute("courses", body);
+        model.addAttribute("dto", courseDTO);
+        return "adminCourse";
+    }
+
+    @PostMapping("/addCourse")
+    public String addCourse(Model model, CourseDTO courseDTO){
+        courseResource.create(courseDTO);
+        List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
+        model.addAttribute("courses", body);
+        model.addAttribute("dto", new CourseDTO());
         return "adminCourse";
     }
 
