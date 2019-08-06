@@ -57,12 +57,12 @@ public class AdminController {
         return "adminCourse";
     }
 
-    @PostMapping("/course/addTeacher/{courseId}/{teacherId}")
+    @GetMapping("/course/addTeacher/{courseId}/{teacherId}")
     public String addTeacherToCourse(@PathVariable Long courseId, @PathVariable Long teacherId, Model model) {
         courseResource.addTeacher(teacherId, courseId);
         model.addAttribute("teachers", teacherResource.findAllEnables().getBody());
         model.addAttribute("course", courseResource.getById(courseId).getBody());
-        return "adminCourse";
+        return "adminSingleCourse";
     }
 
     @GetMapping("/course/delete/{id}")
