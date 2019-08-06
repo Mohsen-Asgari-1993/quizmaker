@@ -14,5 +14,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     List<Course> findAllByStudents(User students);
 
+    Boolean existsByCode(String code);
 
 }
