@@ -130,7 +130,7 @@
                                 <label>عنوان: </label>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control ltr" th:field="*{title}">
+                                    <input type="text" class="form-control" th:field="*{title}">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -138,7 +138,7 @@
                                 <label>شماره دوره:</label>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control ltr" th:field="*{code}">
+                                    <input type="text" class="form-control " th:field="*{code}">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -146,7 +146,7 @@
                                 <label>تاریخ آغاز دوره:</label>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control ltr" th:field="*{begin}">
+                                    <input type="text" class="form-control " th:field="*{begin}">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -154,7 +154,7 @@
                                 <label>تاریخ پایان دوره:</label>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control ltr" th:field="*{end}">
+                                    <input type="text" class="form-control " th:field="*{end}">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -169,7 +169,7 @@
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
                                     <input type="text" class="form-control"
-                                           th:field="*{teacher.firstName + teacher.lastName}">استادی انتخاب نشده است
+                                           th:field="*{teacher.lastName}" placeholder="استادی انتخاب نشده است" readonly="readonly">
                                     <button type="button" class="btn btn-primary btn-flat d-inline float-left"
                                             data-toggle="modal" data-target="#myModal">ویرایش
                                     </button>
