@@ -1,12 +1,11 @@
 package ir.maktab25.quizmaker.base.seurity.autodeploy;
 
-import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
-import ir.maktab25.quizmaker.base.seurity.serivce.UserService;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
+import ir.maktab25.quizmaker.base.seurity.serivce.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
