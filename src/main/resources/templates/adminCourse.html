@@ -20,6 +20,13 @@
     <link rel="stylesheet" th:href="@{/dist/css/bootstrap-rtl.min.css}">
     <!-- template rtl version -->
     <link rel="stylesheet" th:href="@{/dist/css/custom-style.css}">
+
+
+    <link rel="stylesheet" th:href="@{/jalali/skins/aqua/theme.css}">
+    <script th:src="@{/jalali/jalali.js}"></script>
+    <script th:src="@{/jalali/calendar.js}"></script>
+    <script th:src="@{/jalali/calendar-setup.js}"></script>
+    <script th:src="@{/jalali/lang/calendar-fa.js}"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -40,7 +47,7 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/logout"> خروج</a>
+                <a class="nav-link" th:href="@{/logout}"> خروج</a>
             </li>
         </ul>
     </nav>
@@ -49,7 +56,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <p  class="brand-link">
+        <p class="brand-link">
             <span class="brand-text font-weight-light">پنل مدیریت</span>
         </p>
 
@@ -74,7 +81,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                            <a href="#" th:href="@{/admin/courese}" class="nav-link">
                                 <i class="nav-icon fa fa-dashboard"></i>
                                 <p>
                                     دوره ها
@@ -121,10 +128,84 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title d-inline">جدول دوره ها</h3>
-                                <button type="submit"
-                                        class="btn btn-primary btn-flat d-inline float-left">
-                                    ایجاد دوره جدید
+                                <button type="button" class="btn btn-primary btn-flat d-inline float-left"
+                                        data-toggle="modal" data-target="#myModal">ایجاد دوره جدید
                                 </button>
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">دوره جدید</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="login-form" method="post" th:action="@{/admin/addCourse}"
+                                                      th:object="${dto}">
+                                                    <div class="input-group mb-3">
+                                                        <input id="password" name="password" type="hidden"/>
+                                                        <input class="form-control" id="title" name="title"
+                                                               placeholder="عنوان دوره"
+                                                               required="required" type="text" th:field="*{title}">
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <input class="form-control" id="code" name="code"
+                                                               placeholder="شماره دوره"
+                                                               required="required" type="number" th:field="*{code}">
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <input class="form-control" id="begin"
+                                                               placeholder=" تاریخ آغاز دوره"
+                                                               required="required" type="text" th:field="*{begin}">
+                                                        <img id="date_btn_begin" th:src="@{/jalali/examples/cal.png}"
+                                                             style="vertical-align: top;">
+                                                        <script type="text/javascript">
+                                                            Calendar.setup({
+                                                                inputField: "begin",   // id of the input field
+                                                                button: "date_btn_begin",   // trigger for the calendar (button ID)
+                                                                ifFormat: "%Y-%m-%d",       // format of the input field
+                                                                dateType: 'jalali',
+                                                                weekNumbers: false
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <input class="form-control" id="end"
+                                                               placeholder="تاریخ اتمام دوره"
+                                                               required="required" type="text" th:field="*{end}">
+                                                        <img id="date_btn_end" th:src="@{/jalali/examples/cal.png}"
+                                                             style="vertical-align: top;">
+                                                        <script type="text/javascript">
+                                                            Calendar.setup({
+                                                                inputField: "end",   // id of the input field
+                                                                button: "date_btn_end",   // trigger for the calendar (button ID)
+                                                                ifFormat: "%Y-%m-%d",       // format of the input field
+                                                                dateType: 'jalali',
+                                                                weekNumbers: false
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                    <div class="row float-left">
+                                                        <!-- /.col -->
+                                                        <div class="m-1">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">بازگشت
+                                                            </button>
+
+                                                        </div>
+                                                        <!-- /.col -->
+                                                        <div class="m-1">
+                                                            <button type="submit" class="btn btn-primary">ذخیره</button>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- /.card-header -->
                             <!-- /.card-body -->
@@ -153,17 +234,12 @@
                                                         rowspan="1" colspan="1">تاریخ شروع
                                                     </th>
                                                     <th tabindex="0" class="sorting" aria-controls="example2"
-                                                        aria-label="استاد دوره: activate to sort column ascending"
-                                                        rowspan="1"
-                                                        colspan="1">استاد دوره
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc" aria-controls="example2"
-                                                        aria-label="کاروندان دوره: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">کاروندان دوره
+                                                        aria-label="تاریخ شروع: activate to sort column ascending"
+                                                        rowspan="1" colspan="1">تاریخ پایان
                                                     </th>
                                                     <th tabindex="0" class="sorting_asc" aria-controls="example2"
                                                         aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">ویرایش
+                                                        aria-sort="ascending" rowspan="1" colspan="1">ویرایش دوره
                                                     </th>
                                                     <th tabindex="0" class="sorting_asc" aria-controls="example2"
                                                         aria-label="حذف: activate to sort column descending"
@@ -173,27 +249,21 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr class="odd" role="row" th:each="course : ${courses}">
-                                                    <td th:text="${course.code}">Trident</td>
-                                                    <td th:text="${course.title}">Internet Explorer ۷</td>
-                                                    <td th:text="${course.begin}">Win XP SP۲+</td>
-                                                    <td th:if="${course.teacher != null}" th:text="${course.getTeacher().getLastName()}">استادی انتخاب نشده</td>
+                                                    <td th:text="${course.code}"></td>
+                                                    <td th:text="${course.title}"></td>
+                                                    <td th:text="${course.begin}"></td>
+                                                    <td th:text="${course.end}"></td>
                                                     <td>
-                                                        <button type="submit"
-                                                                class="btn btn-primary btn-flat d-inline">
-                                                            نمایش کاروندان
-                                                        </button>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit"
+                                                        <a type="submit" th:href="@{/admin/course/show/{id}(id=${course.id})}"
                                                                 class="btn btn-primary btn-flat d-inline">
                                                             ویرایش
-                                                        </button>
+                                                        </a>
                                                     </td>
                                                     <td>
-                                                        <button type="submit"
+                                                        <a type="submit" th:href="@{/admin/course/delete/{id}(id=${course.id})}"
                                                                 class="btn btn-primary btn-flat d-inline">
                                                             حذف
-                                                        </button>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -202,8 +272,7 @@
                                                     <th rowspan="1" colspan="1">شماره دوره</th>
                                                     <th rowspan="1" colspan="1">عنوان دوره</th>
                                                     <th rowspan="1" colspan="1">تاریخ شروع</th>
-                                                    <th rowspan="1" colspan="1">استاد دوره</th>
-                                                    <th rowspan="1" colspan="1">کاروندان دوره</th>
+                                                    <th rowspan="1" colspan="1">تاریخ پایان</th>
                                                     <th rowspan="1" colspan="1">ویرایش</th>
                                                     <th rowspan="1" colspan="1">حذف</th>
                                                 </tr>
