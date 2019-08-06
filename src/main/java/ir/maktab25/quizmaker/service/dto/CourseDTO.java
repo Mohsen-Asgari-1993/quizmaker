@@ -19,9 +19,9 @@ public class CourseDTO extends BaseDTO<Long> {
 
     private String code;
 
-    private Date begin;
+    private String begin;
 
-    private Date end;
+    private String end;
 
     private UserDTO teacher;
 

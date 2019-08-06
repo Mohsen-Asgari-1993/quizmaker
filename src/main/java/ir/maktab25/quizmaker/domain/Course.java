@@ -28,10 +28,10 @@ public class Course extends BaseEntity<Long> {
     private String code;
 
     @Column(name = "begin")
-    private Date begin;
+    private String begin;
 
     @Column(name = "end")
-    private Date end;
+    private String end;
 
     @OneToOne
     private User teacher;
