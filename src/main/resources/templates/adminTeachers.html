@@ -32,7 +32,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="admin.html" class="nav-link">خانه</a>
+                <a th:href="@{/redirect/admin}" class="nav-link">خانه</a>
             </li>
         </ul>
 
@@ -42,7 +42,7 @@
         <ul class="navbar-nav mr-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="/logout">خروج
+                <a class="nav-link" data-toggle="dropdown" th:href="@{/logout}">خروج
                 </a>
             </li>
             <!-- Notifications Dropdown Menu -->
@@ -78,7 +78,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                            <a href="#" th:href="@{/admin/course}" class="nav-link">
                                 <i class="nav-icon fa fa-dashboard"></i>
                                 <p>
                                     دوره ها
@@ -88,7 +88,7 @@
 
                         </li>
                         <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link">
+                            <a href="#" th:href="@{/admin/teacher}" class="nav-link">
                                 <i class="nav-icon fa fa-pie-chart"></i>
                                 <p>
                                     اساتید
@@ -97,7 +97,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                            <a href="#" th:href="@{/admin/student}" class="nav-link">
                                 <i class="nav-icon fa fa-tree"></i>
                                 <p>
                                     کاروندان
