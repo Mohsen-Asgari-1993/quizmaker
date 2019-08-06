@@ -1,8 +1,8 @@
 package ir.maktab25.quizmaker.service.impl;
 
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
-import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.repository.CourseRepository;
@@ -18,8 +18,24 @@ import java.util.Set;
 @Transactional
 public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepository> implements CourseService {
 
+    private final Integer min = 10000;
+    private final Integer max = 99999;
+
     public CourseServiceImpl(CourseRepository baseRepository) {
         super(baseRepository);
+    }
+
+    @Override
+    public Course save(Course t) {
+        boolean check = true;
+        while (check) {
+            int x = (int) ((Math.random() * ((max - min) + 1)) + min);
+            if (!existByCode(Integer.toString(x))) {
+                check = false;
+                t.setCode(Integer.toString(x));
+            }
+        }
+        return super.save(t);
     }
 
     @Override
@@ -60,11 +76,16 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
         Set<User> courseStudents = course.getStudents();
         if (courseStudents == null)
             courseStudents = new HashSet<>();
-        for (User student: students){
+        for (User student : students) {
             if (checkStudent(student))
                 courseStudents.add(student);
         }
         return super.save(course);
+    }
+
+    @Override
+    public Boolean existByCode(String code) {
+        return baseRepository.existsByCode(code);
     }
 
     private Boolean checkTeacher(User teacher) {
