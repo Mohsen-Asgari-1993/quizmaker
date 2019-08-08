@@ -6,7 +6,6 @@ import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
 import ir.maktab25.quizmaker.service.dto.StudentDTO;
 import ir.maktab25.quizmaker.service.dto.TeacherDTO;
-import ir.maktab25.quizmaker.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,7 +76,7 @@ public class AdminController {
 
     @GetMapping("/course/addStudent/{courseId}/{studentId}")
     public String addStudentToCourse(@PathVariable Long courseId, @PathVariable Long studentId, Model model) {
-        courseResource.addTeacher(studentId, courseId);
+        courseResource.addStudent(courseId, studentId);
         bindDataForSingleCourse(model, courseId);
         return "adminSingleCourse";
     }
@@ -90,21 +89,9 @@ public class AdminController {
     }
 
     private void bindDataForSingleCourse(Model model, Long courseId) {
-        CourseDTO courseDTO = courseResource.getById(courseId).getBody();
-        List<StudentDTO> studentDTOS = studentResource.findAllEnables().getBody();
-        if (courseDTO.getStudents() != null) {
-            for (UserDTO userCourse : courseDTO.getStudents()) {
-                if (studentDTOS != null) {
-                    for (StudentDTO studentDTO : studentDTOS) {
-                        if (userCourse.getId().equals(studentDTO.getId()))
-                            studentDTOS.remove(userCourse);
-                    }
-                }
-            }
-        }
         model.addAttribute("teachers", teacherResource.findAllEnables().getBody());
-        model.addAttribute("course", courseDTO);
-        model.addAttribute("students", studentDTOS);
+        model.addAttribute("course", courseResource.getById(courseId).getBody());
+        model.addAttribute("students", studentResource.findAllEnables().getBody());
     }
 
     @GetMapping("/course/delete/{id}")
