@@ -55,6 +55,7 @@ public class AdminController {
 
     @PostMapping("/course/update/{id}")
     public String updateCourse(@PathVariable Long id, Model model, CourseDTO courseDTO) {
+        courseDTO.setId(id);
         courseResource.update(courseDTO);
         List<CourseDTO> body = courseResource.getAllNotPageable().getBody();
         model.addAttribute("courses", body);
