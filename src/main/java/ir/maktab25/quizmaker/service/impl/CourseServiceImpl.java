@@ -8,9 +8,9 @@ import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.domain.Teacher;
 import ir.maktab25.quizmaker.repository.CourseRepository;
 import ir.maktab25.quizmaker.service.CourseService;
+import ir.maktab25.quizmaker.service.StudentService;
 import ir.maktab25.quizmaker.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,19 +29,22 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Autowired
     TeacherService teacherService;
 
+    @Autowired
+    StudentService studentService;
+
     @Override
     public Course save(Course t) {
         return super.save(t);
     }
 
     @Override
-    public List<Course> findAllByTeacher(Long teacher_id) {
-        return baseRepository.findAllByTeacher_Id(teacher_id);
+    public List<Course> findAllByTeacher(Long teacherId) {
+        return baseRepository.findAllByTeacher_Id(teacherId);
     }
 
     @Override
-    public List<Course> findAllByStudents(User students) {
-        return baseRepository.findAllByStudents(students);
+    public List<Course> findAllByStudents(Long studentId) {
+        return baseRepository.findAllByStudents(studentService.findOne(studentId));
     }
 
     @Override
