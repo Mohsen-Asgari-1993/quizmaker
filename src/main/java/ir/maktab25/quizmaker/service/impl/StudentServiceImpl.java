@@ -50,6 +50,7 @@ public class StudentServiceImpl extends BasicUserServiceImpl<Student, Long, Stud
                 if (user.getId().equals(id))
                     course.getStudents().remove(user);
             }
+            courseService.save(course);
         }
         super.delete(id);
     }
