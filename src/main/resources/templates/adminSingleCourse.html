@@ -41,6 +41,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/logout" class="nav-link">خروج</a>
+
             </li>
         </ul>
     </nav>
@@ -286,15 +287,14 @@
                             <!-- /.form group -->
                             <!-- /.col -->
                             <div class="m-1 float-right">
-                                <button type="button" class="btn btn-secondary"
+                                <a type="button" class="btn btn-secondary" th:href="@{/admin/course}"
                                         data-dismiss="modal">بازگشت
-                                </button>
+                                </a>
 
                             </div>
                             <!-- /.col -->
                             <div class="m-1 float-left">
                                 <input type="submit" class="btn btn-primary" value="ذخیره">
-
                             </div>
                         </form>
 
