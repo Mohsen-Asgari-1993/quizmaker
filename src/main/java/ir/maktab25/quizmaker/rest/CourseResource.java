@@ -1,7 +1,6 @@
 package ir.maktab25.quizmaker.rest;
 
 import ir.maktab25.quizmaker.base.rest.BaseRestFulService;
-import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.service.CourseService;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/Course")
@@ -43,15 +41,22 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
-    @PostMapping("/addSingleStudent/{courseId}")
-    public ResponseEntity<CourseDTO> addStudent(@RequestBody User student, @PathVariable("courseId") Long id) {
-        Course course = baseService.addStudent(student, id);
+    @GetMapping("/addSingleStudent/{courseId}/{studentId}")
+    public ResponseEntity<CourseDTO> addStudent(@PathVariable("courseId") Long id, @PathVariable Long studentId) {
+        Course course = baseService.addStudent(studentId, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
     @PostMapping("/addStudents/{courseId}")
-    public ResponseEntity<CourseDTO> addStudents(@RequestBody Set<User> students, @PathVariable("courseId") Long id) {
-        Course course = baseService.addStudents(students, id);
+    public ResponseEntity<CourseDTO> addStudents(@RequestBody List<Long> studentsId, @PathVariable("courseId") Long id) {
+        Course course = baseService.addStudents(studentsId, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
+    }
+
+    @DeleteMapping("/deleteStudent/{courseId}/{studentId}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long courseId, @PathVariable Long studentId) {
+        baseService.deleteStudent(courseId, studentId);
+        return ResponseEntity.ok().header("deleted", "successful").build();
+
     }
 }
