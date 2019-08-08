@@ -1,8 +1,10 @@
 package ir.maktab25.quizmaker.controller;
 
 import ir.maktab25.quizmaker.rest.CourseResource;
+import ir.maktab25.quizmaker.rest.StudentResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
+import ir.maktab25.quizmaker.service.dto.StudentDTO;
 import ir.maktab25.quizmaker.service.dto.TeacherDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class AdminController {
 
     @Autowired
     TeacherResource teacherResource;
+
+    @Autowired
+    StudentResource studentResource;
 
     @GetMapping("/course")
     public String getCourses(Model model, CourseDTO courseDTO) {
@@ -82,14 +87,14 @@ public class AdminController {
     }
 
     @GetMapping("/teacher/enable/{id}")
-    public String enable(@PathVariable Long id, Model model) {
+    public String enableTeacher(@PathVariable Long id, Model model) {
         teacherResource.enableUser(id);
         bindDateForAdminTeachers(model);
         return "adminTeachers";
     }
 
     @GetMapping("/teacher/delete/{id}")
-    public String delete(@PathVariable Long id, Model model) {
+    public String deleteTeacher(@PathVariable Long id, Model model) {
         teacherResource.deleteById(id);
         bindDateForAdminTeachers(model);
         return "adminTeachers";
@@ -101,4 +106,33 @@ public class AdminController {
         model.addAttribute("enables", enables);
         model.addAttribute("disables", disables);
     }
+
+    @GetMapping("/student")
+    public String getStudents(Model model) {
+        bindDateForAdminStudents(model);
+        return "adminStudents";
+    }
+
+    @GetMapping("/Students/enable/{id}")
+    public String enableStudent(@PathVariable Long id, Model model) {
+        studentResource.enableUser(id);
+        bindDateForAdminStudents(model);
+        return "adminStudents";
+    }
+
+    @GetMapping("/Students/delete/{id}")
+    public String deleteStudent(@PathVariable Long id, Model model) {
+        studentResource.deleteById(id);
+        bindDateForAdminStudents(model);
+        return "adminStudents";
+    }
+
+    private void bindDateForAdminStudents(Model model) {
+        List<StudentDTO> enables = studentResource.findAllEnables().getBody();
+        List<StudentDTO> disables = studentResource.findAllDisable().getBody();
+        model.addAttribute("enables", enables);
+        model.addAttribute("disables", disables);
+    }
+
+
 }
