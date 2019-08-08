@@ -34,7 +34,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
 
     @Override
     public Course save(Course t) {
-        if (t.getId() != null){
+        if (t.getId() != null) {
             t.setTeacher(findOne(t.getId()).getTeacher());
             t.setStudents(findOne(t.getId()).getStudents());
         }
@@ -60,25 +60,25 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public Course addStudent(User student, Long id) {
+    public Course addStudent(Long studentId, Long id) {
         Course course = baseRepository.getOne(id);
         Set<User> courseStudents = course.getStudents();
         if (courseStudents == null)
             courseStudents = new HashSet<>();
-        if (checkStudent(student))
-            courseStudents.add(student);
+        courseStudents.add(studentService.findOne(studentId));
         return super.save(course);
     }
 
     @Override
-    public Course addStudents(Set<User> students, Long id) {
-        Course course = baseRepository.getOne(id);
-        Set<User> courseStudents = course.getStudents();
-        if (courseStudents == null)
-            courseStudents = new HashSet<>();
-        for (User student : students) {
-            if (checkStudent(student))
-                courseStudents.add(student);
+    public Course addStudents(List<Long> studentsId, Long id) {
+        Course course = findOne(id);
+        if (studentsId != null) {
+            Set<User> courseStudents = course.getStudents();
+            if (courseStudents == null)
+                courseStudents = new HashSet<>();
+            for (Long stId : studentsId) {
+                courseStudents.add(studentService.findOne(stId));
+            }
         }
         return super.save(course);
     }
@@ -86,6 +86,16 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Boolean existByCode(Integer code) {
         return baseRepository.existsByCode(code);
+    }
+
+    @Override
+    public void deleteStudent(Long courseId, Long studentId) {
+        Course course = findOne(courseId);
+        if (course.getStudents() != null){
+            for (User user: course.getStudents())
+                if (user.getId().equals(studentId))
+                    course.getStudents().remove(user);
+        }
     }
 
     private Boolean checkTeacher(User teacher) {
