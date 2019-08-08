@@ -269,10 +269,6 @@
                                                                 aria-label="عنوان دوره: activate to sort column ascending"
                                                                 rowspan="1" colspan="1">نام خانوادگی
                                                             </th>
-                                                            <th tabindex="0" class="sorting" aria-controls="example2"
-                                                                aria-label="تاریخ شروع: activate to sort column ascending"
-                                                                rowspan="1" colspan="1">کد
-                                                            </th>
                                                             <th tabindex="0" class="sorting_asc"
                                                                 aria-controls="example2"
                                                                 aria-label="ویرایش: activate to sort column descending"
@@ -293,8 +289,8 @@
                                                         </thead>
                                                         <tbody>
                                                         <tr class="odd" role="row" th:each="student : ${disables}">
-                                                            <td th:text="${student.firstName}">Trident</td>
-                                                            <td th:text="${student.lastName}">Internet Explorer ۷</td>
+                                                            <td th:text="${student.firstName}"></td>
+                                                            <td th:text="${student.lastName}"></td>
                                                             <td>
                                                                 <a type="submit"
                                                                    class="btn btn-primary btn-flat d-inline text-white">
