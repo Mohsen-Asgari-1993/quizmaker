@@ -29,9 +29,9 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(baseMapper.entityToDTOList(courses));
     }
 
-    @PostMapping("/findByStudent")
-    public ResponseEntity<List<CourseDTO>> findAllByStudents(@RequestBody User students) {
-        List<Course> courses = baseService.findAllByStudents(students);
+    @GetMapping("/findByStudent/{id}")
+    public ResponseEntity<List<CourseDTO>> findAllByStudents(@PathVariable Long id) {
+        List<Course> courses = baseService.findAllByStudents(id);
         if (courses == null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(baseMapper.entityToDTOList(courses));
