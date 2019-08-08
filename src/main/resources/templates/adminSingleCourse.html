@@ -93,7 +93,7 @@
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="#" th:href="@{/admin/student}" class="nav-link">
-                            <i class="nav-icon fa fa-tree"></i>
+                                <i class="nav-icon fa fa-tree"></i>
                                 <p>
                                     کاروندان
                                     <i class="fa fa-angle-left right"></i>
@@ -170,7 +170,8 @@
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
                                     <input type="text" class="form-control"
-                                           th:field="*{teacher.lastName}" placeholder="استادی انتخاب نشده است" readonly="readonly">
+                                           th:field="*{teacher.lastName}" placeholder="استادی انتخاب نشده است"
+                                           readonly="readonly">
                                     <button type="button" class="btn btn-primary btn-flat d-inline float-left"
                                             data-toggle="modal" data-target="#myModal">ویرایش
                                     </button>
@@ -240,10 +241,63 @@
                             <!-- IP mask -->
                             <div class="form-group">
                                 <label class="float-right float-right">کاروندان:</label>
-                                <a type="submit"
-                                   class="btn btn-primary btn-flat float-left text-white mb-1 ml-1">
-                                    افزودن کاروند جدید
-                                </a>
+                                <button type="button" class="btn btn-primary btn-flat d-inline float-left"
+                                        data-toggle="modal" data-target="#stModal">افزودن کاروند جدید
+                                </button>
+                                <div class="modal fade" id="stModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLong">افزودن کاروند</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="input-group mb-3">
+                                                        <div class="col-sm-12">
+                                                            <table class="table table-bordered table-hover dataTable"
+                                                                   role="grid">
+                                                                <thead>
+                                                                <tr role="row">
+                                                                    <th tabindex="0" class="sorting w-25"
+                                                                        aria-controls="example2"
+                                                                        aria-label="شماره دوره: activate to sort column ascending"
+                                                                        rowspan="1" colspan="1">نام
+                                                                    </th>
+                                                                    <th tabindex="0" class="sorting"
+                                                                        aria-controls="example2"
+                                                                        aria-label="شماره دوره: activate to sort column ascending"
+                                                                        rowspan="1" colspan="1">نام خانوادگی
+                                                                    </th>
+                                                                    <th tabindex="0" class="sorting_asc w-25"
+                                                                        aria-controls="example2"
+                                                                        aria-label="حذف: activate to sort column descending"
+                                                                        aria-sort="ascending" rowspan="1"
+                                                                        colspan="1">انتخاب
+                                                                    </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr class="odd" role="row"
+                                                                    th:each="student : ${students}">
+                                                                    <td th:text="${student.firstName}"></td>
+                                                                    <td th:text="${student.lastName}"></td>
+                                                                    <td>
+                                                                        <a type="submit"
+                                                                           th:href="@{/admin/course/addStudent/{courseId}/{studentId}
+                                                                           (courseId=${course.id},studentId=${student.id})}"
+                                                                           class="btn btn-primary btn-flat d-inline text-white">
+                                                                            انتخاب
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="input-group mt-1">
                                     <div class="col-sm-12">
@@ -266,12 +320,12 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd" role="row" th:each="course : ${courses}">
-                                                <td th:text="${course.code}"></td>
-                                                <td th:text="${course.title}"></td>
+                                            <tr class="odd" role="row" th:each="st : ${course.getStudents()}">
+                                                <td th:text="${st.firstName}"></td>
+                                                <td th:text="${st.lastName}"></td>
                                                 <td>
                                                     <a type="submit"
-                                                       th:href="@{/admin/course/delete/{id}(id=${course.id})}"
+                                                       th:href="@{/admin/course/deleteStudent/{couresId}/{studentId}(couresId=${course.id}, studentId=${st.id})}"
                                                        class="btn btn-primary btn-flat d-inline text-white">
                                                         حذف
                                                     </a>
@@ -288,7 +342,7 @@
                             <!-- /.col -->
                             <div class="m-1 float-right">
                                 <a type="button" class="btn btn-secondary" th:href="@{/admin/course}"
-                                        data-dismiss="modal">بازگشت
+                                   data-dismiss="modal">بازگشت
                                 </a>
 
                             </div>
