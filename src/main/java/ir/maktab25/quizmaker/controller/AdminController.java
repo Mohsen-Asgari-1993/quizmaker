@@ -6,13 +6,11 @@ import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
 import ir.maktab25.quizmaker.service.dto.StudentDTO;
 import ir.maktab25.quizmaker.service.dto.TeacherDTO;
+import ir.maktab25.quizmaker.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,8 +46,7 @@ public class AdminController {
 
     @GetMapping("/course/show/{id}")
     public String showCourse(@PathVariable Long id, Model model) {
-        model.addAttribute("teachers", teacherResource.findAllEnables().getBody());
-        model.addAttribute("course", courseResource.getById(id).getBody());
+        bindDataForSingleCourse(model, id);
         return "adminSingleCourse";
     }
 
@@ -66,9 +63,48 @@ public class AdminController {
     @GetMapping("/course/addTeacher/{courseId}/{teacherId}")
     public String addTeacherToCourse(@PathVariable Long courseId, @PathVariable Long teacherId, Model model) {
         courseResource.addTeacher(teacherId, courseId);
-        model.addAttribute("teachers", teacherResource.findAllEnables().getBody());
-        model.addAttribute("course", courseResource.getById(courseId).getBody());
+        bindDataForSingleCourse(model, courseId);
+
         return "adminSingleCourse";
+    }
+
+    @GetMapping("/course/deleteStudent/{courseId}/{studentId}")
+    public String deleteStudentFromCourse(@PathVariable Long courseId, @PathVariable Long studentId, Model model) {
+        courseResource.deleteStudent(courseId, studentId);
+        bindDataForSingleCourse(model, courseId);
+        return "adminSingleCourse";
+    }
+
+    @GetMapping("/course/addStudent/{courseId}/{studentId}")
+    public String addStudentToCourse(@PathVariable Long courseId, @PathVariable Long studentId, Model model) {
+        courseResource.addTeacher(studentId, courseId);
+        bindDataForSingleCourse(model, courseId);
+        return "adminSingleCourse";
+    }
+
+    @PostMapping("/course/addStudents/{courseId}")
+    public String addStudentsToCourse(@RequestBody List<Long> studentsId, @PathVariable Long courseId, Model model) {
+        courseResource.addStudents(studentsId, courseId);
+        bindDataForSingleCourse(model, courseId);
+        return "adminSingleCourse";
+    }
+
+    private void bindDataForSingleCourse(Model model, Long courseId) {
+        CourseDTO courseDTO = courseResource.getById(courseId).getBody();
+        List<StudentDTO> studentDTOS = studentResource.findAllEnables().getBody();
+        if (courseDTO.getStudents() != null) {
+            for (UserDTO userCourse : courseDTO.getStudents()) {
+                if (studentDTOS != null) {
+                    for (StudentDTO studentDTO : studentDTOS) {
+                        if (userCourse.getId().equals(studentDTO.getId()))
+                            studentDTOS.remove(userCourse);
+                    }
+                }
+            }
+        }
+        model.addAttribute("teachers", teacherResource.findAllEnables().getBody());
+        model.addAttribute("course", courseDTO);
+        model.addAttribute("students", studentDTOS);
     }
 
     @GetMapping("/course/delete/{id}")
@@ -114,14 +150,14 @@ public class AdminController {
         return "adminStudents";
     }
 
-    @GetMapping("/Students/enable/{id}")
+    @GetMapping("/student/enable/{id}")
     public String enableStudent(@PathVariable Long id, Model model) {
         studentResource.enableUser(id);
         bindDateForAdminStudents(model);
         return "adminStudents";
     }
 
-    @GetMapping("/Students/delete/{id}")
+    @GetMapping("/student/delete/{id}")
     public String deleteStudent(@PathVariable Long id, Model model) {
         studentResource.deleteById(id);
         bindDateForAdminStudents(model);
