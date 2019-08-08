@@ -49,8 +49,11 @@ public class TeacherServiceImpl extends BasicUserServiceImpl<Teacher, Long, Teac
     @Override
     public void delete(Long id) {
         List<Course> byTeacher = courseService.findAllByTeacher(id);
-        for (Course course: byTeacher)
+        for (Course course : byTeacher) {
             course.setTeacher(null);
+            courseService.save(course);
+        }
+
         super.delete(id);
     }
 }
