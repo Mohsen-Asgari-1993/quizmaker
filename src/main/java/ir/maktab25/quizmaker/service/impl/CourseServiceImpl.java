@@ -34,6 +34,10 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
 
     @Override
     public Course save(Course t) {
+        if (t.getId() != null){
+            t.setTeacher(findOne(t.getId()).getTeacher());
+            t.setStudents(findOne(t.getId()).getStudents());
+        }
         return super.save(t);
     }
 
