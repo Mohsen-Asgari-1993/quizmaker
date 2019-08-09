@@ -20,6 +20,12 @@
     <link rel="stylesheet" th:href="@{/dist/css/bootstrap-rtl.min.css}">
     <!-- template rtl version -->
     <link rel="stylesheet" th:href="@{/dist/css/custom-style.css}">
+
+    <link rel="stylesheet" th:href="@{/jalali/skins/aqua/theme.css}">
+    <script th:src="@{/jalali/jalali.js}"></script>
+    <script th:src="@{/jalali/calendar.js}"></script>
+    <script th:src="@{/jalali/calendar-setup.js}"></script>
+    <script th:src="@{/jalali/lang/calendar-fa.js}"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -51,8 +57,6 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="../templates/admin.html" class="brand-link">
-            <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                 style="opacity: .8">
             <span class="brand-text font-weight-light">پنل مدیریت</span>
         </a>
 
@@ -147,7 +151,20 @@
                                 <label>تاریخ آغاز دوره:</label>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control " th:field="*{begin}">
+                                    <input class="form-control" id="begin"
+                                           placeholder=" تاریخ آغاز دوره"
+                                           required="required" type="text" th:field="*{begin}">
+                                    <img id="date_btn_begin" th:src="@{/jalali/examples/cal.png}"
+                                         style="vertical-align: top;">
+                                    <script type="text/javascript">
+                                        Calendar.setup({
+                                            inputField: "begin",   // id of the input field
+                                            button: "date_btn_begin",   // trigger for the calendar (button ID)
+                                            ifFormat: "%Y-%m-%d",       // format of the input field
+                                            dateType: 'jalali',
+                                            weekNumbers: false
+                                        });
+                                    </script>
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -155,7 +172,20 @@
                                 <label>تاریخ پایان دوره:</label>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control " th:field="*{end}">
+                                    <input class="form-control" id="end"
+                                           placeholder="تاریخ اتمام دوره"
+                                           required="required" type="text" th:field="*{end}">
+                                    <img id="date_btn_end" th:src="@{/jalali/examples/cal.png}"
+                                         style="vertical-align: top;">
+                                    <script type="text/javascript">
+                                        Calendar.setup({
+                                            inputField: "end",   // id of the input field
+                                            button: "date_btn_end",   // trigger for the calendar (button ID)
+                                            ifFormat: "%Y-%m-%d",       // format of the input field
+                                            dateType: 'jalali',
+                                            weekNumbers: false
+                                        });
+                                    </script>
                                 </div>
                                 <!-- /.input group -->
                             </div>
