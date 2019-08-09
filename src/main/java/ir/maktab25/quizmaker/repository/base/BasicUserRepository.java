@@ -20,4 +20,6 @@ public interface BasicUserRepository<E extends User, PK extends Serializable> ex
     List<E> findAllByFirstName(String firstName);
 
     List<E> findAllByLastName(String lastName);
+
+    Long countAllByIsActive(Boolean isActive);
 }
