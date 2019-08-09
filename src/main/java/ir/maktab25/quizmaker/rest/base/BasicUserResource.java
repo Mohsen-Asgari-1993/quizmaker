@@ -39,6 +39,18 @@ public class BasicUserResource<E extends BaseEntity<PK>, D extends BaseDTO<PK>, 
         return ResponseEntity.ok(baseMapper.entityToDTOList(disable));
     }
 
+    @GetMapping("/countAllEnable")
+    public ResponseEntity<Long> countAllEnables() {
+        Long active = baseService.countAllByIsActive(true);
+        return ResponseEntity.ok(active);
+    }
+
+    @GetMapping("/countAllDisable")
+    public ResponseEntity<Long> countAllDisable() {
+        Long all = baseService.countAllByIsActive(false);
+        return ResponseEntity.ok(all);
+    }
+
     @GetMapping("/getAllByRoleName/{name}")
     public ResponseEntity<List<D>> findAllByRoleName(@PathVariable String name) {
         return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByRoleName(name)));
