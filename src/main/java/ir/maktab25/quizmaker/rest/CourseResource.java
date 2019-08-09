@@ -59,4 +59,9 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok().header("deleted", "successful").build();
 
     }
+
+    @GetMapping("/countAll")
+    public ResponseEntity<Long> countAll(){
+        return ResponseEntity.ok(baseService.countAll());
+    }
 }
