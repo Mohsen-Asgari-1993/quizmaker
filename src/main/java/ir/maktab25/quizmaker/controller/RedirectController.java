@@ -1,6 +1,11 @@
 package ir.maktab25.quizmaker.controller;
 
+import ir.maktab25.quizmaker.rest.CourseResource;
+import ir.maktab25.quizmaker.rest.StudentResource;
+import ir.maktab25.quizmaker.rest.TeacherResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,8 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/redirect")
 public class RedirectController {
 
+    @Autowired
+    TeacherResource teacherResource;
+
+    @Autowired
+    StudentResource studentResource;
+
+    @Autowired
+    CourseResource courseResource;
+
     @GetMapping("/admin")
-    public String adminPage() {
+    public String adminPage(Model model) {
+        model.addAttribute("enableTeachers", teacherResource.countAllEnables().getBody());
+        model.addAttribute("disableTeachers", teacherResource.countAllDisable().getBody());
+        model.addAttribute("enableStudent", studentResource.countAllEnables().getBody());
+        model.addAttribute("disableStudent", studentResource.countAllDisable().getBody());
+        model.addAttribute("allCourse", courseResource.countAll().getBody());
         return "admin";
     }
 
