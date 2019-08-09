@@ -65,7 +65,7 @@ body {
 }
 
 .ltr {
-    direction:ltr;
+    direction: ltr;
 }
 
 
@@ -76,11 +76,12 @@ ul {
 .dropdown-item {
     text-align: right;
 }
+
 .dropdown-footer, .dropdown-header {
     text-align: center;
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item + .breadcrumb-item::before {
     padding-left: .5rem;
 }
 
@@ -119,16 +120,16 @@ ul {
 }
 
 .small-box .icon {
-    right:auto;
-    left:10px;
+    right: auto;
+    left: 10px;
 }
 
-.nav-sidebar .nav-link>p>.right {
+.nav-sidebar .nav-link > p > .right {
     left: 1rem;
     right: auto;
 }
 
-.nav-sidebar>.nav-item .nav-icon {
+.nav-sidebar > .nav-item .nav-icon {
     margin-right: 0;
     margin-left: .2rem;
 }
@@ -144,7 +145,7 @@ ul {
     .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .main-footer, .sidebar-mini.sidebar-collapse .main-header {
         margin-left: 0rem !important;
         margin-right: 4.6rem !important;
-        z-index:100;
+        z-index: 100;
     }
 
     .sidebar-mini.sidebar-collapse .main-sidebar, .sidebar-mini.sidebar-collapse .main-sidebar:before {
@@ -158,14 +159,14 @@ ul {
     .content-wrapper, .main-footer, .main-header {
         transition: margin-right .3s ease-in-out;
         margin-right: 250px;
-        margin-left : 0;
+        margin-left: 0;
         z-index: 3000;
     }
 }
 
 @media (max-width: 991.98px) {
     .main-sidebar, .main-sidebar:before {
-        box-shadow: none!important;
+        box-shadow: none !important;
         margin-right: -250px;
         margin-left: 0;
     }
@@ -186,18 +187,18 @@ ul {
 
 .main-sidebar {
     left: auto;
-    right:0;
+    right: 0;
 }
 
 /* Cards */
 
-.card-header>.card-tools {
-    right:auto;
-    left:1rem;
+.card-header > .card-tools {
+    right: auto;
+    left: 1rem;
 }
 
 .user-block img {
-     float: right;
+    float: right;
 }
 
 .attachment-block .attachment-img {
@@ -218,7 +219,7 @@ ul {
     margin-left: 0;
 }
 
-.card-comments .card-comment img+.img-push, .img-sm+.img-push, .user-block.user-block-sm img+.img-push {
+.card-comments .card-comment img + .img-push, .img-sm + .img-push, .user-block.user-block-sm img + .img-push {
     margin-left: 0px;
     margin-right: 40px;
 }
@@ -243,18 +244,18 @@ ul {
 }
 
 /*----------------------- Extra Page ---------------------------*/
-.error-page>.headline {
+.error-page > .headline {
     float: right;
 }
 
-.error-page>.error-content {
+.error-page > .error-content {
     margin-right: 190px;
     margin-left: 0;
 }
 
 .lockscreen-image {
     left: auto;
-    right:-10px;
+    right: -10px;
 }
 
 .lockscreen-credentials {
@@ -273,6 +274,15 @@ ul {
 }
 
 /*----------------------------------------- register result -------------------------------------------*/
-.background-color-aqua{
+.background-color-aqua {
     background-color: aquamarine;
+}
+
+.table-border-hidden {
+    border-right-style: none !important;
+    border-top-style: none !important;
+}
+
+.table-border-none {
+    border-style: none !important;;
 }

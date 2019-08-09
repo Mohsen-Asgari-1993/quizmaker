@@ -118,7 +118,62 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row justify-content-center">
+                    <div class="col-sm-9">
+                        <table class="table table-bordered table-hover dataTable text-center table-border-none"
+                               role="grid" style="border-style: none !important;">
+                            <thead>
+                            <tr role="row">
+                                <th tabindex="0" class="sorting table-border-hidden" aria-controls="example2"
+                                    aria-label="شماره دوره: activate to sort column ascending"
+                                    rowspan="1" colspan="1">
+                                </th>
+                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                    aria-label="عنوان دوره: activate to sort column ascending"
+                                    rowspan="1" colspan="2">اساتید
+                                </th>
+                                <th tabindex="0" class="sorting_asc"
+                                    aria-controls="example2"
+                                    aria-label="ویرایش: activate to sort column descending"
+                                    aria-sort="ascending" rowspan="1" colspan="2">کاروندان
+                                </th>
+                            </tr>
+                            <tr role="row">
+                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                    aria-label="شماره دوره: activate to sort column ascending"
+                                    rowspan="1" colspan="1">دوره ها
+                                </th>
+                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                    aria-label="عنوان دوره: activate to sort column ascending"
+                                    rowspan="1" colspan="1">اساتید ثبت شده
+                                </th>
+                                <th tabindex="0" class="sorting_asc"
+                                    aria-controls="example2"
+                                    aria-label="ویرایش: activate to sort column descending"
+                                    aria-sort="ascending" rowspan="1" colspan="1">اساتید در انتظار تایید
+                                </th>
+                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                    aria-label="شماره دوره: activate to sort column ascending"
+                                    rowspan="1" colspan="1">کاروندان ثبت شده
+                                </th>
+                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                    aria-label="عنوان دوره: activate to sort column ascending"
+                                    rowspan="1" colspan="1">کاروندان در انتظار تایید
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd" role="row">
+                                <td th:text="${allCourse}"></td>
+                                <td th:text="${enableTeachers}"></td>
+                                <td th:text="${disableTeachers}"></td>
+                                <td th:text="${enableStudent}"></td>
+                                <td th:text="${disableStudent}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
 
                 </div>
                 <!-- /.row -->
