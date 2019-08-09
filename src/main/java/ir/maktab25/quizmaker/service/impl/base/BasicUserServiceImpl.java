@@ -63,4 +63,9 @@ public class BasicUserServiceImpl<E extends User, PK extends Serializable, Repo 
     public List<E> findAllByLastName(String lastName) {
         return baseRepository.findAllByLastName(lastName);
     }
+
+    @Override
+    public Long countAllByIsActive(Boolean isActive) {
+        return baseRepository.countAllByIsActive(isActive);
+    }
 }

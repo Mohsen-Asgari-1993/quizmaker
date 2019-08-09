@@ -19,4 +19,6 @@ public interface BasicUserService<E, PK extends Serializable> extends BaseServic
 
     List<E> findAllByLastName(String lastName);
 
+    Long countAllByIsActive(Boolean isActive);
+
 }
