@@ -149,7 +149,6 @@
                                                                 aria-controls="example2"
                                                                 aria-label="ویرایش: activate to sort column descending"
                                                                 aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
-                                                                نقش
                                                             </th>
                                                             <th tabindex="0" class="sorting_asc"
                                                                 aria-controls="example2"
@@ -164,6 +163,7 @@
                                                             <td th:text="${student.lastName}">Internet Explorer ۷</td>
                                                             <td>
                                                                 <button type="submit"
+                                                                        th:href="@{/admin/student/update/{id}(id=${student.id})}"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
                                                                 </button>
@@ -263,7 +263,6 @@
                                                                 aria-controls="example2"
                                                                 aria-label="ویرایش: activate to sort column descending"
                                                                 aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
-                                                                نقش
                                                             </th>
                                                             <th tabindex="0" class="sorting_asc"
                                                                 aria-controls="example2"
@@ -283,8 +282,9 @@
                                                             <td th:text="${student.lastName}"></td>
                                                             <td>
                                                                 <a type="submit"
+                                                                   th:href="@{/admin/student/update/{id}(id=${student.id})}"
                                                                    class="btn btn-primary btn-flat d-inline text-white">
-                                                                    ویرایش نقش
+                                                                    ویرایش
                                                                 </a>
                                                             </td>
 
