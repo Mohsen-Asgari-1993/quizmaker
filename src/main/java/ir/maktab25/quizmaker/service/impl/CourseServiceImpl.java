@@ -91,11 +91,8 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public void deleteStudent(Long courseId, Long studentId) {
         Course course = findOne(courseId);
-        if (course.getStudents() != null){
-            for (User user: course.getStudents())
-                if (user.getId().equals(studentId))
-                    course.getStudents().remove(user);
-        }
+        Set<User> students = course.getStudents();
+        students.removeIf(user -> user.getId().equals(studentId));
     }
 
     private Boolean checkTeacher(User teacher) {
