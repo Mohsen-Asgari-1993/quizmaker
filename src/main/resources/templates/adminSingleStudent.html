@@ -138,17 +138,23 @@
                                 <label>نام خانوادگی: </label>
 
                                 <div class="input-group">
-                                    <input type="number" class="form-control " th:field="*{lastName}">
+                                    <input type="text" class="form-control " th:field="*{lastName}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>نام کاربری: </label>
-
                                 <div class="input-group">
-                                    <input type="number" class="form-control " th:field="*{userName}">
+                                    <input type="text" class="form-control " th:field="*{userName}">
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>پست الکترونیکی:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control " th:field="*{email}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>نقش کاربری: </label>
                                 <select id="role" class="form-control" th:field="*{role}">
                                     <option type="text" value="STUDENT">کاروند
                                     <option type="text" value="TEACHER">استاد
