@@ -1,12 +1,16 @@
 package ir.maktab25.quizmaker.controller.admin;
 
 import ir.maktab25.quizmaker.rest.StudentResource;
+import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.StudentDTO;
+import ir.maktab25.quizmaker.service.dto.TeacherDTO;
+import ir.maktab25.quizmaker.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -18,32 +22,58 @@ public class AdminStudentController {
     @Autowired
     StudentResource studentResource;
 
-    @GetMapping("")
+    @Autowired
+    TeacherResource teacherResource;
+
+    @GetMapping
     public String getStudents(Model model) {
-        bindDateForAdminStudents(model);
+        bindDataForAdminStudents(model);
         return "adminStudents";
     }
 
     @GetMapping("/enable/{id}")
     public String enableStudent(@PathVariable Long id, Model model) {
         studentResource.enableUser(id);
-        bindDateForAdminStudents(model);
+        bindDataForAdminStudents(model);
         return "adminStudents";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable Long id, Model model) {
         studentResource.deleteById(id);
-        bindDateForAdminStudents(model);
+        bindDataForAdminStudents(model);
         return "adminStudents";
     }
 
-    private void bindDateForAdminStudents(Model model) {
+    @GetMapping("/show/{id}")
+    public String showStudent(@PathVariable Long id, Model model) {
+        bindDataForSingleStudent(model, id);
+        return "adminSingleStudent";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateStudent(@PathVariable Long id, Model model, UserDTO userDTO) {
+
+        if (userDTO.getRole().equals("STUDENT")) {
+            studentResource.update((StudentDTO) userDTO);
+            userDTO.setId(id);
+        } else {
+            studentResource.deleteById(id);
+            teacherResource.create((TeacherDTO) userDTO);
+        }
+        bindDataForAdminStudents(model);
+        return "adminSingleStudent";
+    }
+
+    private void bindDataForAdminStudents(Model model) {
         List<StudentDTO> enables = studentResource.findAllEnables().getBody();
         List<StudentDTO> disables = studentResource.findAllDisable().getBody();
         model.addAttribute("enables", enables);
         model.addAttribute("disables", disables);
     }
 
+    private void bindDataForSingleStudent(Model model, Long id) {
+        model.addAttribute("student", studentResource.getById(id).getBody());
+    }
 
 }
