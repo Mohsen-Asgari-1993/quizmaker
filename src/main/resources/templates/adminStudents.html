@@ -163,7 +163,7 @@
                                                             <td th:text="${student.lastName}">Internet Explorer ۷</td>
                                                             <td>
                                                                 <button type="submit"
-                                                                        th:href="@{/admin/student/update/{id}(id=${student.id})}"
+                                                                        th:href="@{/admin/student/show/{id}(id=${student.id})}"
                                                                         class="btn btn-primary btn-flat d-inline">
                                                                     ویرایش
                                                                 </button>
@@ -282,7 +282,7 @@
                                                             <td th:text="${student.lastName}"></td>
                                                             <td>
                                                                 <a type="submit"
-                                                                   th:href="@{/admin/student/update/{id}(id=${student.id})}"
+                                                                   th:href="@{/admin/student/show/{id}(id=${student.id})}"
                                                                    class="btn btn-primary btn-flat d-inline text-white">
                                                                     ویرایش
                                                                 </a>
