@@ -6,6 +6,7 @@ import ir.maktab25.quizmaker.service.TeacherService;
 import ir.maktab25.quizmaker.service.dto.TeacherDTO;
 import ir.maktab25.quizmaker.service.mapper.TeacherMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class TeacherResource extends BasicUserResource<Teacher, TeacherDTO, Long
 
 
     @PostMapping("/changeRole")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<TeacherDTO> changeRole(@RequestBody TeacherDTO teacherDTO) {
         Teacher teacher = baseService.changeRole(baseMapper.toEntity(teacherDTO));
         return ResponseEntity.ok(baseMapper.toDTO(teacher));
