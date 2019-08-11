@@ -6,6 +6,8 @@ import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.StudentDTO;
 import ir.maktab25.quizmaker.service.dto.TeacherDTO;
 import ir.maktab25.quizmaker.service.dto.UserDTO;
+import ir.maktab25.quizmaker.service.mapper.UserDTOToStudentDTOMapper;
+import ir.maktab25.quizmaker.service.mapper.UserDTOToTeacherDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,12 @@ public class AdminStudentController {
 
     @Autowired
     UserResource userResource;
+
+    @Autowired
+    UserDTOToStudentDTOMapper toStudentDTOMapper;
+
+    @Autowired
+    UserDTOToTeacherDTOMapper toTeacherDTOMapper;
 
     @GetMapping
     public String getStudents(Model model) {
@@ -59,9 +67,9 @@ public class AdminStudentController {
     public String updateStudent(@PathVariable Long id, Model model, UserDTO userDTO) {
         userDTO.setId(id);
         if (userDTO.getRole().equals("STUDENT")) {
-            studentResource.update(userDTOToStudentDTO(userDTO));
+            studentResource.update(toStudentDTOMapper.userDTOToStudentDTO(userDTO));
         } else {
-            teacherResource.changeRole(userDTOToTeacherDTO(userDTO));
+            teacherResource.changeRole(toTeacherDTOMapper.userDTOToTeacherDTO(userDTO));
         }
         bindDataForAdminStudents(model);
         return "adminStudents";
@@ -83,6 +91,7 @@ public class AdminStudentController {
         studentDTO.setId(userDTO.getId());
         studentDTO.setFirstName(userDTO.getFirstName());
         studentDTO.setLastName(userDTO.getLastName());
+        studentDTO.setUserName(userDTO.getUserName());
         studentDTO.setEmail(userDTO.getEmail());
         return studentDTO;
     }
@@ -92,6 +101,7 @@ public class AdminStudentController {
         teacherDTO.setId(userDTO.getId());
         teacherDTO.setFirstName(userDTO.getFirstName());
         teacherDTO.setLastName(userDTO.getLastName());
+        teacherDTO.setUserName(userDTO.getLastName());
         teacherDTO.setEmail(userDTO.getEmail());
         return teacherDTO;
     }

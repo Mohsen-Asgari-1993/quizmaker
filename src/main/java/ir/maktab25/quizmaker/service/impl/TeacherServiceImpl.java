@@ -4,6 +4,7 @@ import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
 import ir.maktab25.quizmaker.domain.Course;
+import ir.maktab25.quizmaker.domain.Student;
 import ir.maktab25.quizmaker.domain.Teacher;
 import ir.maktab25.quizmaker.repository.TeacherRepository;
 import ir.maktab25.quizmaker.service.CourseService;
@@ -42,17 +43,18 @@ public class TeacherServiceImpl extends BasicUserServiceImpl<Teacher, Long, Teac
 
     @Override
     public Teacher changeRole(Teacher teacher) {
+        Student student = studentService.findOne(teacher.getId());
         studentService.delete(teacher.getId());
-        return save(teacher);
+        teacher.setId(null);
+        teacher.setPassword(student.getPassword());
+        teacher.setIsActive(student.getIsActive());
+        setRole(teacher);
+        return baseRepository.save(teacher);
     }
 
     @Override
     public Teacher save(Teacher t) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.findByName(RoleName.TEACHER));
-        t.setRoles(roles);
-        if (t.getIsActive() == null)
-            t.setIsActive(false);
+        setRole(t);
         return super.save(t);
     }
 
@@ -65,5 +67,13 @@ public class TeacherServiceImpl extends BasicUserServiceImpl<Teacher, Long, Teac
         }
 
         super.delete(id);
+    }
+
+    private void setRole(Teacher teacher){
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByName(RoleName.TEACHER));
+        teacher.setRoles(roles);
+        if (teacher.getIsActive() == null)
+            teacher.setIsActive(false);
     }
 }

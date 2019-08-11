@@ -23,7 +23,8 @@ public class BasicUserServiceImpl<E extends User, PK extends Serializable, Repo 
 
     @Override
     public E save(E t) {
-        t.setPassword(passwordEncoder.encode(t.getPassword()));
+        if (t.getId() == null)
+            t.setPassword(passwordEncoder.encode(t.getPassword()));
         return super.save(t);
     }
 
