@@ -71,7 +71,7 @@ public class AdminTeacherController {
             studentResource.changeRole(toStudentDTOMapper.userDTOToStudentDTO(userDTO));
         }
         bindDataForAdminTeachers(model);
-        return "adminStudents";
+        return "adminTeachers";
     }
 
     private void bindDataForAdminTeachers(Model model) {
