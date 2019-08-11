@@ -6,9 +6,11 @@ import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.domain.Student;
+import ir.maktab25.quizmaker.domain.Teacher;
 import ir.maktab25.quizmaker.repository.StudentRepository;
 import ir.maktab25.quizmaker.service.CourseService;
 import ir.maktab25.quizmaker.service.StudentService;
+import ir.maktab25.quizmaker.service.TeacherService;
 import ir.maktab25.quizmaker.service.impl.base.BasicUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,17 +31,16 @@ public class StudentServiceImpl extends BasicUserServiceImpl<Student, Long, Stud
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    TeacherService teacherService;
+
     public StudentServiceImpl(StudentRepository baseRepository) {
         super(baseRepository);
     }
 
     @Override
     public Student save(Student t) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.findByName(RoleName.STUDENT));
-        t.setRoles(roles);
-        if (t.getIsActive() == null)
-            t.setIsActive(false);
+        setRole(t);
         return super.save(t);
     }
 
@@ -50,5 +51,24 @@ public class StudentServiceImpl extends BasicUserServiceImpl<Student, Long, Stud
             course.getStudents().removeIf(user -> user.getId().equals(id));
         }
         super.delete(id);
+    }
+
+    @Override
+    public Student changeRole(Student student) {
+        Teacher teacher = teacherService.findOne(student.getId());
+        teacherService.delete(student.getId());
+        student.setId(null);
+        student.setPassword(teacher.getPassword());
+        student.setIsActive(teacher.getIsActive());
+        setRole(student);
+        return baseRepository.save(student);
+    }
+
+    private void setRole(Student t) {
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByName(RoleName.STUDENT));
+        t.setRoles(roles);
+        if (t.getIsActive() == null)
+            t.setIsActive(false);
     }
 }
