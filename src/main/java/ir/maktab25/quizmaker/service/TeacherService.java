@@ -8,4 +8,6 @@ import java.util.List;
 public interface TeacherService extends BasicUserService<Teacher, Long> {
 
     List<Teacher> findAllByCode(String code);
+
+    Teacher changeRole(Teacher teacher);
 }

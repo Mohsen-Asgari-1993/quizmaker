@@ -7,6 +7,7 @@ import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.domain.Teacher;
 import ir.maktab25.quizmaker.repository.TeacherRepository;
 import ir.maktab25.quizmaker.service.CourseService;
+import ir.maktab25.quizmaker.service.StudentService;
 import ir.maktab25.quizmaker.service.TeacherService;
 import ir.maktab25.quizmaker.service.impl.base.BasicUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class TeacherServiceImpl extends BasicUserServiceImpl<Teacher, Long, Teac
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    StudentService studentService;
+
     public TeacherServiceImpl(TeacherRepository baseRepository) {
         super(baseRepository);
     }
@@ -34,6 +38,12 @@ public class TeacherServiceImpl extends BasicUserServiceImpl<Teacher, Long, Teac
     @Override
     public List<Teacher> findAllByCode(String code) {
         return baseRepository.findAllByCode(code);
+    }
+
+    @Override
+    public Teacher changeRole(Teacher teacher) {
+        studentService.delete(teacher.getId());
+        return save(teacher);
     }
 
     @Override
