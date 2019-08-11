@@ -86,24 +86,4 @@ public class AdminStudentController {
         model.addAttribute("student", userResource.getById(id).getBody());
     }
 
-    private StudentDTO userDTOToStudentDTO(UserDTO userDTO){
-        StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setId(userDTO.getId());
-        studentDTO.setFirstName(userDTO.getFirstName());
-        studentDTO.setLastName(userDTO.getLastName());
-        studentDTO.setUserName(userDTO.getUserName());
-        studentDTO.setEmail(userDTO.getEmail());
-        return studentDTO;
-    }
-
-    private TeacherDTO userDTOToTeacherDTO(UserDTO userDTO){
-        TeacherDTO teacherDTO = new TeacherDTO();
-        teacherDTO.setId(userDTO.getId());
-        teacherDTO.setFirstName(userDTO.getFirstName());
-        teacherDTO.setLastName(userDTO.getLastName());
-        teacherDTO.setUserName(userDTO.getLastName());
-        teacherDTO.setEmail(userDTO.getEmail());
-        return teacherDTO;
-    }
-
 }
