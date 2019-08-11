@@ -1,5 +1,6 @@
 package ir.maktab25.quizmaker.controller.admin;
 
+import ir.maktab25.quizmaker.base.seurity.rest.UserResource;
 import ir.maktab25.quizmaker.rest.StudentResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.StudentDTO;
@@ -24,6 +25,9 @@ public class AdminStudentController {
 
     @Autowired
     TeacherResource teacherResource;
+
+    @Autowired
+    UserResource userResource;
 
     @GetMapping
     public String getStudents(Model model) {
@@ -53,16 +57,14 @@ public class AdminStudentController {
 
     @PostMapping("/update/{id}")
     public String updateStudent(@PathVariable Long id, Model model, UserDTO userDTO) {
-
+        userDTO.setId(id);
         if (userDTO.getRole().equals("STUDENT")) {
-            studentResource.update((StudentDTO) userDTO);
-            userDTO.setId(id);
+            studentResource.update(userDTOToStudentDTO(userDTO));
         } else {
-            studentResource.deleteById(id);
-            teacherResource.create((TeacherDTO) userDTO);
+            teacherResource.changeRole(userDTOToTeacherDTO(userDTO));
         }
         bindDataForAdminStudents(model);
-        return "adminSingleStudent";
+        return "adminStudents";
     }
 
     private void bindDataForAdminStudents(Model model) {
@@ -73,7 +75,25 @@ public class AdminStudentController {
     }
 
     private void bindDataForSingleStudent(Model model, Long id) {
-        model.addAttribute("student", studentResource.getById(id).getBody());
+        model.addAttribute("student", userResource.getById(id).getBody());
+    }
+
+    private StudentDTO userDTOToStudentDTO(UserDTO userDTO){
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(userDTO.getId());
+        studentDTO.setFirstName(userDTO.getFirstName());
+        studentDTO.setLastName(userDTO.getLastName());
+        studentDTO.setEmail(userDTO.getEmail());
+        return studentDTO;
+    }
+
+    private TeacherDTO userDTOToTeacherDTO(UserDTO userDTO){
+        TeacherDTO teacherDTO = new TeacherDTO();
+        teacherDTO.setId(userDTO.getId());
+        teacherDTO.setFirstName(userDTO.getFirstName());
+        teacherDTO.setLastName(userDTO.getLastName());
+        teacherDTO.setEmail(userDTO.getEmail());
+        return teacherDTO;
     }
 
 }
