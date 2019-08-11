@@ -169,10 +169,12 @@
                                                             <td th:text="${teacher.lastName}">Internet Explorer ۷</td>
                                                             <td th:text="${teacher.code}">Win XP SP۲+</td>
                                                             <td>
-                                                                <button type="submit"
-                                                                        class="btn btn-primary btn-flat d-inline">
+                                                                <a type="submit"
+                                                                   th:href="@{/admin/teacher/show/{id}(id=${teacher
+                                                                   .id})}"
+                                                                   class="btn btn-primary btn-flat d-inline text-white">
                                                                     ویرایش
-                                                                </button>
+                                                                </a>
                                                             </td>
                                                             <td>
                                                                 <a type="submit"
@@ -294,6 +296,7 @@
                                                             <td th:text="${teacher.code}">Win XP SP۲+</td>
                                                             <td>
                                                                 <a type="submit"
+                                                                   th:href="@{/admin/teacher/show/{id}(id=${teacher.id})}"
                                                                    class="btn btn-primary btn-flat d-inline text-white">
                                                                     ویرایش
                                                                 </a>
