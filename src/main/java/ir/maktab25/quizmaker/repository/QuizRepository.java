@@ -10,4 +10,6 @@ import java.util.List;
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
     List<Quiz> findAllByTeacher_Id(Long id);
+
+    Long countAllByTeacher_UserName(String username);
 }
