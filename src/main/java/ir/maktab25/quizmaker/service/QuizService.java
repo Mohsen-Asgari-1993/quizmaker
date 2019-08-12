@@ -8,4 +8,6 @@ import java.util.List;
 public interface QuizService extends BaseService<Quiz, Long> {
 
     List<Quiz> findAllByTeacherId(Long id);
+
+    Long countByTeacherUsername(String username);
 }

@@ -21,4 +21,9 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
     public List<Quiz> findAllByTeacherId(Long id) {
         return baseRepository.findAllByTeacher_Id(id);
     }
+
+    @Override
+    public Long countByTeacherUsername(String username){
+        return baseRepository.countAllByTeacher_UserName(username);
+    }
 }
