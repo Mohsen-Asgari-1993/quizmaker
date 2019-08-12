@@ -8,13 +8,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "exam")
+@Table(name = "quiz")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Exam extends BaseEntity<Long> {
+public class Quiz extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,9 @@ public class Exam extends BaseEntity<Long> {
     @Column(name = "description", length = 1024)
     private String description;
 
-    //    @Column(name = "timer")
-//    private Timer timer;
-//
+    @Column(name = "timer")
+    private String timer;
+
     @OneToOne
     private User teacher;
 
