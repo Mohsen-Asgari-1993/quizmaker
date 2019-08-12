@@ -18,4 +18,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Boolean existsByCode(Integer code);
 
+    Long countAllByTeacher_UserName(String username);
+
 }
