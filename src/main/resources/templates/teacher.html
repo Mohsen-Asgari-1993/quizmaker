@@ -50,9 +50,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../templates/admin.html" class="brand-link">
-      <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+    <a th:href="@{/redirect/teacher}" class="brand-link">
       <span class="brand-text font-weight-light">پنل اساتید</span>
     </a>
 
@@ -71,6 +69,16 @@
                 <i class="nav-icon fa fa-dashboard"></i>
                 <p>
                   دوره ها
+                  <i class="right fa fa-angle-left"></i>
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#"  class="nav-link">
+                <i class="nav-icon fa fa-dashboard"></i>
+                <p>
+                  بانک سوالات
                   <i class="right fa fa-angle-left"></i>
                 </p>
               </a>
@@ -94,7 +102,33 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center">
+          <div class="col-sm-8">
+            <table class="table table-bordered table-hover dataTable text-center table-border-none"
+                   role="grid">
+              <thead>
+              <tr role="row">
+                <th tabindex="0" class="sorting" aria-controls="example2"
+                    aria-label="عنوان دوره: activate to sort column ascending"
+                    rowspan="1" colspan="1">تعداد دوره ها
+                </th>
+                <th tabindex="0" class="sorting_asc"
+                    aria-controls="example2"
+                    aria-label="ویرایش: activate to sort column descending"
+                    aria-sort="ascending" rowspan="1" colspan="1"> تعداد آزمون های طرح شده
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd" role="row">
+                <td th:text="${course}"></td>
+                <td th:text="${quiz}"></td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
 
         </div>
         <!-- /.row -->
