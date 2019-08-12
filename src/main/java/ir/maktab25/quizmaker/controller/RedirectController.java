@@ -40,8 +40,8 @@ public class RedirectController {
 
     @GetMapping("/teacher")
     public String teacherPage(Model model) {
-        model.addAttribute("course", courseResource.countByTeacherUserName(CurrentUserDetail.getCurrentUsername()));
-        model.addAttribute("quiz", quizResource.countByTeacherUsername(CurrentUserDetail.getCurrentUsername()));
+        model.addAttribute("course", courseResource.countByTeacherUserName(CurrentUserDetail.getCurrentUsername()).getBody());
+        model.addAttribute("quiz", quizResource.countByTeacherUsername(CurrentUserDetail.getCurrentUsername()).getBody());
         return "teacher";
     }
 
