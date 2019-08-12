@@ -1,6 +1,9 @@
 package ir.maktab25.quizmaker.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.CourseResource;
+import ir.maktab25.quizmaker.rest.QuizResource;
 import ir.maktab25.quizmaker.rest.StudentResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ public class RedirectController {
     @Autowired
     CourseResource courseResource;
 
+    @Autowired
+    QuizResource quizResource;
+
     @GetMapping("/admin")
     public String adminPage(Model model) {
         model.addAttribute("enableTeachers", teacherResource.countAllEnables().getBody());
@@ -33,7 +39,9 @@ public class RedirectController {
     }
 
     @GetMapping("/teacher")
-    public String teacherPage() {
+    public String teacherPage(Model model) {
+        model.addAttribute("course", courseResource.countByTeacherUserName(CurrentUserDetail.getCurrentUsername()));
+        model.addAttribute("quiz", quizResource.countByTeacherUsername(CurrentUserDetail.getCurrentUsername()));
         return "teacher";
     }
 
