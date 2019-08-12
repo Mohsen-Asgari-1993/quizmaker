@@ -12,6 +12,8 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     List<Course> findAllByTeacher_Id(Long teacher_id);
 
+    List<Course> findAllByTeacher_UserName(String username);
+
     List<Course> findAllByStudents(User students);
 
     Boolean existsByCode(Integer code);
