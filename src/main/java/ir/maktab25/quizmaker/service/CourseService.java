@@ -8,7 +8,9 @@ import java.util.List;
 public interface CourseService extends BaseService<Course, Long> {
 
 
-    List<Course> findAllByTeacher(Long teacherId);
+    List<Course> findAllByTeacherId(Long teacherId);
+
+    List<Course> findAllByTeacherUsername(String username);
 
     List<Course> findAllByStudents(Long studentId);
 
