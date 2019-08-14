@@ -29,7 +29,7 @@ public class TeacherQuizController {
         return "teacherQuiz";
     }
 
-    @GetMapping("/addQuiz/{courseId}/{quizId}")
+    @GetMapping("/delete/{courseId}/{quizId}")
     public String deleteQuiz(@PathVariable Long courseId,@PathVariable Long quizId, Model model) {
         courseResource.deleteQuiz(courseId, quizId);
         bindDataForTeacherQuiz(courseId, model);
