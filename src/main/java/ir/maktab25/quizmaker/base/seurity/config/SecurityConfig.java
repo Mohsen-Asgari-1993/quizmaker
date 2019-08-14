@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         permit(http);
         swaggerPermit(http);
         adminPermit(http);
+        teacherPermit(http);
 
         http
                 .authorizeRequests()
@@ -89,6 +90,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**")
                 .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.ADMIN.toString());
+    }
+
+    private void teacherPermit(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/teacher/**")
+                .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.TEACHER.toString());
     }
 
 }
