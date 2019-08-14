@@ -1,6 +1,5 @@
 package ir.maktab25.quizmaker.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.CourseResource;
 import ir.maktab25.quizmaker.rest.QuizResource;
