@@ -32,7 +32,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/redirect/admin}" class="nav-link">خانه</a>
+                <a th:href="@{/redirect/teacher}" class="nav-link">خانه</a>
             </li>
         </ul>
 
@@ -109,7 +109,7 @@
                             <div class="card-header">
                                 <h3 class="card-title d-inline">جدول آزمون ها</h3>
                                 <button type="button" class="btn btn-primary btn-flat d-inline float-left"
-                                        data-toggle="modal" data-target="#myModal">ایجاد آزمون جدید جدید
+                                        data-toggle="modal" data-target="#myModal">ایجاد آزمون جدید
                                 </button>
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -119,24 +119,27 @@
                                                 <h5 class="modal-title" id="exampleModalLongTitle">آزمون جدید</h5>
                                             </div>
                                             <div class="modal-body">
-                                                <form id="login-form" method="post"
-                                                      th:action="@{/admin/quiz/addQuiz/{id}(id = ${courseId})}"
+                                                <form id="new-quiz" method="post"
+                                                      th:action="@{/teacher/quiz/addQuiz/{id}(id = ${courseId})}"
                                                       th:object="${quizDTO}">
                                                     <div class="input-group mb-3">
                                                         <input class="form-control" id="title" name="title"
                                                                placeholder="عنوان آزمون"
-                                                               required="required" type="text" th:field="*{title}">
+                                                               required="required" type="text"
+                                                               th:field="${quizDTO.title}">
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <textarea class="form-control" id="code" name="code"
+                                                        <textarea class="form-control" id="code" form="new-quiz"
+                                                                  name="code"
                                                                   placeholder="توضیح دوره"
                                                                   required="required" type="number"
-                                                                  th:field="*{description}"></textarea>
+                                                                  th:field="${quizDTO.description}"></textarea>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <input class="form-control" id="begin"
-                                                               placeholder=" زمان مورد نیاز دوره"
-                                                               required="required" type="number" th:field="*{timer}">
+                                                               placeholder=" زمان مورد نیاز آزمون"
+                                                               required="required" type="number"
+                                                               th:field="${quizDTO.timer}">
                                                     </div>
                                                     <div class="row float-left">
                                                         <!-- /.col -->
@@ -186,12 +189,18 @@
                                                     <th tabindex="0" class="sorting_asc"
                                                         aria-controls="example2"
                                                         aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">زمان مورد آزمون
+                                                        aria-sort="ascending" rowspan="1" colspan="1">زمان مورد نیاز
+                                                        آزمون
                                                     </th>
                                                     <th tabindex="0" class="sorting_asc"
                                                         aria-controls="example2"
                                                         aria-label="ویرایش: activate to sort column descending"
                                                         aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
+                                                    </th>
+                                                    <th tabindex="0" class="sorting_asc"
+                                                        aria-controls="example2"
+                                                        aria-label="ویرایش: activate to sort column descending"
+                                                        aria-sort="ascending" rowspan="1" colspan="1">لیست سوالات
                                                     </th>
                                                     <th tabindex="0" class="sorting_asc"
                                                         aria-controls="example2"
@@ -209,12 +218,19 @@
                                                         <a type="submit"
                                                            th:href="@{/teacher/quiz/show/{id}(id=${quiz.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
-                                                            ویرایش
+                                                           ویرایش اطلاعات
                                                         </a>
                                                     </td>
                                                     <td>
                                                         <a type="submit"
-                                                           th:href="@{/teacher/quiz//delete/{courseId}/{quizId}
+                                                           th:href="@{/teacher/quiz/questions/{id}(id=${quiz.id})}"
+                                                           class="btn btn-primary btn-flat d-inline">
+                                                            لیست سوالات
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a type="submit"
+                                                           th:href="@{/teacher/quiz/delete/{courseId}/{quizId}
                                                            (courseId = ${courseId}, quizId = ${quiz.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
                                                             حذف
