@@ -83,7 +83,12 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
     public ResponseEntity<Void> deleteStudent(@PathVariable Long courseId, @PathVariable Long studentId) {
         baseService.deleteStudent(courseId, studentId);
         return ResponseEntity.ok().header("deleted", "successful").build();
+    }
 
+    @DeleteMapping("/deleteQuiz/{courseId}/{quizId}")
+    public ResponseEntity<Void> deleteQuiz(@PathVariable Long courseId, @PathVariable Long quizId) {
+        baseService.deleteQuiz(courseId, quizId);
+        return ResponseEntity.ok().header("deleted", "successful").build();
     }
 
     @GetMapping("/countAll")
