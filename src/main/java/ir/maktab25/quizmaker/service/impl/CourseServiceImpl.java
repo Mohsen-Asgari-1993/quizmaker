@@ -121,6 +121,13 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
         students.removeIf(user -> user.getId().equals(studentId));
     }
 
+    @Override
+    public void deleteQuiz(Long courseId, Long quizId) {
+        Course course = findOne(courseId);
+        Set<Quiz> quizzes = course.getQuizzes();
+        quizzes.removeIf(quiz -> quiz.getId().equals(quizId));
+    }
+
     private Boolean checkTeacher(User teacher) {
         Set<Role> roles = teacher.getRoles();
         for (Role r : roles) {

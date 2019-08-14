@@ -28,4 +28,6 @@ public interface CourseService extends BaseService<Course, Long> {
     Boolean existByCode(Integer code);
 
     void deleteStudent(Long courseId, Long studentId);
+
+    void deleteQuiz(Long courseId, Long quizId);
 }
