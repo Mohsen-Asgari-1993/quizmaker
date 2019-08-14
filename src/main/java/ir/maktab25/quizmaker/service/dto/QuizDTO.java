@@ -20,7 +20,7 @@ public class QuizDTO extends BaseDTO<Long> {
 
     private String description;
 
-    private String timer;
+    private Long timer;
 
     private User teacher;
 

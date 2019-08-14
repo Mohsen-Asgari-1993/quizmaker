@@ -27,7 +27,7 @@ public class Quiz extends BaseEntity<Long> {
     private String description;
 
     @Column(name = "timer")
-    private String timer;
+    private Long timer;
 
     @OneToOne
     private User teacher;
