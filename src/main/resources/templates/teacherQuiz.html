@@ -43,8 +43,6 @@
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a href="/logout" class="nav-link">خروج</a>
-
-                </a>
             </li>
             <!-- Notifications Dropdown Menu -->
         </ul>
@@ -64,7 +62,8 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview">
@@ -78,7 +77,7 @@
                         </li>
 
                         <li class="nav-item has-treeview">
-                            <a href="#"  class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-dashboard"></i>
                                 <p>
                                     بانک سوالات
@@ -112,40 +111,45 @@
                             <tr role="row">
                                 <th tabindex="0" class="sorting" aria-controls="example2"
                                     aria-label="عنوان دوره: activate to sort column ascending"
-                                    rowspan="1" colspan="1">شماره دوره
-                                </th>
-                                <th tabindex="0" class="sorting" aria-controls="example2"
-                                    aria-label="عنوان دوره: activate to sort column ascending"
-                                    rowspan="1" colspan="1">عنوان دوره
+                                    rowspan="1" colspan="1">عنوان آزمون
                                 </th>
                                 <th tabindex="0" class="sorting_asc"
                                     aria-controls="example2"
                                     aria-label="ویرایش: activate to sort column descending"
-                                    aria-sort="ascending" rowspan="1" colspan="1"> تاریخ آغاز
+                                    aria-sort="ascending" rowspan="1" colspan="1">توضیح آزمون
                                 </th>
                                 <th tabindex="0" class="sorting_asc"
                                     aria-controls="example2"
                                     aria-label="ویرایش: activate to sort column descending"
-                                    aria-sort="ascending" rowspan="1" colspan="1"> تاریخ پایان
+                                    aria-sort="ascending" rowspan="1" colspan="1">زمان مورد آزمون
                                 </th>
                                 <th tabindex="0" class="sorting_asc"
                                     aria-controls="example2"
                                     aria-label="ویرایش: activate to sort column descending"
-                                    aria-sort="ascending" rowspan="1" colspan="1"> لیست آزمون ها
+                                    aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
+                                </th>
+                                <th tabindex="0" class="sorting_asc"
+                                    aria-controls="example2"
+                                    aria-label="ویرایش: activate to sort column descending"
+                                    aria-sort="ascending" rowspan="1" colspan="1">حذف
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="odd" role="row" th:each="course : ${courses}">
-                                <td th:text="${course.code}"></td>
-                                <td th:text="${course.title}"></td>
-                                <td th:text="${course.begin}"></td>
-                                <td th:text="${course.end}"></td>
-
+                            <tr class="odd" role="row" th:each="quiz : ${quizzes}">
+                                <td th:text="${quiz.title}"></td>
+                                <td th:text="${quiz.description}"></td>
+                                <td th:text="${quiz.timer}"></td>
                                 <td>
-                                    <a type="submit" th:href="@{/teacher/quiz/{id}(id=${course.id})}"
+                                    <a type="submit" th:href="@{/teacher/quiz/show/{id}(id=${quiz.id})}"
                                        class="btn btn-primary btn-flat d-inline">
-                                        لیست آزمون ها
+                                        ویرایش
+                                    </a>
+                                </td>
+                                <td>
+                                    <a type="submit" th:href="@{/teacher/quiz/delete/{id}(id=${quiz.id})}"
+                                       class="btn btn-primary btn-flat d-inline">
+                                        حذف
                                     </a>
                                 </td>
                             </tr>
