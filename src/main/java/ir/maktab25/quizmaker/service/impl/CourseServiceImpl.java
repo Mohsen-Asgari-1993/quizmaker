@@ -5,9 +5,11 @@ import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.domain.Course;
+import ir.maktab25.quizmaker.domain.Quiz;
 import ir.maktab25.quizmaker.domain.Teacher;
 import ir.maktab25.quizmaker.repository.CourseRepository;
 import ir.maktab25.quizmaker.service.CourseService;
+import ir.maktab25.quizmaker.service.QuizService;
 import ir.maktab25.quizmaker.service.StudentService;
 import ir.maktab25.quizmaker.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    QuizService quizService;
+
     @Override
     public Course save(Course t) {
         if (t.getId() != null) {
@@ -52,7 +57,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public Long countAllByTeacherUserName(String username){
+    public Long countAllByTeacherUserName(String username) {
         return baseRepository.countAllByTeacher_UserName(username);
     }
 
@@ -90,6 +95,17 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
                 courseStudents.add(studentService.findOne(stId));
             }
         }
+        return super.save(course);
+    }
+
+    @Override
+    public Course addQuiz(Quiz quiz, Long id) {
+        Course course = baseRepository.getOne(id);
+        Quiz save = quizService.save(quiz);
+        Set<Quiz> quizzes = course.getQuizzes();
+        if (quizzes == null)
+            quizzes = new HashSet<>();
+        quizzes.add(save);
         return super.save(course);
     }
 
