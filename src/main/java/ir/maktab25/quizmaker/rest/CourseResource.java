@@ -4,7 +4,10 @@ import ir.maktab25.quizmaker.base.rest.BaseRestFulService;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.service.CourseService;
 import ir.maktab25.quizmaker.service.dto.CourseDTO;
+import ir.maktab25.quizmaker.service.dto.QuizDTO;
 import ir.maktab25.quizmaker.service.mapper.CourseMapper;
+import ir.maktab25.quizmaker.service.mapper.QuizMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,9 @@ import java.util.List;
 @RequestMapping("/Course")
 public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, CourseService, CourseMapper> {
 
+
+    @Autowired
+    QuizMapper quizMapper;
 
     public CourseResource(CourseService baseService, CourseMapper baseMapper) {
         super(baseService, baseMapper);
@@ -67,6 +73,12 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
+    @PostMapping("/addQuiz/{courseId}")
+    public ResponseEntity<CourseDTO> addQuiz(@RequestBody QuizDTO quizDTO, @PathVariable("courseId") Long id) {
+        Course course = baseService.addQuiz(quizMapper.toEntity(quizDTO), id);
+        return ResponseEntity.ok(baseMapper.toDTO(course));
+    }
+
     @DeleteMapping("/deleteStudent/{courseId}/{studentId}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long courseId, @PathVariable Long studentId) {
         baseService.deleteStudent(courseId, studentId);
@@ -75,7 +87,7 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
     }
 
     @GetMapping("/countAll")
-    public ResponseEntity<Long> countAll(){
+    public ResponseEntity<Long> countAll() {
         return ResponseEntity.ok(baseService.countAll());
     }
 }
