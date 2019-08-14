@@ -4,6 +4,7 @@ import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
+import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.domain.Course;
 import ir.maktab25.quizmaker.domain.Quiz;
 import ir.maktab25.quizmaker.domain.Teacher;
@@ -101,6 +102,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Course addQuiz(Quiz quiz, Long id) {
         Course course = baseRepository.getOne(id);
+        quiz.setTeacher(teacherService.findByUserName(CurrentUserDetail.getCurrentUsername()));
         Quiz save = quizService.save(quiz);
         Set<Quiz> quizzes = course.getQuizzes();
         if (quizzes == null)
