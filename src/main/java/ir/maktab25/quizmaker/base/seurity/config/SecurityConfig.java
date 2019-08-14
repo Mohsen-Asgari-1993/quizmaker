@@ -88,14 +88,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private void adminPermit(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**")
+                .antMatchers("/admin/**", "/redirect/admin")
                 .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.ADMIN.toString());
     }
 
     private void teacherPermit(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/teacher/**")
+                .antMatchers("/teacher/**", "/redirect/teacher")
                 .hasAnyAuthority(RoleName.SUPER.toString(), RoleName.TEACHER.toString());
     }
 
