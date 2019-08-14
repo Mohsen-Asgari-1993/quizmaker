@@ -105,56 +105,129 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-sm-8">
-                        <table class="table table-bordered table-hover dataTable text-center table-border-none"
-                               role="grid">
-                            <thead>
-                            <tr role="row">
-                                <th tabindex="0" class="sorting" aria-controls="example2"
-                                    aria-label="عنوان دوره: activate to sort column ascending"
-                                    rowspan="1" colspan="1">عنوان آزمون
-                                </th>
-                                <th tabindex="0" class="sorting_asc"
-                                    aria-controls="example2"
-                                    aria-label="ویرایش: activate to sort column descending"
-                                    aria-sort="ascending" rowspan="1" colspan="1">توضیح آزمون
-                                </th>
-                                <th tabindex="0" class="sorting_asc"
-                                    aria-controls="example2"
-                                    aria-label="ویرایش: activate to sort column descending"
-                                    aria-sort="ascending" rowspan="1" colspan="1">زمان مورد آزمون
-                                </th>
-                                <th tabindex="0" class="sorting_asc"
-                                    aria-controls="example2"
-                                    aria-label="ویرایش: activate to sort column descending"
-                                    aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
-                                </th>
-                                <th tabindex="0" class="sorting_asc"
-                                    aria-controls="example2"
-                                    aria-label="ویرایش: activate to sort column descending"
-                                    aria-sort="ascending" rowspan="1" colspan="1">حذف
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="odd" role="row" th:each="quiz : ${quizzes}">
-                                <td th:text="${quiz.title}"></td>
-                                <td th:text="${quiz.description}"></td>
-                                <td th:text="${quiz.timer}"></td>
-                                <td>
-                                    <a type="submit" th:href="@{/teacher/quiz/show/{id}(id=${quiz.id})}"
-                                       class="btn btn-primary btn-flat d-inline">
-                                        ویرایش
-                                    </a>
-                                </td>
-                                <td>
-                                    <a type="submit" th:href="@{/teacher/quiz/delete/{id}(id=${quiz.id})}"
-                                       class="btn btn-primary btn-flat d-inline">
-                                        حذف
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title d-inline">جدول آزمون ها</h3>
+                                <button type="button" class="btn btn-primary btn-flat d-inline float-left"
+                                        data-toggle="modal" data-target="#myModal">ایجاد آزمون جدید جدید
+                                </button>
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">آزمون جدید</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="login-form" method="post"
+                                                      th:action="@{/admin/quiz/addQuiz/{id}(id = ${courseId})}"
+                                                      th:object="${quizDTO}">
+                                                    <div class="input-group mb-3">
+                                                        <input class="form-control" id="title" name="title"
+                                                               placeholder="عنوان آزمون"
+                                                               required="required" type="text" th:field="*{title}">
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <textarea class="form-control" id="code" name="code"
+                                                                  placeholder="توضیح دوره"
+                                                                  required="required" type="number"
+                                                                  th:field="*{description}">
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <input class="form-control" id="begin"
+                                                               placeholder=" زمان مورد نیاز دوره"
+                                                               required="required" type="number" th:field="*{timer}">
+                                                    </div>
+                                                    <div class="row float-left">
+                                                        <!-- /.col -->
+                                                        <div class="m-1">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">بازگشت
+                                                            </button>
+
+                                                        </div>
+                                                        <!-- /.col -->
+                                                        <div class="m-1">
+                                                            <button type="submit" class="btn btn-primary">ذخیره</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- /.card-body -->
+                            <div class="card-body">
+                                <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="example2_wrapper">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6"></div>
+                                        <div class="col-sm-12 col-md-6"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered table-hover dataTable text-center table-border-none"
+                                                   role="grid">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th tabindex="0" class="sorting" aria-controls="example2"
+                                                        aria-label="عنوان دوره: activate to sort column ascending"
+                                                        rowspan="1" colspan="1">عنوان آزمون
+                                                    </th>
+                                                    <th tabindex="0" class="sorting_asc"
+                                                        aria-controls="example2"
+                                                        aria-label="ویرایش: activate to sort column descending"
+                                                        aria-sort="ascending" rowspan="1" colspan="1">توضیح آزمون
+                                                    </th>
+                                                    <th tabindex="0" class="sorting_asc"
+                                                        aria-controls="example2"
+                                                        aria-label="ویرایش: activate to sort column descending"
+                                                        aria-sort="ascending" rowspan="1" colspan="1">زمان مورد آزمون
+                                                    </th>
+                                                    <th tabindex="0" class="sorting_asc"
+                                                        aria-controls="example2"
+                                                        aria-label="ویرایش: activate to sort column descending"
+                                                        aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
+                                                    </th>
+                                                    <th tabindex="0" class="sorting_asc"
+                                                        aria-controls="example2"
+                                                        aria-label="ویرایش: activate to sort column descending"
+                                                        aria-sort="ascending" rowspan="1" colspan="1">حذف
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="odd" role="row" th:each="quiz : ${quizzes}">
+                                                    <td th:text="${quiz.title}"></td>
+                                                    <td th:text="${quiz.description}"></td>
+                                                    <td th:text="${quiz.timer}"></td>
+                                                    <td>
+                                                        <a type="submit"
+                                                           th:href="@{/teacher/quiz/show/{id}(id=${quiz.id})}"
+                                                           class="btn btn-primary btn-flat d-inline">
+                                                            ویرایش
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a type="submit"
+                                                           th:href="@{/teacher/quiz/delete/{id}(id=${quiz.id})}"
+                                                           class="btn btn-primary btn-flat d-inline">
+                                                            حذف
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
