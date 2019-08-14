@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,8 +23,9 @@ public class TeacherQuizController {
         return "teacherQuiz";
     }
 
-    @GetMapping("/addQuiz/{id}")
+    @PostMapping("/addQuiz/{id}")
     public String addQuiz(@PathVariable Long id, Model model, QuizDTO quizDTO) {
+        quizDTO.setId(null);
         courseResource.addQuiz(quizDTO, id);
         bindDataForTeacherQuiz(id, model);
         return "teacherQuiz";
