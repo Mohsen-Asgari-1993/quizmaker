@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.io.Serializable;
+import java.util.List;
 
 @NoRepositoryBean
 public interface BaseQuestionRepository<E extends Question, PK extends Serializable> extends JpaRepository<E, PK> {
+
+    List<Question> findAllByTeacher_UserName(String username);
 }
