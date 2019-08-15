@@ -1,9 +1,9 @@
 package ir.maktab25.quizmaker.repository;
 
 import ir.maktab25.quizmaker.domain.Question;
-import org.springframework.data.jpa.repository.JpaRepository;
+import ir.maktab25.quizmaker.repository.base.BaseQuestionRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface QuestionRepository extends BaseQuestionRepository<Question, Long> {
 }
