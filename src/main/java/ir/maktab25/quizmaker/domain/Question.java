@@ -1,6 +1,7 @@
 package ir.maktab25.quizmaker.domain;
 
 import ir.maktab25.quizmaker.base.domain.BaseEntity;
+import ir.maktab25.quizmaker.base.seurity.domian.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,4 +29,7 @@ public class Question extends BaseEntity<Long> {
 
     @Column(name = "grade")
     private Long grade;
+
+    @OneToOne
+    private User teacher;
 }

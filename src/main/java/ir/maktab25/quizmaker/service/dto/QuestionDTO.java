@@ -18,4 +18,6 @@ public class QuestionDTO extends BaseDTO<Long> {
     private String header;
 
     private Long grade;
+
+    private UserDTO teacher;
 }
