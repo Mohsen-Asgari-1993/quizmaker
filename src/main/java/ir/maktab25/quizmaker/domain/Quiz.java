@@ -5,6 +5,7 @@ import ir.maktab25.quizmaker.base.seurity.domian.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,4 +35,7 @@ public class Quiz extends BaseEntity<Long> {
 
     @ManyToMany
     private Set<User> students;
+
+    @OneToMany
+    private List<Question> questions;
 }

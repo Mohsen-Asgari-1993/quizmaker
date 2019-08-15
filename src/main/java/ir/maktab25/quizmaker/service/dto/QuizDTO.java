@@ -4,7 +4,7 @@ import ir.maktab25.quizmaker.base.dto.BaseDTO;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 
 @Setter
@@ -24,5 +24,8 @@ public class QuizDTO extends BaseDTO<Long> {
 
     private User teacher;
 
-    private Set<User> students;
+    private List<User> students;
+
+    private List<QuestionDTO> questions;
+
 }
