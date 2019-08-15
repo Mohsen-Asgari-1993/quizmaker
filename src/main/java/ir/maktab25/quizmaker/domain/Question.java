@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Question extends BaseEntity<Long> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "title")
