@@ -19,6 +19,6 @@ public class MultipleChoiceQuestion extends Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToMany
     private List<Answer> answers;
 }
