@@ -12,5 +12,7 @@ public class AnswerDTO extends BaseDTO<Long> {
 
     private Long id;
 
-    private String title;
+    private String content;
+
+    private Boolean isTrue;
 }

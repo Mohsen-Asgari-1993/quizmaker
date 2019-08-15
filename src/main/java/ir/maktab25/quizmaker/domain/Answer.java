@@ -20,5 +20,8 @@ public class Answer extends BaseEntity<Long> {
 
     @Column(name = "content")
     @Lob
-    private String title;
+    private String content;
+
+    @Column(name = "is_true")
+    private Boolean isTrue;
 }
