@@ -128,7 +128,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
         Course course = findOne(courseId);
         Set<Quiz> quizzes = course.getQuizzes();
         quizzes.removeIf(quiz -> quiz.getId().equals(quizId));
-        super.delete(quizId);
+        quizService.delete(quizId);
     }
 
     private Boolean checkTeacher(User teacher) {
