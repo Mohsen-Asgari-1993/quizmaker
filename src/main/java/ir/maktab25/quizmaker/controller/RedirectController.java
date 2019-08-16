@@ -41,6 +41,7 @@ public class RedirectController {
     public String teacherPage(Model model) {
         model.addAttribute("course", courseResource.countByTeacherUserName(CurrentUserDetail.getCurrentUsername()).getBody());
         model.addAttribute("quiz", quizResource.countByTeacherUsername(CurrentUserDetail.getCurrentUsername()).getBody());
+        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
         return "teacher";
     }
 
