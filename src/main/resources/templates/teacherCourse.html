@@ -31,24 +31,26 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/redirect/admin}" class="nav-link">خانه</a>
-            </li>
         </ul>
+        <p>آقای</p>
+        <p th:text="${name}"></p>
+        <p>خوش آمدید</p>
 
         <!-- SEARCH FORM -->
 
         <!-- Right navbar links -->
         <ul class="navbar-nav mr-auto">
-            <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a href="/logout" class="nav-link">خروج</a>
+            <li class="nav-item d-none d-sm-inline-block float-right">
+                <a th:href="@{/redirect/teacher}" class="nav-link">خانه</a>
 
-                </a>
             </li>
-            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item d-none d-sm-inline-block float-right">
+                <a href="/logout" class="nav-link">خروج</a>
+            </li>
         </ul>
+
     </nav>
+
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->

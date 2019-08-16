@@ -31,22 +31,26 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/redirect/teacher}" class="nav-link">خانه</a>
-            </li>
         </ul>
+        <p>آقای</p>
+        <p th:text="${name}"></p>
+        <p>خوش آمدید</p>
 
         <!-- SEARCH FORM -->
 
         <!-- Right navbar links -->
         <ul class="navbar-nav mr-auto">
-            <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
+            <li class="nav-item d-none d-sm-inline-block float-right">
+                <a th:href="@{/redirect/teacher}" class="nav-link">خانه</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block float-right">
                 <a href="/logout" class="nav-link">خروج</a>
             </li>
-            <!-- Notifications Dropdown Menu -->
         </ul>
+
     </nav>
+
+
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -107,7 +111,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title d-inline">جدول آزمون ها</h3>
+                                <h3 class="card-title d-inline">جدول آزمون های دوره</h3>
+                                <h3 class="card-title d-inline" th:text="${courseName}"></h3>
                                 <button type="button" class="btn btn-primary btn-flat d-inline float-left"
                                         data-toggle="modal" data-target="#myModal">ایجاد آزمون جدید
                                 </button>
@@ -131,13 +136,13 @@
                                                     <div class="input-group mb-3">
                                                         <textarea class="form-control" id="code" form="new-quiz"
                                                                   name="code"
-                                                                  placeholder="توضیح دوره"
+                                                                  placeholder="توضیح آزمون"
                                                                   required="required" type="number"
                                                                   th:field="${quizDTO.description}"></textarea>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <input class="form-control" id="begin"
-                                                               placeholder=" زمان مورد نیاز آزمون"
+                                                               placeholder=" زمان مورد نیاز آزمون (دقیقه)"
                                                                required="required" type="number"
                                                                th:field="${quizDTO.timer}">
                                                     </div>
