@@ -65,4 +65,9 @@ public class BasicUserResource<E extends BaseEntity<PK>, D extends BaseDTO<PK>, 
     public ResponseEntity<List<D>> findAllByLastName(@PathVariable String name) {
         return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByLastName(name)));
     }
+
+    @GetMapping("/getAllByUsername/{name}")
+    public ResponseEntity<D> findAllByUsername(@PathVariable String name) {
+        return ResponseEntity.ok(baseMapper.toDTO(baseService.findByUserName(name)));
+    }
 }
