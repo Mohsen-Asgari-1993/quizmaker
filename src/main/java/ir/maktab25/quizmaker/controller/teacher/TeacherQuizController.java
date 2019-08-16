@@ -1,7 +1,9 @@
 package ir.maktab25.quizmaker.controller.teacher;
 
+import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.CourseResource;
 import ir.maktab25.quizmaker.rest.QuizResource;
+import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.QuizDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class TeacherQuizController {
 
     @Autowired
     QuizResource quizResource;
+
+    @Autowired
+    TeacherResource teacherResource;
 
     @GetMapping("/{id}")
     public String getQuizzes(@PathVariable Long id, Model model) {
@@ -61,12 +66,15 @@ public class TeacherQuizController {
 
     private void bindDataForTeacherQuiz(Long id, Model model) {
         model.addAttribute("quizzes", courseResource.getById(id).getBody().getQuizzes());
+        model.addAttribute("courseName", courseResource.getById(id).getBody().getTitle());
         model.addAttribute("quizDTO", new QuizDTO());
         model.addAttribute("courseId", id);
+        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
     }
 
     private void bindDataForSingleQuizPage(Long id, Model model) {
         model.addAttribute("quiz", quizResource.getById(id).getBody());
         model.addAttribute("courseId", id);
+        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
     }
 }
