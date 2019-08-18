@@ -221,7 +221,8 @@
                                                     <td th:text="${quiz.timer}"></td>
                                                     <td>
                                                         <a type="submit"
-                                                           th:href="@{/teacher/quiz/show/{id}(id=${quiz.id})}"
+                                                           th:href="@{/teacher/quiz/show/{courseId}/{quizId}
+                                                           (courseId=${courseId}, quizId=${quiz.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
                                                            ویرایش اطلاعات
                                                         </a>

@@ -47,9 +47,9 @@ public class TeacherQuizController {
         return "teacherQuiz";
     }
 
-    @GetMapping("/show/{id}")
-    public String showQuiz(@PathVariable Long id, Model model) {
-        bindDataForSingleQuizPage(id, model);
+    @GetMapping("/show/{courseId}/{quizId}")
+    public String showQuiz(@PathVariable Long courseId, @PathVariable Long quizId, Model model) {
+        bindDataForSingleQuizPage(courseId, quizId, model);
         return "teacherSingleQuiz";
     }
 
@@ -72,9 +72,9 @@ public class TeacherQuizController {
         model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
     }
 
-    private void bindDataForSingleQuizPage(Long id, Model model) {
-        model.addAttribute("quiz", quizResource.getById(id).getBody());
-        model.addAttribute("courseId", id);
+    private void bindDataForSingleQuizPage(Long courseId, Long quizId, Model model) {
+        model.addAttribute("quiz", quizResource.getById(quizId).getBody());
+        model.addAttribute("courseId", courseId);
         model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
     }
 }
