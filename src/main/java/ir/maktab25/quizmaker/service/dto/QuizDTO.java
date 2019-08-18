@@ -1,7 +1,6 @@
 package ir.maktab25.quizmaker.service.dto;
 
 import ir.maktab25.quizmaker.base.dto.BaseDTO;
-import ir.maktab25.quizmaker.base.seurity.domian.User;
 import lombok.*;
 
 import java.util.List;
@@ -22,9 +21,9 @@ public class QuizDTO extends BaseDTO<Long> {
 
     private Long timer;
 
-    private User teacher;
+    private UserDTO teacher;
 
-    private List<User> students;
+    private List<UserDTO> students;
 
     private List<QuestionDTO> questions;
 
