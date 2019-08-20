@@ -4,6 +4,7 @@ package ir.maktab25.quizmaker.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,5 +21,5 @@ public class MultipleChoiceQuestion extends Question {
     private Long id;
 
     @OneToMany
-    private List<Answer> answers;
+    private List<Answer> answers = new ArrayList<>();
 }

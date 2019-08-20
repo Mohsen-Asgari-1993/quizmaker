@@ -5,6 +5,7 @@ import ir.maktab25.quizmaker.base.seurity.domian.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -36,8 +37,8 @@ public class Course extends BaseEntity<Long> {
     private User teacher;
 
     @OneToMany
-    private Set<User> students;
+    private Set<User> students = new HashSet<>();
 
     @OneToMany
-    private Set<Quiz> quizzes;
+    private Set<Quiz> quizzes = new HashSet<>();
 }
