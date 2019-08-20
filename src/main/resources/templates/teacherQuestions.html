@@ -135,18 +135,12 @@
                                                 <tr role="row">
                                                     <th tabindex="0" class="sorting" aria-controls="example2"
                                                         aria-label="عنوان دوره: activate to sort column ascending"
-                                                        rowspan="1" colspan="1">عنوان
+                                                        rowspan="1" colspan="1">عنوان سوال
                                                     </th>
                                                     <th tabindex="0" class="sorting_asc"
                                                         aria-controls="example2"
                                                         aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">توضیح آزمون
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">زمان مورد نیاز
-                                                        آزمون
+                                                        aria-sort="ascending" rowspan="1" colspan="1">نمره سوال
                                                     </th>
                                                     <th tabindex="0" class="sorting_asc"
                                                         aria-controls="example2"
@@ -156,39 +150,25 @@
                                                     <th tabindex="0" class="sorting_asc"
                                                         aria-controls="example2"
                                                         aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">لیست سوالات
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
                                                         aria-sort="ascending" rowspan="1" colspan="1">حذف
                                                     </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr class="odd" role="row" th:each="quiz : ${quizzes}">
-                                                    <td th:text="${quiz.title}"></td>
-                                                    <td th:text="${quiz.description}"></td>
-                                                    <td th:text="${quiz.timer}"></td>
+                                                <tr class="odd" role="row" th:each="ques : ${questions}">
+                                                    <td th:text="${ques.title}"></td>
+                                                    <td th:text="${ques.grade}"></td>
                                                     <td>
                                                         <a type="submit"
-                                                           th:href="@{/teacher/quiz/show/{courseId}/{quizId}
-                                                           (courseId=${courseId}, quizId=${quiz.id})}"
+                                                           th:href="@{/teacher/question/show/{quizId}/{questionId}
+                                                           (quizId=${quizId}, quizId=${ques.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
                                                             ویرایش اطلاعات
                                                         </a>
                                                     </td>
                                                     <td>
                                                         <a type="submit"
-                                                           th:href="@{/teacher/quiz/questions/{id}(id=${quiz.id})}"
-                                                           class="btn btn-primary btn-flat d-inline">
-                                                            لیست سوالات
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a type="submit"
-                                                           th:href="@{/teacher/quiz/delete/{courseId}/{quizId}
-                                                           (courseId = ${courseId}, quizId = ${quiz.id})}"
+                                                           th:href="@{/teacher/questions/delete/{questionId}(questionId=${ques.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
                                                             حذف
                                                         </a>
