@@ -107,6 +107,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card-header p-2">
@@ -151,7 +152,8 @@
                                                             <tr class="odd" role="row" th:each="ques:${questionBank}">
                                                                 <td th:text="${ques.title}"></td>
                                                                 <td>
-                                                                    <input type="checkbox" th:value="${idList.add(ques.id)}">
+                                                                    <input type="checkbox"
+                                                                           th:value="${idList.add(ques.id)}">
                                                                 </td>
                                                             </tr>
                                                             </tbody>
@@ -168,16 +170,100 @@
                                 </div>
                                 <div class="tab-pane active" id="newQuestion">
                                     <div class="card-body">
-                                        <div class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-6"></div>
-                                                <div class="col-sm-12 col-md-6"></div>
+                                        <div class="form-group">
+                                            <label> نوع سوال : </label>
+                                            <div class="input-group">
+                                                <select id="questionType"
+                                                        class="d-block float-right col-2">
+                                                    <option type="text" value="descriptive">تشریحی
+                                                    <option type="text" value="multiple">چند گزینه ای
+                                                </select>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
+
+                                        </div>
+                                        <div id="descriptive">
+                                            <form method="post" th:object="${DescriptiveQuestion}"
+                                                  th:action="@{/admin/course/update}">
+                                                <!-- Date dd/mm/yyyy -->
+                                                <div class="form-group">
+                                                    <label>عنوان سوال: </label>
+
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control"
+                                                               th:field="*{title}">
+                                                    </div>
+                                                    <!-- /.input group -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>صورت سوال :</label>
+
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control "
+                                                               th:field="*{header}">
+                                                    </div>
+                                                    <!-- /.input group -->
+                                                </div>
+                                                <div class="m-1 float-right">
+                                                    <a type="button" class="btn btn-secondary"
+                                                       th:href="@{/admin/course}"
+                                                       data-dismiss="modal">بازگشت
+                                                    </a>
 
                                                 </div>
-                                            </div>
+                                                <!-- /.col -->
+                                                <div class="m-1 float-left">
+                                                    <input type="submit" class="btn btn-primary"
+                                                           value="ذخیره">
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                        <div id="multiple">
+
+                                            <form method="post" th:object="${MultipleChoiceQuestion}"
+                                                  th:action="@{/admin/course/update}">
+                                                <!-- Date dd/mm/yyyy -->
+                                                <div class="form-group">
+                                                    <label>عنوان سوال: </label>
+
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control"
+                                                               th:field="*{title}">
+                                                    </div>
+                                                    <!-- /.input group -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>صورت سوال :</label>
+
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control "
+                                                               th:field="*{header}">
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control "
+                                                               th:field="*{header}">
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control "
+                                                               th:field="*{header}">
+                                                    </div>
+                                                    <!-- /.input group -->
+                                                </div>
+                                                <div class="m-1 float-right">
+                                                    <a type="button" class="btn btn-secondary"
+                                                       th:href="@{/admin/course}"
+                                                       data-dismiss="modal">بازگشت
+                                                    </a>
+
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="m-1 float-left">
+                                                    <input type="submit" class="btn btn-primary"
+                                                           value="ذخیره">
+                                                </div>
+                                            </form>
+
+
                                         </div>
                                     </div>
 
@@ -218,5 +304,18 @@
 <script th:src="@{/dist/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/dist/js/demo.js}"></script>
+<script type="text/javascript">
+    $('#multiple').hide();
+    $('#questionType').on('change', function () {
+        if (this.value == 'descriptive') {
+            $("#descriptive").show();
+            $("#multiple").hide();
+        } else {
+            $("#descriptive").hide();
+            $("#multiple").show();
+        }
+    });
+
+</script>
 </body>
 </html>
