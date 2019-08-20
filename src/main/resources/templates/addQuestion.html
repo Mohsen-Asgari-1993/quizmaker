@@ -183,7 +183,7 @@
                                         </div>
                                         <div id="descriptive">
                                             <form method="post" th:object="${DescriptiveQuestion}"
-                                                  th:action="@{/admin/course/update}">
+                                                  th:action="@{/admin/question/addDescriptive/{quizId}(quizId = ${quizId})}">
                                                 <!-- Date dd/mm/yyyy -->
                                                 <div class="form-group">
                                                     <label>عنوان سوال: </label>
@@ -205,7 +205,7 @@
                                                 </div>
                                                 <div class="m-1 float-right">
                                                     <a type="button" class="btn btn-secondary"
-                                                       th:href="@{/admin/course}"
+                                                       th:href="@{/teacher/question/{quizId}(quizId = ${quizId})}"
                                                        data-dismiss="modal">بازگشت
                                                     </a>
 
