@@ -6,6 +6,7 @@ import ir.maktab25.quizmaker.rest.QuizResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.DescriptiveQuestionDTO;
 import ir.maktab25.quizmaker.service.dto.MultipleChoiceQuestionDTO;
+import ir.maktab25.quizmaker.service.dto.QuestionDTO;
 import ir.maktab25.quizmaker.service.dto.QuizDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,14 @@ public class TeacherQuestionController {
     @PostMapping("/addFromBank/{quizId}")
     public String addFromBank(@PathVariable Long quizId, Model model, List<Long> longList) {
 
+
+        bindDataForTeacherQuestions(quizId, model);
+        return "teacherQuestions";
+    }
+
+    @PostMapping("/addDescriptive/{quizId}")
+    public String addDescriptive(@PathVariable Long quizId, Model model, QuestionDTO questionDTO) {
+        questionResource.addQuestion(quizId, questionDTO);
 
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
