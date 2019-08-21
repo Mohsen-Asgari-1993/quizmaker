@@ -7,20 +7,24 @@
     <title>پنل مدیریت | صفحه قفل</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+          th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+          th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}">
     <!-- Theme style -->
-    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+    <link rel="stylesheet" href="../static/dist/css/adminlte.min.css"
+          th:href="@{/dist/css/adminlte.min.css}">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet">
 
     <!-- bootstrap rtl -->
-    <link rel="stylesheet" th:href="@{/dist/css/bootstrap-rtl.min.css}">
+    <link rel="stylesheet" href="../static/dist/css/custom-style.css"
+          th:href="@{/dist/css/bootstrap-rtl.min.css}">
     <!-- template rtl version -->
-    <link rel="stylesheet" th:href="@{/dist/css/custom-style.css}">
+    <link rel="stylesheet" href="../static/dist/css/custom-style.css"
+          th:href="@{/dist/css/custom-style.css}">
 </head>
 <body class="sidebar-mini" style="height: auto;">
 <div class="wrapper">
@@ -59,16 +63,19 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script src="../static/plugins/jquery/jquery.min.js"
+        th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
-<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js"
+        th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- FastClick -->
-<script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+<script src="../static/plugins/fastclick/fastclick.js"
+        th:src="@{/plugins/fastclick/fastclick.js}"></script>
 <!-- AdminLTE App -->
-<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<script src="../static/dist/js/adminlte.min.js"
+        th:src="@{/dist/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
-<script th:src="@{/dist/js/demo.js}"></script>
-
-
+<script src="../static/dist/js/demo.js"
+        th:src="@{/dist/js/demo.js}"></script>
 </body>
 </html>
