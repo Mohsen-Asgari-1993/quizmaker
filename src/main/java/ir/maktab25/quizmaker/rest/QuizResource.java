@@ -6,10 +6,7 @@ import ir.maktab25.quizmaker.service.QuizService;
 import ir.maktab25.quizmaker.service.dto.QuizDTO;
 import ir.maktab25.quizmaker.service.mapper.QuizMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +28,11 @@ public class QuizResource extends BaseRestFulService<Quiz, QuizDTO, Long, QuizSe
     public ResponseEntity<Long> countByTeacherUsername(@PathVariable String username) {
         Long count = baseService.countByTeacherUsername(username);
         return ResponseEntity.ok(count);
+    }
+
+    @PostMapping("/addQuestion/{quizId}")
+    public ResponseEntity<QuizDTO> addQuestion(@PathVariable Long quizId, @RequestBody List<Long> questionIds){
+        Quiz quiz = baseService.addQuestion(quizId, questionIds);
+        return ResponseEntity.ok(baseMapper.toDTO(quiz));
     }
 }

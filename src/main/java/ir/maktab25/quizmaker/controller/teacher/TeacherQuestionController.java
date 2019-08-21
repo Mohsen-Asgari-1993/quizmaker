@@ -1,9 +1,7 @@
 package ir.maktab25.quizmaker.controller.teacher;
 
 import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
-import ir.maktab25.quizmaker.rest.QuestionResource;
-import ir.maktab25.quizmaker.rest.QuizResource;
-import ir.maktab25.quizmaker.rest.TeacherResource;
+import ir.maktab25.quizmaker.rest.*;
 import ir.maktab25.quizmaker.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/teacher/question")
@@ -23,6 +22,12 @@ public class TeacherQuestionController {
 
     @Autowired
     QuestionResource questionResource;
+
+    @Autowired
+    DescriptiveQuestionResource descriptiveQuestionResource;
+
+    @Autowired
+    MultipleChoiceQuestionResource multipleChoiceQuestionResource;
 
     @Autowired
     TeacherResource teacherResource;
@@ -43,22 +48,30 @@ public class TeacherQuestionController {
 
     @PostMapping("/addFromBank/{quizId}")
     public String addFromBank(@PathVariable Long quizId, Model model, List<Long> longList) {
-
-
+        quizResource.addQuestion(quizId, longList);
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
     }
 
     @PostMapping("/addDescriptive/{quizId}")
-    public String addDescriptive(@PathVariable Long quizId, Model model, QuestionDTO questionDTO) {
-        questionResource.addQuestion(quizId, questionDTO);
+    public String addDescriptive(@PathVariable Long quizId, Model model, DescriptiveQuestionDTO questionDTO) {
+        descriptiveQuestionResource.addQuestion(quizId, questionDTO);
 
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
     }
 
-    @PostMapping(value = "/addAnswer/{quizId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String addAnswer(@PathVariable Long quizId, @RequestBody AnswerDTO answerDTO, Model model) {
+    @PostMapping("/addMulti/{quizId}")
+    public String addMulti(@PathVariable Long quizId, Model model, MultipleChoiceQuestionDTO multipleChoiceQuestionDTO) {
+        multipleChoiceQuestionDTO.setAnswers(dtoList);
+        multipleChoiceQuestionResource.addQuestion(quizId, multipleChoiceQuestionDTO);
+        dtoList.removeIf(Objects::nonNull);
+        bindDataForTeacherQuestions(quizId, model);
+        return "teacherQuestions";
+    }
+
+    @PostMapping("/addAnswer/{quizId}")
+    public String addAnswer(@PathVariable Long quizId, AnswerDTO answerDTO, Model model) {
         if (answerDTO.getBool().equals("false"))
             answerDTO.setIsTrue(false);
         else
