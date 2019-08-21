@@ -4,17 +4,12 @@ import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.QuestionResource;
 import ir.maktab25.quizmaker.rest.QuizResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
-import ir.maktab25.quizmaker.service.dto.DescriptiveQuestionDTO;
-import ir.maktab25.quizmaker.service.dto.MultipleChoiceQuestionDTO;
-import ir.maktab25.quizmaker.service.dto.QuestionDTO;
-import ir.maktab25.quizmaker.service.dto.QuizDTO;
+import ir.maktab25.quizmaker.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +26,8 @@ public class TeacherQuestionController {
 
     @Autowired
     TeacherResource teacherResource;
+
+    private static List<AnswerDTO> dtoList = new ArrayList<>();
 
     @GetMapping("/{quizId}")
     public String showQuestions(@PathVariable Long quizId, Model model) {
@@ -60,6 +57,24 @@ public class TeacherQuestionController {
         return "teacherQuestions";
     }
 
+    @PostMapping(value = "/addAnswer/{quizId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String addAnswer(@PathVariable Long quizId, @RequestBody AnswerDTO answerDTO, Model model) {
+        if (answerDTO.getBool().equals("false"))
+            answerDTO.setIsTrue(false);
+        else
+            answerDTO.setIsTrue(true);
+        dtoList.add(answerDTO);
+        bindDataForAddQuestionPage(quizId, model);
+        return "addQuestion";
+    }
+
+    @GetMapping("/deleteAnswer/{quizId}/{content}")
+    public String deleteAnswer(@PathVariable Long quizId, @PathVariable String content, Model model) {
+        dtoList.removeIf(a -> a.getContent().equals(content));
+        bindDataForAddQuestionPage(quizId, model);
+        return "addQuestion";
+    }
+
     private void bindDataForAddQuestionPage(Long quizId, Model model) {
         model.addAttribute("MultipleChoiceQuestion", new MultipleChoiceQuestionDTO());
         model.addAttribute("DescriptiveQuestion", new DescriptiveQuestionDTO());
@@ -67,6 +82,8 @@ public class TeacherQuestionController {
         model.addAttribute("questionBank", questionResource.findAllTeacherQuestions().getBody());
         model.addAttribute("idList", new ArrayList<Long>());
         model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
+        model.addAttribute("answerList", dtoList);
+        model.addAttribute("newAnswer", new AnswerDTO());
 
     }
 

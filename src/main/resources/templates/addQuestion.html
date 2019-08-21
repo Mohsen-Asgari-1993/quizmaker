@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="../static/dist/css/adminlte.min.css"
           th:href="@{/dist/css/adminlte.min.css}">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <!-- bootstrap rtl -->
     <link rel="stylesheet" href="../static/dist/css/custom-style.css"
@@ -208,7 +207,7 @@
                                                     <!-- /.input group -->
                                                 </div>
                                                 <div class="m-1 float-right">
-                                                    <a type="button" class="btn btn-secondary"
+                                                    <a type="button" class="btn btn-secondary text-white"
                                                        th:href="@{/teacher/question/{quizId}(quizId = ${quizId})}"
                                                        data-dismiss="modal">بازگشت
                                                     </a>
@@ -246,33 +245,168 @@
 
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label>پاسخ ها:</label>
+                                                <!--<div class="form-group">-->
+                                                <!--<label class="float-right">گزینه ها:</label>-->
+                                                <!--<button type="button"-->
+                                                <!--class="btn btn-primary btn-flat d-inline float-left"-->
+                                                <!--data-toggle="modal" data-target="#myModal">ایجاد گزینه جدید-->
+                                                <!--</button>-->
+                                                <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog"-->
+                                                <!--aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+                                                <!--<div class="modal-dialog modal-dialog-centered" role="document">-->
+                                                <!--<div class="modal-content">-->
+                                                <!--<div class="modal-header">-->
+                                                <!--<h5 class="modal-title" id="exampleModalLongTitle">-->
+                                                <!--سوال جدید</h5>-->
+                                                <!--</div>-->
+                                                <!--<div class="modal-body">-->
+                                                <!--<form id="new-quiz" method="post"-->
+                                                <!--th:action="@{/teacher/question/addAnswer/{quizId}(quizId = ${quizId})}"-->
+                                                <!--th:object="${newAnswer}">-->
+                                                <!--<div class="input-group mb-3">-->
+                                                <!--<input class="form-control" id="title"-->
+                                                <!--name="title"-->
+                                                <!--placeholder="متن گزینه"-->
+                                                <!--required="required" type="text"-->
+                                                <!--th:field="*{content}">-->
+                                                <!--</div>-->
+                                                <!--<div class="input-group mb-3">-->
+                                                <!--<select class="d-block float-right col-4"-->
+                                                <!--th:field="*{isTrue}">-->
+                                                <!--<option type="text" value="false">-->
+                                                <!--پاسخ غلط-->
+                                                <!--<option type="text" value="true">پاسخ-->
+                                                <!--صحیح-->
+                                                <!--</select>-->
+                                                <!--</div>-->
+                                                <!--<div class="row float-left">-->
+                                                <!--&lt;!&ndash; /.col &ndash;&gt;-->
+                                                <!--<div class="m-1">-->
+                                                <!--<button type="button" th:form=""-->
+                                                <!--class="btn btn-secondary"-->
+                                                <!--data-dismiss="modal">بازگشت-->
+                                                <!--</button>-->
 
-                                                    <div class="input-group" id="answer">
-                                                        <input type="text" class="form-control col-3 "
-                                                               th:field="${}">
-                                                    </div>
-                                                    <div class="m-1 float-right">
-                                                        <a type="button" class="btn btn-secondary"
-                                                        >افزودن گزینه جدید
+                                                <!--</div>-->
+                                                <!--&lt;!&ndash; /.col &ndash;&gt;-->
+                                                <!--<div class="m-1">-->
+                                                <!--<button type="submit"-->
+                                                <!--class="btn btn-primary">ذخیره-->
+                                                <!--</button>-->
+                                                <!--</div>-->
+                                                <!--</div>-->
+                                                <!--</form>-->
+
+                                                <!--</div>-->
+
+                                                <!--</div>-->
+                                                <!--</div>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group" th:each="answer: ${answerList}">-->
+                                                <!--<div class="input-group">-->
+                                                <!--<input type="text" class="form-control m-2 col-3"-->
+                                                <!--th:field="${answer.content}" readonly="readonly">-->
+                                                <!--<input type="text" class="form-control m-2 col-1"-->
+                                                <!--th:field="${answer.isTrue}" readonly="readonly">-->
+                                                <!--<a type="button" class="btn btn-secondary m-2 text-white"-->
+                                                <!--th:href="@{/teacher/question/deleteAnswer/{quizId}/{content}(quizId = ${quizId}, content=${answer.content})}"-->
+                                                <!--&gt;حذف-->
+                                                <!--</a>-->
+                                                <!--</div>-->
+
+                                                <!--</div>-->
+
+
+                                                <!--</div>-->
+                                                <div class="row mb-3 ">
+                                                    <div class=" m-1 float-right">
+                                                        <a type="button" class="btn btn-secondary text-white"
+                                                           th:href="@{/teacher/question/{quizId}(quizId = ${quizId})}"
+                                                        >بازگشت
                                                         </a>
 
                                                     </div>
+                                                    <!-- /.col -->
+                                                    <div class="m-1 float-left">
+                                                        <input type="submit" class="btn btn-primary"
+                                                               value="ذخیره">
+                                                    </div>
                                                 </div>
-                                                <div class="m-1 float-right">
-                                                    <a type="button" class="btn btn-secondary"
-                                                       th:href="@{/teacher/question/{quizId}(quizId = ${quizId})}"
-                                                    >بازگشت
-                                                    </a>
+
+                                            </form>
+
+                                            <div class="form-group">
+                                                <label class="float-right">گزینه ها:</label>
+                                                <button type="button"
+                                                        class="btn btn-primary btn-flat d-inline float-left"
+                                                        data-toggle="modal" data-target="#myModal">ایجاد گزینه جدید
+                                                </button>
+                                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                                    سوال جدید</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="post"
+                                                                      th:action="@{/teacher/question/addAnswer/{quizId}(quizId = ${quizId})}"
+                                                                      th:object="${newAnswer}">
+                                                                    <div class="input-group mb-3">
+                                                                        <input class="form-control"
+                                                                               placeholder="متن گزینه"
+                                                                               required="required" type="text"
+                                                                               th:field="*{content}">
+                                                                    </div>
+                                                                    <div class="input-group mb-3">
+                                                                        <select class="d-block float-right col-4 form-control"
+                                                                                th:field="*{bool}">
+                                                                            <option type="text" value="false">
+                                                                                پاسخ غلط
+                                                                            <option type="text" value="true">پاسخ
+                                                                                صحیح
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="row float-left">
+                                                                        <!-- /.col -->
+                                                                        <div class="m-1">
+                                                                            <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">بازگشت
+                                                                            </button>
+
+                                                                        </div>
+                                                                        <!-- /.col -->
+                                                                        <div class="m-1">
+                                                                            <button type="submit"
+                                                                                    class="btn btn-primary">ذخیره
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" th:each="answer: ${answerList}">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control m-2 col-3"
+                                                               th:field="${answer.content}" readonly="readonly">
+                                                        <input type="text" class="form-control m-2 col-1"
+                                                               th:field="${answer.isTrue}" readonly="readonly">
+                                                        <a type="button" class="btn btn-secondary m-2 text-white"
+                                                           th:href="@{/teacher/question/deleteAnswer/{quizId}/{content}(quizId = ${quizId}, content=${answer.content})}"
+                                                        >حذف
+                                                        </a>
+                                                    </div>
 
                                                 </div>
-                                                <!-- /.col -->
-                                                <div class="m-1 float-left">
-                                                    <input type="submit" class="btn btn-primary"
-                                                           value="ذخیره">
-                                                </div>
-                                            </form>
+
+
+                                            </div>
 
 
                                         </div>
