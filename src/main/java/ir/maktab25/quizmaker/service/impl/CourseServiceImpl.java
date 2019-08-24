@@ -68,6 +68,11 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
+    public List<Course> findAllByStudentUsername() {
+        return baseRepository.findAllByStudents(studentService.findByUserName(CurrentUserDetail.getCurrentUsername()));
+    }
+
+    @Override
     public Course addTeacher(Long teacherId, Long id) {
         Course course = baseRepository.getOne(id);
         Teacher teacher = teacherService.findOne(teacherId);
