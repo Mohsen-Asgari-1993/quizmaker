@@ -3,6 +3,7 @@ package ir.maktab25.quizmaker.service.dto;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,5 +15,5 @@ public class MultipleChoiceQuestionDTO extends QuestionDTO {
 
     private Long id;
 
-    private List<AnswerDTO> answers;
+    private List<AnswerDTO> answers = new ArrayList<>();
 }
