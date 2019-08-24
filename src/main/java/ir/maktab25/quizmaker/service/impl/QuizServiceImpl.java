@@ -1,9 +1,11 @@
 package ir.maktab25.quizmaker.service.impl;
 
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
+import ir.maktab25.quizmaker.domain.QuestionWrapper;
 import ir.maktab25.quizmaker.domain.Quiz;
 import ir.maktab25.quizmaker.repository.QuizRepository;
 import ir.maktab25.quizmaker.service.QuestionService;
+import ir.maktab25.quizmaker.service.QuestionWrapperService;
 import ir.maktab25.quizmaker.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    QuestionWrapperService questionWrapperService;
+
     public QuizServiceImpl(QuizRepository baseRepository) {
         super(baseRepository);
     }
@@ -28,14 +33,21 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
     }
 
     @Override
-    public Long countByTeacherUsername(String username){
+    public Long countByTeacherUsername(String username) {
         return baseRepository.countAllByTeacher_UserName(username);
     }
 
     @Override
     public Quiz addQuestion(Long quizId, List<Long> questionsId) {
         Quiz quiz = findOne(quizId);
-        questionsId.forEach( id -> quiz.getQuestions().add(questionService.findOne(id)));
+        questionsId.forEach(id -> quiz
+                .getQuestions()
+                .add
+                        (questionWrapperService
+                                .save(
+                                        new QuestionWrapper(null,
+                                                questionService.findOne(id),
+                                                null))));
         return super.save(quiz);
     }
 }
