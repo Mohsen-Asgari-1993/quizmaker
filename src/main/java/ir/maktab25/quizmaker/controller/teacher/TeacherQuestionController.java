@@ -1,6 +1,5 @@
 package ir.maktab25.quizmaker.controller.teacher;
 
-import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.*;
 import ir.maktab25.quizmaker.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,7 +129,7 @@ public class TeacherQuestionController {
         model.addAttribute("quizId", quizId);
         model.addAttribute("questionBank", questionResource.findAllTeacherQuestions().getBody());
         model.addAttribute("idList", new ArrayList<Long>());
-        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
+        model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
         model.addAttribute("answerList", dtoList);
         model.addAttribute("newAnswer", new AnswerDTO());
 
@@ -141,7 +140,7 @@ public class TeacherQuestionController {
         model.addAttribute("questions", quizDTO.getQuestions());
         model.addAttribute("quizName", quizDTO.getTitle());
         model.addAttribute("quizId", quizId);
-        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
+        model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
 
     }
 

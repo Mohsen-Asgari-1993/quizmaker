@@ -1,6 +1,5 @@
 package ir.maktab25.quizmaker.controller.teacher;
 
-import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.CourseResource;
 import ir.maktab25.quizmaker.rest.QuizResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
@@ -72,12 +71,12 @@ public class TeacherQuizController {
         model.addAttribute("quizDTO", new QuizDTO());
         model.addAttribute("courseId", id);
         model.addAttribute("name", teacherResource
-                .findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
+                .findAllByUsername().getBody().getLastName());
     }
 
     private void bindDataForSingleQuizPage(Long courseId, Long quizId, Model model) {
         model.addAttribute("quiz", quizResource.getById(quizId).getBody());
         model.addAttribute("courseId", courseId);
-        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
+        model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
     }
 }

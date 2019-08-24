@@ -1,6 +1,5 @@
 package ir.maktab25.quizmaker.controller;
 
-import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.CourseResource;
 import ir.maktab25.quizmaker.rest.QuizResource;
 import ir.maktab25.quizmaker.rest.StudentResource;
@@ -39,9 +38,9 @@ public class RedirectController {
 
     @GetMapping("/teacher")
     public String teacherPage(Model model) {
-        model.addAttribute("course", courseResource.countByTeacherUserName(CurrentUserDetail.getCurrentUsername()).getBody());
-        model.addAttribute("quiz", quizResource.countByTeacherUsername(CurrentUserDetail.getCurrentUsername()).getBody());
-        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
+        model.addAttribute("course", courseResource.countByTeacherUserName().getBody());
+        model.addAttribute("quiz", quizResource.countByTeacherUsername().getBody());
+        model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
         return "teacher";
     }
 

@@ -1,6 +1,5 @@
 package ir.maktab25.quizmaker.controller.teacher;
 
-import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.CourseResource;
 import ir.maktab25.quizmaker.rest.TeacherResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,8 @@ public class TeacherCourseController {
 
     @GetMapping
     public String getCourses(Model model) {
-        model.addAttribute("courses", courseResource.findAllByTeacherUserName(CurrentUserDetail.getCurrentUsername()).getBody());
-        model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
+        model.addAttribute("courses", courseResource.findAllByTeacherUserName().getBody());
+        model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
 
         return "teacherCourse";
     }
