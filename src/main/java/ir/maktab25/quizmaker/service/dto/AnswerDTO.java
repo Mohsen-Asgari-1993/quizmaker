@@ -17,4 +17,7 @@ public class AnswerDTO extends BaseDTO<Long> {
     private String bool;
 
     private Boolean isTrue;
+
+    private Boolean isChosen;
+
 }

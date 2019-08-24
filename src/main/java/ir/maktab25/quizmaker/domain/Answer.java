@@ -24,4 +24,7 @@ public class Answer extends BaseEntity<Long> {
 
     @Column(name = "is_true")
     private Boolean isTrue;
+
+    @Column(name = "is_chosen")
+    private Boolean isChosen;
 }
