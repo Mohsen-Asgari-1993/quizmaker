@@ -3,6 +3,7 @@ package ir.maktab25.quizmaker.service.dto;
 import ir.maktab25.quizmaker.base.dto.BaseDTO;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,9 +24,9 @@ public class QuizDTO extends BaseDTO<Long> {
 
     private UserDTO teacher;
 
-    private List<UserDTO> students;
+    private List<UserDTO> students = new ArrayList<>();
 
-    private List<QuestionWrapperDTO> questions;
+    private List<QuestionWrapperDTO> questions = new ArrayList<>();
 
     @Getter(AccessLevel.NONE)
     private Long totalGrade;
@@ -33,7 +34,8 @@ public class QuizDTO extends BaseDTO<Long> {
     public Long getTotalGrade() {
         Long total = 0L;
         for (QuestionWrapperDTO ques : questions)
-            total += ques.getGrade();
+            if (ques != null && ques.getGrade() != null)
+                total += ques.getGrade();
         return total;
     }
 }
