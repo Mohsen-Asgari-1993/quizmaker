@@ -1,6 +1,7 @@
 package ir.maktab25.quizmaker.service.impl;
 
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
+import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.domain.QuestionWrapper;
 import ir.maktab25.quizmaker.domain.Quiz;
 import ir.maktab25.quizmaker.repository.QuizRepository;
@@ -33,8 +34,8 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
     }
 
     @Override
-    public Long countByTeacherUsername(String username) {
-        return baseRepository.countAllByTeacher_UserName(username);
+    public Long countByTeacherUsername() {
+        return baseRepository.countAllByTeacher_UserName(CurrentUserDetail.getCurrentUsername());
     }
 
     @Override

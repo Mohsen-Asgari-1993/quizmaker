@@ -9,7 +9,7 @@ public interface QuizService extends BaseService<Quiz, Long> {
 
     List<Quiz> findAllByTeacherId(Long id);
 
-    Long countByTeacherUsername(String username);
+    Long countByTeacherUsername();
 
     Quiz addQuestion(Long quizId, List<Long> questionsId);
 
