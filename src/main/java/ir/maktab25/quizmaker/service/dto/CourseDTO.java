@@ -1,10 +1,9 @@
 package ir.maktab25.quizmaker.service.dto;
 
 import ir.maktab25.quizmaker.base.dto.BaseDTO;
-import ir.maktab25.quizmaker.domain.Quiz;
 import lombok.*;
 
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -26,8 +25,8 @@ public class CourseDTO extends BaseDTO<Long> {
 
     private UserDTO teacher;
 
-    private Set<UserDTO> students;
+    private Set<UserDTO> students = new HashSet<>();
 
-    private Set<QuizDTO> quizzes;
+    private Set<QuizDTO> quizzes = new HashSet<>();
 
 }
