@@ -5,9 +5,7 @@ import ir.maktab25.quizmaker.base.seurity.domian.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,5 +37,5 @@ public class Quiz extends BaseEntity<Long> {
     private Set<User> students = new HashSet<>();
 
     @OneToMany
-    private List<Question> questions = new ArrayList<>();
+    private Set<QuestionWrapper> questions = new HashSet<>();
 }

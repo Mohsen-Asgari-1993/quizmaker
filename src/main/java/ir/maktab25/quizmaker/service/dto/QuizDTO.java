@@ -25,6 +25,15 @@ public class QuizDTO extends BaseDTO<Long> {
 
     private List<UserDTO> students;
 
-    private List<QuestionDTO> questions;
+    private List<QuestionWrapperDTO> questions;
 
+    @Getter(AccessLevel.NONE)
+    private Long totalGrade;
+
+    public Long getTotalGrade() {
+        Long total = 0L;
+        for (QuestionWrapperDTO ques : questions)
+            total += ques.getGrade();
+        return total;
+    }
 }
