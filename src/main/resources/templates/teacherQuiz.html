@@ -198,6 +198,11 @@
                                                     <th tabindex="0" class="sorting_asc"
                                                         aria-controls="example2"
                                                         aria-label="ویرایش: activate to sort column descending"
+                                                        aria-sort="ascending" rowspan="1" colspan="1">نمره آزمون
+                                                    </th>
+                                                    <th tabindex="0" class="sorting_asc"
+                                                        aria-controls="example2"
+                                                        aria-label="ویرایش: activate to sort column descending"
                                                         aria-sort="ascending" rowspan="1" colspan="1">زمان مورد نیاز
                                                         آزمون
                                                     </th>
@@ -222,13 +227,14 @@
                                                 <tr class="odd" role="row" th:each="quiz : ${quizzes}">
                                                     <td th:text="${quiz.title}"></td>
                                                     <td th:text="${quiz.description}"></td>
+                                                    <td th:text="${quiz.totalGrade}"></td>
                                                     <td th:text="${quiz.timer}"></td>
                                                     <td>
                                                         <a type="submit"
                                                            th:href="@{/teacher/quiz/show/{courseId}/{quizId}
                                                            (courseId=${courseId}, quizId=${quiz.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
-                                                           ویرایش اطلاعات
+                                                            ویرایش اطلاعات
                                                         </a>
                                                     </td>
                                                     <td>
