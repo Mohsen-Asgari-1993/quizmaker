@@ -33,6 +33,9 @@ public class Quiz extends BaseEntity<Long> {
     @OneToOne
     private User teacher;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
     @ManyToMany
     private Set<User> students = new HashSet<>();
 

@@ -22,6 +22,8 @@ public class QuizDTO extends BaseDTO<Long> {
 
     private Long timer;
 
+    private boolean isActive;
+
     private UserDTO teacher;
 
     private List<UserDTO> students = new ArrayList<>();
