@@ -24,9 +24,9 @@ public class QuizResource extends BaseRestFulService<Quiz, QuizDTO, Long, QuizSe
         return ResponseEntity.ok(baseMapper.entityToDTOList(quizList));
     }
 
-    @GetMapping("/countByTeacherId/{username}")
-    public ResponseEntity<Long> countByTeacherUsername(@PathVariable String username) {
-        Long count = baseService.countByTeacherUsername(username);
+    @GetMapping("/countByTeacherId")
+    public ResponseEntity<Long> countByTeacherUsername() {
+        Long count = baseService.countByTeacherUsername();
         return ResponseEntity.ok(count);
     }
 
