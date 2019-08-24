@@ -11,9 +11,9 @@ public interface CourseService extends BaseService<Course, Long> {
 
     List<Course> findAllByTeacherId(Long teacherId);
 
-    List<Course> findAllByTeacherUsername(String username);
+    List<Course> findAllByTeacherUsername();
 
-    Long countAllByTeacherUserName(String username);
+    Long countAllByTeacherUserName();
 
     List<Course> findAllByStudents(Long studentId);
 

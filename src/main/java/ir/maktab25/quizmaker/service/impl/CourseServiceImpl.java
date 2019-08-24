@@ -53,13 +53,13 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
-    public List<Course> findAllByTeacherUsername(String username) {
-        return baseRepository.findAllByTeacher_UserName(username);
+    public List<Course> findAllByTeacherUsername() {
+        return baseRepository.findAllByTeacher_UserName(CurrentUserDetail.getCurrentUsername());
     }
 
     @Override
-    public Long countAllByTeacherUserName(String username) {
-        return baseRepository.countAllByTeacher_UserName(username);
+    public Long countAllByTeacherUserName() {
+        return baseRepository.countAllByTeacher_UserName(CurrentUserDetail.getCurrentUsername());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
 
     @Override
     public List<Course> findAllByStudentUsername() {
-        return baseRepository.findAllByStudents(studentService.findByUserName(CurrentUserDetail.getCurrentUsername()));
+        return baseRepository.findAllByStudents(studentService.findByUserName());
     }
 
     @Override
@@ -107,7 +107,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Course addQuiz(Quiz quiz, Long id) {
         Course course = baseRepository.getOne(id);
-        quiz.setTeacher(teacherService.findByUserName(CurrentUserDetail.getCurrentUsername()));
+        quiz.setTeacher(teacherService.findByUserName());
         Quiz save = quizService.save(quiz);
         Set<Quiz> quizzes = course.getQuizzes();
         if (quizzes == null)
