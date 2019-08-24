@@ -161,12 +161,12 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr class="odd" role="row" th:each="ques : ${questions}">
-                                                    <td th:text="${ques.title}"></td>
+                                                    <td th:text="${ques.getQuestion().title}"></td>
                                                     <td th:text="${ques.grade}"></td>
                                                     <td>
                                                         <a type="submit"
                                                            th:href="@{/teacher/question/show/{quizId}/{questionId}
-                                                           (quizId=${quizId}, quizId=${ques.id})}"
+                                                           (quizId=${quizId}, questionId=${ques.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
                                                             ویرایش اطلاعات
                                                         </a>
