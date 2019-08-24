@@ -1,6 +1,6 @@
 package ir.maktab25.quizmaker.service.dto;
 
-import ir.maktab25.quizmaker.base.domain.BaseEntity;
+import ir.maktab25.quizmaker.base.dto.BaseDTO;
 import lombok.*;
 
 @Getter
@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class QuestionWrapperDTO extends BaseEntity<Long> {
+public class QuestionWrapperDTO extends BaseDTO<Long> {
 
     private Long id;
 
