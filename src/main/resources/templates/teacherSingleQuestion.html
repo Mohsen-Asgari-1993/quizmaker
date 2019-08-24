@@ -115,8 +115,8 @@
                 <div class="row mb-2 justify-content-center align-items-center">
                     <div class="card-body col-6">
                         <form id="register-form" method="post" th:object="${questionWrapper}"
-                              th:action="@{/teacher/question/updateQuestion/{quizId}/{quesitonId}
-                              (quizId = ${quizId}, questionId= ${questionWrapper.id})}">
+                              th:action="@{/teacher/question/updateQuestion/{quizId}/{questionId}
+                              (quizId = ${quizId}, questionId = ${questionWrapper.id})}">
                             <!-- Date dd/mm/yyyy -->
                             <div class="form-group">
                                 <label>عنوان سوال: </label>
