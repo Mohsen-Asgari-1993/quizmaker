@@ -20,7 +20,7 @@ public class StudentQuizResultDTO extends BaseDTO<Long> {
 
     private Long studentId;
 
-    private Long quizId;
+    private QuizDTO quiz;
 
     @Getter(AccessLevel.NONE)
     private Long totalGrade;

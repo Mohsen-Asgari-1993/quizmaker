@@ -26,7 +26,7 @@ public class StudentQuizResult extends BaseEntity<Long> {
     @Column(name = "student_id")
     private Long studentId;
 
-    @Column(name = "quiz_id")
-    private Long quizId;
+    @OneToOne
+    private Quiz quiz;
 
 }
