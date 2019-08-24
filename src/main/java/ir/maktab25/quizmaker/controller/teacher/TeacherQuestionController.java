@@ -4,10 +4,12 @@ import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.rest.*;
 import ir.maktab25.quizmaker.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,22 +19,41 @@ import java.util.Objects;
 @RequestMapping("/teacher/question")
 public class TeacherQuestionController {
 
-    @Autowired
+    private final
     QuizResource quizResource;
 
-    @Autowired
+    private final
     QuestionResource questionResource;
 
-    @Autowired
+    private final
     DescriptiveQuestionResource descriptiveQuestionResource;
 
-    @Autowired
+    private final
     MultipleChoiceQuestionResource multipleChoiceQuestionResource;
 
-    @Autowired
+    private final
     TeacherResource teacherResource;
 
+    private final
+    QuestionWrapperResource questionWrapperResource;
+
+
     private static List<AnswerDTO> dtoList = new ArrayList<>();
+
+    @Autowired
+    public TeacherQuestionController(QuizResource quizResource,
+                                     QuestionResource questionResource,
+                                     DescriptiveQuestionResource descriptiveQuestionResource,
+                                     MultipleChoiceQuestionResource multipleChoiceQuestionResource,
+                                     TeacherResource teacherResource,
+                                     QuestionWrapperResource questionWrapperResource) {
+        this.quizResource = quizResource;
+        this.questionResource = questionResource;
+        this.descriptiveQuestionResource = descriptiveQuestionResource;
+        this.multipleChoiceQuestionResource = multipleChoiceQuestionResource;
+        this.teacherResource = teacherResource;
+        this.questionWrapperResource = questionWrapperResource;
+    }
 
     @GetMapping("/{quizId}")
     public String showQuestions(@PathVariable Long quizId, Model model) {
@@ -88,6 +109,21 @@ public class TeacherQuestionController {
         return "addQuestion";
     }
 
+    @GetMapping("/show/{quizId}/{questionId}")
+    public String showSingleQuestion(@PathVariable Long quizId, @PathVariable Long questionId, Model model) {
+        bindDataForSingleQuestion(quizId, questionId, model);
+        return "teacherSingleQuestion";
+
+    }
+
+    @PostMapping("/updateQuestion/{quizId}/{questionId}")
+    public String updateQuestion(@PathVariable Long quizId, @PathVariable Long questionId, Model model, QuestionWrapperDTO questionWrapperDTO) {
+        questionWrapperDTO.setId(questionId);
+        questionWrapperResource.update(questionWrapperDTO);
+        bindDataForTeacherQuestions(quizId, model);
+        return "teacherQuestions";
+    }
+
     private void bindDataForAddQuestionPage(Long quizId, Model model) {
         model.addAttribute("MultipleChoiceQuestion", new MultipleChoiceQuestionDTO());
         model.addAttribute("DescriptiveQuestion", new DescriptiveQuestionDTO());
@@ -107,5 +143,10 @@ public class TeacherQuestionController {
         model.addAttribute("quizId", quizId);
         model.addAttribute("name", teacherResource.findAllByUsername(CurrentUserDetail.getCurrentUsername()).getBody().getLastName());
 
+    }
+
+    private void bindDataForSingleQuestion(Long quizId, Long questionId, Model model) {
+        model.addAttribute("quizId", quizId);
+        model.addAttribute("questionWrapper", questionWrapperResource.getById(questionId).getBody());
     }
 }
