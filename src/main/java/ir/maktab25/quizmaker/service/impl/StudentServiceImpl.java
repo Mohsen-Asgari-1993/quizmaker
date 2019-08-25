@@ -1,7 +1,6 @@
 package ir.maktab25.quizmaker.service.impl;
 
 import ir.maktab25.quizmaker.base.seurity.domian.Role;
-import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
 import ir.maktab25.quizmaker.base.seurity.serivce.RoleService;
 import ir.maktab25.quizmaker.domain.Course;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -25,17 +23,25 @@ import java.util.Set;
 @Transactional
 public class StudentServiceImpl extends BasicUserServiceImpl<Student, Long, StudentRepository> implements StudentService {
 
-    @Autowired
+    private final
     RoleService roleService;
 
-    @Autowired
+    private final
     CourseService courseService;
 
-    @Autowired
+    private final
     TeacherService teacherService;
 
-    public StudentServiceImpl(StudentRepository baseRepository) {
+    @Autowired
+    public StudentServiceImpl(StudentRepository baseRepository,
+                              RoleService roleService,
+                              CourseService courseService,
+                              TeacherService teacherService) {
+
         super(baseRepository);
+        this.roleService = roleService;
+        this.courseService = courseService;
+        this.teacherService = teacherService;
     }
 
     @Override

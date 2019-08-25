@@ -25,18 +25,24 @@ import java.util.Set;
 @Transactional
 public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepository> implements CourseService {
 
-    public CourseServiceImpl(CourseRepository baseRepository) {
-        super(baseRepository);
-    }
-
-    @Autowired
+    private final
     TeacherService teacherService;
-
-    @Autowired
+    private final
     StudentService studentService;
+    private final
+    QuizService quizService;
 
     @Autowired
-    QuizService quizService;
+    public CourseServiceImpl(CourseRepository baseRepository,
+                             TeacherService teacherService,
+                             StudentService studentService,
+                             QuizService quizService) {
+
+        super(baseRepository);
+        this.teacherService = teacherService;
+        this.studentService = studentService;
+        this.quizService = quizService;
+    }
 
     @Override
     public Course save(Course t) {

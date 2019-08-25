@@ -14,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class QuestionWrapperServiceImpl extends BaseServiceImpl<QuestionWrapper, Long, QuestionWrapperRepository>
         implements QuestionWrapperService {
 
-    @Autowired
+    private final
     QuestionService questionService;
 
-    public QuestionWrapperServiceImpl(QuestionWrapperRepository baseRepository) {
+    @Autowired
+    public QuestionWrapperServiceImpl(QuestionWrapperRepository baseRepository, QuestionService questionService) {
         super(baseRepository);
+        this.questionService = questionService;
     }
 
     @Override
