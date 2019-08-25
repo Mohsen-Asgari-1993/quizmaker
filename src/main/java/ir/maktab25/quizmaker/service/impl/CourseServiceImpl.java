@@ -63,6 +63,11 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     }
 
     @Override
+    public Long countAllByStudentUserName() {
+        return baseRepository.countAllByStudents_UserName(studentService.findByUserName());
+    }
+
+    @Override
     public List<Course> findAllByStudents(Long studentId) {
         return baseRepository.findAllByStudents(studentService.findOne(studentId));
     }

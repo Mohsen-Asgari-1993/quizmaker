@@ -47,6 +47,12 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(count);
     }
 
+    @GetMapping("/countByStudentUsername")
+    public ResponseEntity<Long> countByStudentUserName() {
+        Long count = baseService.countAllByStudentUserName();
+        return ResponseEntity.ok(count);
+    }
+
     @GetMapping("/findAllByStudentUsername")
     public ResponseEntity<List<CourseDTO>> findAllByStudentUserName() {
         List<Course> courses = baseService.findAllByStudentUsername();
