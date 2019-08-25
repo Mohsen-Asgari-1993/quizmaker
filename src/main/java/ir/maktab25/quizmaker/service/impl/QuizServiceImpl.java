@@ -52,7 +52,7 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
 
     @Override
     public Long countByStudentUsername() {
-        return baseRepository.countAllByStudents_UserName(studentService.findByUserName());
+        return baseRepository.countAllByStudents_UserName(studentService.findByUserName(CurrentUserDetail.getCurrentUsername()));
     }
 
     @Override

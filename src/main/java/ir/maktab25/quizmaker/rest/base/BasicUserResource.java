@@ -3,6 +3,7 @@ package ir.maktab25.quizmaker.rest.base;
 import ir.maktab25.quizmaker.base.domain.BaseEntity;
 import ir.maktab25.quizmaker.base.dto.BaseDTO;
 import ir.maktab25.quizmaker.base.rest.BaseRestFulService;
+import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.service.base.BasicUserService;
 import ir.maktab25.quizmaker.service.mapper.base.BaseMapper;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +69,6 @@ public class BasicUserResource<E extends BaseEntity<PK>, D extends BaseDTO<PK>, 
 
     @GetMapping("/getAllByUsername")
     public ResponseEntity<D> findAllByUsername() {
-        return ResponseEntity.ok(baseMapper.toDTO(baseService.findByUserName()));
+        return ResponseEntity.ok(baseMapper.toDTO(baseService.findByUserName(CurrentUserDetail.getCurrentUsername())));
     }
 }

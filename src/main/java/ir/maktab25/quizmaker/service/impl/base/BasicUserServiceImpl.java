@@ -3,7 +3,6 @@ package ir.maktab25.quizmaker.service.impl.base;
 import ir.maktab25.quizmaker.base.service.impl.BaseServiceImpl;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
 import ir.maktab25.quizmaker.base.seurity.domian.enumeration.RoleName;
-import ir.maktab25.quizmaker.base.util.CurrentUserDetail;
 import ir.maktab25.quizmaker.repository.base.BasicUserRepository;
 import ir.maktab25.quizmaker.service.base.BasicUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,8 @@ public class BasicUserServiceImpl<E extends User, PK extends Serializable, Repo 
     }
 
     @Override
-    public E findByUserName() {
-        return baseRepository.findByUserName(CurrentUserDetail.getCurrentUsername());
+    public E findByUserName(String username) {
+        return baseRepository.findByUserName(username);
     }
 
     @Override

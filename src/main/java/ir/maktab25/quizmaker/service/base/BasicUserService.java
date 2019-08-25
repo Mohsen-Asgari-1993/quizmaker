@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface BasicUserService<E, PK extends Serializable> extends BaseService<E, PK> {
-    E findByUserName();
+    E findByUserName(String username);
 
     E enable(PK id);
 
