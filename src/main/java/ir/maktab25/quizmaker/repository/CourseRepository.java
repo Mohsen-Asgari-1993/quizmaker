@@ -20,6 +20,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Long countAllByTeacher_UserName(String username);
 
-    Long countAllByStudents_UserName(User students_userName);
+    List<Course> findAllByStudents_UserName(String username);
 
 }

@@ -41,4 +41,12 @@ public class QuizResource extends BaseRestFulService<Quiz, QuizDTO, Long, QuizSe
         Quiz quiz = baseService.addQuestion(quizId, questionIds);
         return ResponseEntity.ok(baseMapper.toDTO(quiz));
     }
+
+    @GetMapping("/changeState/{quizId}")
+    public ResponseEntity<QuizDTO> changeState(@PathVariable Long quizId) {
+        Quiz quiz = baseService.changeState(quizId);
+        return ResponseEntity.ok(baseMapper.toDTO(quiz));
+    }
+
+
 }

@@ -45,7 +45,8 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
 
     @Override
     public Long countByStudentUsername() {
-        return baseRepository.countAllByStudents_UserName(studentService.findByUserName(CurrentUserDetail.getCurrentUsername()));
+        List<Quiz> quizzes = baseRepository.findAllByStudents_UserName(CurrentUserDetail.getCurrentUsername());
+        return (long) quizzes.size();
     }
 
     @Override
@@ -59,6 +60,13 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
                                         new QuestionWrapper(null,
                                                 questionService.findOne(id),
                                                 null))));
+        return super.save(quiz);
+    }
+
+    @Override
+    public Quiz changeState(Long quizId) {
+        Quiz quiz = findOne(quizId);
+        quiz.setActive(!quiz.isActive());
         return super.save(quiz);
     }
 }
