@@ -23,25 +23,17 @@ import java.util.Set;
 @Transactional
 public class TeacherServiceImpl extends BasicUserServiceImpl<Teacher, Long, TeacherRepository> implements TeacherService {
 
-    private final
+    @Autowired
     RoleService roleService;
 
-    private final
+    @Autowired
     CourseService courseService;
 
-    private final
+    @Autowired
     StudentService studentService;
 
-    @Autowired
-    public TeacherServiceImpl(TeacherRepository baseRepository,
-                              RoleService roleService,
-                              CourseService courseService,
-                              StudentService studentService) {
-
+    public TeacherServiceImpl(TeacherRepository baseRepository) {
         super(baseRepository);
-        this.roleService = roleService;
-        this.courseService = courseService;
-        this.studentService = studentService;
     }
 
     @Override
@@ -77,7 +69,7 @@ public class TeacherServiceImpl extends BasicUserServiceImpl<Teacher, Long, Teac
         super.delete(id);
     }
 
-    private void setRole(Teacher teacher) {
+    private void setRole(Teacher teacher){
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.findByName(RoleName.TEACHER));
         teacher.setRoles(roles);

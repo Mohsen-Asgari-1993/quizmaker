@@ -19,13 +19,11 @@ public class MultipleChoiceQuestionServiceImpl extends
         BaseQuestionServiceImpl<MultipleChoiceQuestion, Long, MultipleChoiceQuestionRepository>
         implements MultipleChoiceQuestionService {
 
-    private final
+    @Autowired
     AnswerService answerService;
 
-    @Autowired
-    public MultipleChoiceQuestionServiceImpl(MultipleChoiceQuestionRepository baseRepository, AnswerService answerService) {
+    public MultipleChoiceQuestionServiceImpl(MultipleChoiceQuestionRepository baseRepository) {
         super(baseRepository);
-        this.answerService = answerService;
     }
 
     @Override

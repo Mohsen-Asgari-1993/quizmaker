@@ -23,25 +23,17 @@ import java.util.Set;
 @Transactional
 public class StudentServiceImpl extends BasicUserServiceImpl<Student, Long, StudentRepository> implements StudentService {
 
-    private final
+    @Autowired
     RoleService roleService;
 
-    private final
+    @Autowired
     CourseService courseService;
 
-    private final
+    @Autowired
     TeacherService teacherService;
 
-    @Autowired
-    public StudentServiceImpl(StudentRepository baseRepository,
-                              RoleService roleService,
-                              CourseService courseService,
-                              TeacherService teacherService) {
-
+    public StudentServiceImpl(StudentRepository baseRepository) {
         super(baseRepository);
-        this.roleService = roleService;
-        this.courseService = courseService;
-        this.teacherService = teacherService;
     }
 
     @Override
