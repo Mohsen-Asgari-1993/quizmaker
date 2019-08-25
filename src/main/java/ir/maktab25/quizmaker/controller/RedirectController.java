@@ -45,7 +45,10 @@ public class RedirectController {
     }
 
     @GetMapping("/student")
-    public String studentPage() {
+    public String studentPage(Model model) {
+        model.addAttribute("name", studentResource.findAllByUsername().getBody().getLastName());
+        model.addAttribute("course", courseResource.countByStudentUserName().getBody());
+        model.addAttribute("quiz", quizResource.countByStudentUsername().getBody());
         return "student";
     }
 }
