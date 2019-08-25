@@ -113,10 +113,14 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title d-inline">جدول آزمون های دوره</h3>
-                                <h3 class="card-title d-inline" th:text="${courseName}"></h3>
+
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills justify-content-center">
+                                <li class="nav-item"><a class="nav-link" href="#activeQuiz" data-toggle="tab">آزمون های فعال</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="#deActiveQuiz"
+                                                        data-toggle="tab">آزمون های غیر فعال</a></li>
+                            </ul>
+                            <div class="float-left">
                                 <button type="button" class="btn btn-primary btn-flat d-inline float-left"
                                         data-toggle="modal" data-target="#myModal">ایجاد آزمون جدید
                                 </button>
@@ -170,98 +174,239 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                            <!-- /.card-header -->
-                            <!-- /.card-body -->
-                            <div class="card-body">
-                                <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="example2_wrapper">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6"></div>
-                                        <div class="col-sm-12 col-md-6"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered table-hover dataTable text-center table-border-none"
-                                                   role="grid">
-                                                <thead>
-                                                <tr role="row">
-                                                    <th tabindex="0" class="sorting" aria-controls="example2"
-                                                        aria-label="عنوان دوره: activate to sort column ascending"
-                                                        rowspan="1" colspan="1">عنوان آزمون
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">توضیح آزمون
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">نمره آزمون
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">زمان مورد نیاز
-                                                        آزمون
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">لیست سوالات
-                                                    </th>
-                                                    <th tabindex="0" class="sorting_asc"
-                                                        aria-controls="example2"
-                                                        aria-label="ویرایش: activate to sort column descending"
-                                                        aria-sort="ascending" rowspan="1" colspan="1">حذف
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr class="odd" role="row" th:each="quiz : ${quizzes}">
-                                                    <td th:text="${quiz.title}"></td>
-                                                    <td th:text="${quiz.description}"></td>
-                                                    <td th:text="${quiz.totalGrade}"></td>
-                                                    <td th:text="${quiz.timer}"></td>
-                                                    <td>
-                                                        <a type="submit"
-                                                           th:href="@{/teacher/quiz/show/{courseId}/{quizId}
-                                                           (courseId=${courseId}, quizId=${quiz.id})}"
-                                                           class="btn btn-primary btn-flat d-inline">
-                                                            ویرایش اطلاعات
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a type="submit"
-                                                           th:href="@{/teacher/question/{id}(id=${quiz.id})}"
-                                                           class="btn btn-primary btn-flat d-inline">
-                                                            لیست سوالات
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a type="submit"
-                                                           th:href="@{/teacher/quiz/delete/{courseId}/{quizId}
-                                                           (courseId = ${courseId}, quizId = ${quiz.id})}"
-                                                           class="btn btn-primary btn-flat d-inline">
-                                                            حذف
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane" id="activeQuiz">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title d-inline">جدول آزمون های فعال دوره</h3>
+                                            <h3 class="card-title d-inline" th:text="${courseName}"></h3>
+
+
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- /.card-body -->
+                                        <div class="card-body">
+                                            <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="example2_wrapper">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-6"></div>
+                                                    <div class="col-sm-12 col-md-6"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table class="table table-bordered table-hover dataTable text-center table-border-none"
+                                                               role="grid">
+                                                            <thead>
+                                                            <tr role="row">
+                                                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                                                    aria-label="عنوان دوره: activate to sort column ascending"
+                                                                    rowspan="1" colspan="1">عنوان آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">توضیح آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">نمره آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">زمان مورد نیاز
+                                                                    آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1"> غیر فعال کردن
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">لیست سوالات
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">حذف
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr class="odd" role="row" th:each="quiz : ${activeQuizzes}">
+                                                                <td th:text="${quiz.title}"></td>
+                                                                <td th:text="${quiz.description}"></td>
+                                                                <td th:text="${quiz.totalGrade}"></td>
+                                                                <td th:text="${quiz.timer}"></td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/quiz/changeState/{courseId}/{quizId}
+                                                           (courseId=${courseId}, quizId=${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        غبر فعال کردن
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/quiz/show/{courseId}/{quizId}
+                                                           (courseId=${courseId}, quizId=${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        ویرایش اطلاعات
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/question/{id}(id=${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        لیست سوالات
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/quiz/delete/{courseId}/{quizId}
+                                                           (courseId = ${courseId}, quizId = ${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        حذف
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane active" id="deActiveQuiz">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title d-inline">جدول آزمون های غیر فعال دوره</h3>
+                                            <h3 class="card-title d-inline" th:text="${courseName}"></h3>
+
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- /.card-body -->
+                                        <div class="card-body">
+                                            <div class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-6"></div>
+                                                    <div class="col-sm-12 col-md-6"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table class="table table-bordered table-hover dataTable text-center table-border-none"
+                                                               role="grid">
+                                                            <thead>
+                                                            <tr role="row">
+                                                                <th tabindex="0" class="sorting" aria-controls="example2"
+                                                                    aria-label="عنوان دوره: activate to sort column ascending"
+                                                                    rowspan="1" colspan="1">عنوان آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">توضیح آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">نمره آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">زمان مورد نیاز
+                                                                    آزمون
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1"> فعال کردن
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1"> ویرایش
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">لیست سوالات
+                                                                </th>
+                                                                <th tabindex="0" class="sorting_asc"
+                                                                    aria-controls="example2"
+                                                                    aria-label="ویرایش: activate to sort column descending"
+                                                                    aria-sort="ascending" rowspan="1" colspan="1">حذف
+                                                                </th>
+                                                            </tr>
+                                                            </thead><tbody>
+                                                        <tr class="odd" role="row" th:each="quiz : ${deActiveQuizzes}">
+                                                                <td th:text="${quiz.title}"></td>
+                                                                <td th:text="${quiz.description}"></td>
+                                                                <td th:text="${quiz.totalGrade}"></td>
+                                                                <td th:text="${quiz.timer}"></td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/quiz/changeState/{courseId}/{quizId}
+                                                           (courseId=${courseId}, quizId=${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        فعال کردن
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/quiz/show/{courseId}/{quizId}
+                                                           (courseId=${courseId}, quizId=${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        ویرایش اطلاعات
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/question/{id}(id=${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        لیست سوالات
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a type="submit"
+                                                                       th:href="@{/teacher/quiz/delete/{courseId}/{quizId}
+                                                           (courseId = ${courseId}, quizId = ${quiz.id})}"
+                                                                       class="btn btn-primary btn-flat d-inline">
+                                                                        حذف
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
                     </div>
                 </div>
 
