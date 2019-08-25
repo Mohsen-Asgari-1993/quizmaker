@@ -19,25 +19,18 @@ import java.util.List;
 @Transactional
 public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository> implements QuizService {
 
-    private final
-    QuestionService questionService;
-
-    private final
-    StudentService studentService;
-
-    private final
-    QuestionWrapperService questionWrapperService;
+    @Autowired
+    private QuestionService questionService;
 
     @Autowired
-    public QuizServiceImpl(QuizRepository baseRepository,
-                           QuestionService questionService,
-                           StudentService studentService,
-                           QuestionWrapperService questionWrapperService) {
+    private StudentService studentService;
 
+    @Autowired
+    private QuestionWrapperService questionWrapperService;
+
+    @Autowired
+    public QuizServiceImpl(QuizRepository baseRepository) {
         super(baseRepository);
-        this.questionService = questionService;
-        this.studentService = studentService;
-        this.questionWrapperService = questionWrapperService;
     }
 
     @Override
