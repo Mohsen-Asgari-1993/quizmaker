@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/teacher/quiz")
 public class TeacherQuizController {
@@ -53,6 +55,14 @@ public class TeacherQuizController {
         return "teacherSingleQuiz";
     }
 
+    @GetMapping("/changeState/{courseId}/{quizId}")
+    public String changeStateQuiz(@PathVariable Long courseId, @PathVariable Long quizId, Model model) {
+        quizResource.changeState(quizId);
+        bindDataForTeacherQuiz(courseId, model);
+        return "teacherQuiz";
+    }
+
+
     @PostMapping("/updateQuiz/{courseId}/{quizId}")
     public String updateQuiz(@PathVariable("courseId") Long courseId,
                              @PathVariable("quizId") Long quizId,
@@ -66,7 +76,8 @@ public class TeacherQuizController {
 
     private void bindDataForTeacherQuiz(Long id, Model model) {
         CourseDTO courseDTO = courseResource.getById(id).getBody();
-        model.addAttribute("quizzes", courseDTO.getQuizzes());
+        model.addAttribute("activeQuizzes", courseDTO.getQuizzes().stream().filter(QuizDTO::isActive).collect(Collectors.toList()));
+        model.addAttribute("deActiveQuizzes", courseDTO.getQuizzes().stream().filter(q -> !q.isActive()).collect(Collectors.toList()));
         model.addAttribute("courseName", courseDTO.getTitle());
         model.addAttribute("quizDTO", new QuizDTO());
         model.addAttribute("courseId", id);
@@ -79,4 +90,5 @@ public class TeacherQuizController {
         model.addAttribute("courseId", courseId);
         model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
     }
+
 }
