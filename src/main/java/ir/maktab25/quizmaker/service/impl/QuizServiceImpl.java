@@ -8,6 +8,7 @@ import ir.maktab25.quizmaker.repository.QuizRepository;
 import ir.maktab25.quizmaker.service.QuestionService;
 import ir.maktab25.quizmaker.service.QuestionWrapperService;
 import ir.maktab25.quizmaker.service.QuizService;
+import ir.maktab25.quizmaker.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +19,25 @@ import java.util.List;
 @Transactional
 public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository> implements QuizService {
 
-    @Autowired
+    private final
     QuestionService questionService;
 
-    @Autowired
+    private final
+    StudentService studentService;
+
+    private final
     QuestionWrapperService questionWrapperService;
 
-    public QuizServiceImpl(QuizRepository baseRepository) {
+    @Autowired
+    public QuizServiceImpl(QuizRepository baseRepository,
+                           QuestionService questionService,
+                           StudentService studentService,
+                           QuestionWrapperService questionWrapperService) {
+
         super(baseRepository);
+        this.questionService = questionService;
+        this.studentService = studentService;
+        this.questionWrapperService = questionWrapperService;
     }
 
     @Override
@@ -36,6 +48,11 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
     @Override
     public Long countByTeacherUsername() {
         return baseRepository.countAllByTeacher_UserName(CurrentUserDetail.getCurrentUsername());
+    }
+
+    @Override
+    public Long countByStudentUsername() {
+        return baseRepository.countAllByStudents_UserName(studentService.findByUserName());
     }
 
     @Override

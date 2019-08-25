@@ -11,6 +11,8 @@ public interface QuizService extends BaseService<Quiz, Long> {
 
     Long countByTeacherUsername();
 
+    Long countByStudentUsername();
+
     Quiz addQuestion(Long quizId, List<Long> questionsId);
 
 }
