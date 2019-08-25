@@ -21,7 +21,7 @@ public class StudentCourseController {
     @GetMapping
     public String getCourse(Model model) {
         model.addAttribute("name", studentResource.findAllByUsername().getBody().getLastName());
-        model.addAttribute("courses", courseResource.findAllByStudentUserName());
+        model.addAttribute("courses", courseResource.findAllByStudentUserName().getBody());
         return "studentCourse";
     }
 }
