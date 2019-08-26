@@ -48,8 +48,14 @@ public class QuizResource extends BaseRestFulService<Quiz, QuizDTO, Long, QuizSe
         return ResponseEntity.ok(baseMapper.toDTO(quiz));
     }
 
+    @GetMapping("/findAllByQuestionId/{questionId}")
+    public ResponseEntity<List<QuizDTO>> findByQuestionId(@PathVariable Long questionId) {
+        List<Quiz> quizzes = baseService.findAllByQuestionId(questionId);
+        return ResponseEntity.ok(baseMapper.entityToDTOList(quizzes));
+    }
+
     @DeleteMapping("/deleteQuestion/{quizId}/{questionId}")
-    public ResponseEntity<QuizDTO> deleteQuestion(@PathVariable Long quizId, @PathVariable Long questionId){
+    public ResponseEntity<QuizDTO> deleteQuestion(@PathVariable Long quizId, @PathVariable Long questionId) {
         Quiz quiz = baseService.deleteQuestion(quizId, questionId);
         return ResponseEntity.ok(baseMapper.toDTO(quiz));
     }
