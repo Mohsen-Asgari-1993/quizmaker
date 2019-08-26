@@ -113,7 +113,6 @@ public class CourseServiceImpl extends BaseServiceImpl<Course, Long, CourseRepos
     @Override
     public Course addQuiz(Quiz quiz, Long id) {
         Course course = baseRepository.getOne(id);
-        quiz.setTeacher(teacherService.findByUserName(CurrentUserDetail.getCurrentUsername()));
         quiz.setActive(false);
         Quiz save = quizService.save(quiz);
         Set<Quiz> quizzes = course.getQuizzes();
