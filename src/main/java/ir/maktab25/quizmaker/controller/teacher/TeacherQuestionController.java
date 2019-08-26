@@ -130,6 +130,20 @@ public class TeacherQuestionController {
         return "teacherQuestions";
     }
 
+    @GetMapping("/bank")
+    public String getBank(Model model){
+        model.addAttribute("questions", questionResource.findAllTeacherQuestions().getBody());
+        model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
+        return "teacherQuestionBank";
+    }
+    @GetMapping("/bank/delete/{id}")
+    public String deleteQuestionFromBank(@PathVariable Long id, Model model){
+        questionResource.deleteById(id);
+        model.addAttribute("questions", questionResource.findAllTeacherQuestions().getBody());
+        model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
+        return "teacherQuestionBank";
+    }
+
     private void bindDataForAddQuestionPage(Long quizId, Model model) {
         model.addAttribute("MultipleChoiceQuestion", new MultipleChoiceQuestionDTO());
         model.addAttribute("DescriptiveQuestion", new DescriptiveQuestionDTO());
