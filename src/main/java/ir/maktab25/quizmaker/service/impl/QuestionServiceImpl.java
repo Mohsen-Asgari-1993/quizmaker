@@ -15,4 +15,6 @@ public class QuestionServiceImpl extends BaseQuestionServiceImpl<Question, Long,
     public QuestionServiceImpl(QuestionRepository baseRepository) {
         super(baseRepository);
     }
+
+    //TODO override delete method for deleting question from bank
 }
