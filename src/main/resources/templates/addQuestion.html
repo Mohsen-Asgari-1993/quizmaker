@@ -155,7 +155,7 @@
                                                                 <td th:text="${ques.title}"></td>
                                                                 <td>
                                                                     <input type="checkbox"
-                                                                           th:value="${idList.add(ques.id)}">
+                                                                           th:field="*{longList}" th:value="${ques.id}">
                                                                 </td>
                                                             </tr>
                                                             </tbody>
