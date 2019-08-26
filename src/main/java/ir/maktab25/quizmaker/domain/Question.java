@@ -21,7 +21,7 @@ public class Question extends BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", unique = true)
     private String title;
 
     @Column(name = "header")
