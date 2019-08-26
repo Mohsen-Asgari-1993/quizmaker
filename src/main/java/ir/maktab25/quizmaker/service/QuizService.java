@@ -18,4 +18,7 @@ public interface QuizService extends BaseService<Quiz, Long> {
     Quiz changeState(Long quizId);
 
     Quiz deleteQuestion(Long quizId, Long questionId);
+
+    List<Quiz> findAllByQuestionId(Long questionId);
+
 }

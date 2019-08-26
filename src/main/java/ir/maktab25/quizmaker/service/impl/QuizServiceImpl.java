@@ -88,6 +88,11 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz, Long, QuizRepository>
         return save(quiz);
     }
 
+    @Override
+    public List<Quiz> findAllByQuestionId(Long questionId) {
+        return baseRepository.findAllByQuestions_Question_Id(questionId);
+    }
+
     private boolean isExisted(Long id, Set<QuestionWrapper> questionWrappers) {
         for (QuestionWrapper ques : questionWrappers) {
             if (ques.getQuestion().getId().equals(id))

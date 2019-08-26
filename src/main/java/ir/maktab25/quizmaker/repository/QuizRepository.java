@@ -14,4 +14,6 @@ public interface QuizRepository extends JpaRepository<Quiz, Long> {
     Long countAllByTeacher_UserName(String username);
 
     List<Quiz> findAllByStudents_UserName(String students_userName);
+
+    List<Quiz> findAllByQuestions_Question_Id(Long questionId);
 }
