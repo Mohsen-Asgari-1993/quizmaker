@@ -173,7 +173,8 @@
                                                     </td>
                                                     <td>
                                                         <a type="submit"
-                                                           th:href="@{/teacher/questions/delete/{questionId}(questionId=${ques.id})}"
+                                                           th:href="@{/teacher/question/delete/{quizId}/{questionId}
+                                                           (quizId = ${quizId}, questionId = ${ques.id})}"
                                                            class="btn btn-primary btn-flat d-inline">
                                                             حذف
                                                         </a>
