@@ -67,8 +67,8 @@ public class TeacherQuestionController {
     }
 
     @PostMapping("/addFromBank/{quizId}")
-    public String addFromBank(@PathVariable Long quizId, Model model, List<Long> longList) {
-        quizResource.addQuestion(quizId, longList);
+    public String addFromBank(@PathVariable Long quizId, Model model, QuestionBankDTO questionBankDTO) {
+        quizResource.addQuestion(quizId, questionBankDTO.getLongList());
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
     }
@@ -115,6 +115,13 @@ public class TeacherQuestionController {
 
     }
 
+    @GetMapping("/delete/{quizId}/{questionId}")
+    public String deleteQuestion(@PathVariable Long quizId, @PathVariable Long questionId, Model model){
+        quizResource.deleteQuestion(quizId, questionId);
+        bindDataForTeacherQuestions(quizId, model);
+        return "teacherQuestions";
+    }
+
     @PostMapping("/updateQuestion/{quizId}/{questionId}")
     public String updateQuestion(@PathVariable Long quizId, @PathVariable Long questionId, Model model, QuestionWrapperDTO questionWrapperDTO) {
         questionWrapperDTO.setId(questionId);
@@ -128,7 +135,7 @@ public class TeacherQuestionController {
         model.addAttribute("DescriptiveQuestion", new DescriptiveQuestionDTO());
         model.addAttribute("quizId", quizId);
         model.addAttribute("questionBank", questionResource.findAllTeacherQuestions().getBody());
-        model.addAttribute("idList", new ArrayList<Long>());
+        model.addAttribute("idList", new QuestionBankDTO());
         model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
         model.addAttribute("answerList", dtoList);
         model.addAttribute("newAnswer", new AnswerDTO());
