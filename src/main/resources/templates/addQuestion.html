@@ -184,7 +184,7 @@
 
                                         </div>
                                         <div id="descriptive">
-                                            <form method="post" th:object="${DescriptiveQuestion}"
+                                            <form method="post" th:object="${questionDTO}"
                                                   th:action="@{/teacher/question/addDescriptive/{quizId}(quizId = ${quizId})}">
                                                 <!-- Date dd/mm/yyyy -->
                                                 <div class="form-group">
@@ -222,7 +222,7 @@
                                         </div>
                                         <div id="multiple">
 
-                                            <form method="post" id="multi" th:object="${MultipleChoiceQuestion}"
+                                            <form method="post" id="multi" th:object="${questionDTO}"
                                                   th:action="@{/teacher/question/addMulti/{quizId}(quizId = ${quizId})}">
 
                                                 <div class="form-group">
@@ -244,103 +244,43 @@
 
                                                 </div>
 
-                                            </form>
 
-                                            <div class="form-group">
-                                                <label class="float-right mb-2">گزینه ها:</label>
-                                                <button type="button"
-                                                        class="btn btn-primary btn-flat d-inline float-left mb-2"
-                                                        data-target="#myModal" data-toggle="modal">ایجاد گزینه جدید
-                                                </button>
-                                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">سوال
-                                                                    جدید</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form id="new-quiz" method="post"
-                                                                      th:action="@{/teacher/question/addAnswer/{quizId}(quizId = ${quizId})}"
-                                                                      th:object="${newAnswer}">
-                                                                    <div class="input-group mb-3">
-                                                                        <input class="form-control" id="title"
-                                                                               name="title"
-                                                                               placeholder="متن گزینه"
-                                                                               required="required" type="text"
-                                                                               th:field="${newAnswer.content}">
-                                                                    </div>
-                                                                    <div class="input-group mb-3">
-                                                                        <select id="role" class="form-control"
-                                                                                th:field="*{bool}">
-                                                                            <option type="text" value="true">پاسخ صحیح
-                                                                            <option type="text" value="false">پاسخ غلط
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="row float-left">
-                                                                        <!-- /.col -->
-                                                                        <div class="m-1">
-                                                                            <button type="button"
-                                                                                    class="btn btn-secondary"
-                                                                                    data-dismiss="modal">بازگشت
-                                                                            </button>
-
-                                                                        </div>
-                                                                        <!-- /.col -->
-                                                                        <div class="m-1">
-                                                                            <button type="submit"
-                                                                                    class="btn btn-primary">ذخیره
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label class="float-right mb-2">گزینه ها:</label>
+                                                    <button type="button"
+                                                            class="btn btn-primary btn-flat d-inline float-left mb-2"
+                                                            onclick="addInput()">ایجاد گزینه جدید
+                                                    </button>
+                                                    <br>
                                                 </div>
+                                                <div class="form-group">
 
-                                                <table class="table table-bordered table-hover dataTable text-center table-border-none "
-                                                       role="grid">
-                                                    <thead>
-                                                    <tr role="row">
-                                                        <th tabindex="0" class="sorting" aria-controls="example2"
-                                                            aria-label="عنوان دوره: activate to sort column ascending"
-                                                            rowspan="1" colspan="1">عنوان گزینه
-                                                        </th>
-                                                        <th tabindex="0" class="sorting_asc"
-                                                            aria-controls="example2"
-                                                            aria-label="ویرایش: activate to sort column descending"
-                                                            aria-sort="ascending" rowspan="1" colspan="1">پاسخ درست
-                                                        </th>
-                                                        <th tabindex="0" class="sorting_asc"
-                                                            aria-controls="example2"
-                                                            aria-label="ویرایش: activate to sort column descending"
-                                                            aria-sort="ascending" rowspan="1" colspan="1">حذف
-                                                            گزینه
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr class="odd" role="row" th:each="answer : ${answerList}">
-                                                        <td th:text="${answer.content}"></td>
-                                                        <td th:text="(${answer.getIsTrue()}? 'صحیح' : 'غلط')"></td>
-                                                        <td>
-                                                            <a type="submit"
-                                                               th:href="@{/teacher/question/deleteAnswer/{quizId}/{content}
-                                                           (quizId = ${quizId}, content = ${answer.content})}"
-                                                               class="btn btn-primary btn-flat d-inline">
-                                                                حذف
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                    <div class="row" id="answer">
+                                                        <div id="new" class="form-group">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control m-1"
+                                                                       th:field="*{strings}">
+                                                                <select class="form-control m-1 col-3"
+                                                                        th:field="*{integers}">
+                                                                    <option type="text" th:value="1">صحیح
+                                                                    <option type="text" th:value="0">غلط
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control m-1"
+                                                                   th:field="*{strings}">
+                                                            <select class="form-control m-1 col-3"
+                                                                    th:field="*{integers}">
+                                                                <option type="text" th:value="1">صحیح
+                                                                <option type="text" th:value="0">غلط
+                                                            </select>
+                                                        </div>
 
+                                                    </div>
 
-                                            </div>
+                                                </div>
+                                            </form>
 
                                             <div class="row mb-3 ">
                                                 <div class=" m-1 float-right">
@@ -358,7 +298,7 @@
                                             </div>
                                         </div>
                                     </div>
-<!--sadasdasd-->
+                                    <!--sadasdasd-->
                                 </div>
 
                             </div>
@@ -411,6 +351,18 @@
             $("#descriptive").hide();
             $("#multiple").show();
         }
+    });
+
+    function addInput() {
+        var b = $('#new').html();
+        $('#answer').append(b);
+    };
+
+    jQuery(function ($) {
+        $('.removeDiv').on('click', function () {
+            debugger
+            $(this).parent('div').remove();
+        });
     });
 
 </script>

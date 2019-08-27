@@ -1,6 +1,9 @@
 package ir.maktab25.quizmaker.controller.teacher;
 
-import ir.maktab25.quizmaker.rest.*;
+import ir.maktab25.quizmaker.rest.QuestionResource;
+import ir.maktab25.quizmaker.rest.QuestionWrapperResource;
+import ir.maktab25.quizmaker.rest.QuizResource;
+import ir.maktab25.quizmaker.rest.TeacherResource;
 import ir.maktab25.quizmaker.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,15 +66,16 @@ public class TeacherQuestionController {
     }
 
     @PostMapping("/addDescriptive/{quizId}")
-    public String addDescriptive(@PathVariable Long quizId, Model model) {
-
+    public String addDescriptive(@PathVariable Long quizId, Model model, QuestionDTO questionDTO) {
+        questionResource.addQuestion(quizId,questionDTO);
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
     }
 
     @PostMapping("/addMulti/{quizId}")
-    public String addMulti(@PathVariable Long quizId, Model model) {
-        dtoList.removeIf(Objects::nonNull);
+    public String addMulti(@PathVariable Long quizId, Model model, QuestionDTO questionDTO) {
+//        dtoList.removeIf(Objects::nonNull);
+        questionResource.addQuestion(quizId,questionDTO);
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
     }
@@ -102,7 +106,7 @@ public class TeacherQuestionController {
     }
 
     @GetMapping("/delete/{quizId}/{questionId}")
-    public String deleteQuestion(@PathVariable Long quizId, @PathVariable Long questionId, Model model){
+    public String deleteQuestion(@PathVariable Long quizId, @PathVariable Long questionId, Model model) {
         quizResource.deleteQuestion(quizId, questionId);
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
@@ -117,13 +121,14 @@ public class TeacherQuestionController {
     }
 
     @GetMapping("/bank")
-    public String getBank(Model model){
+    public String getBank(Model model) {
         model.addAttribute("questions", questionResource.findAllTeacherQuestions().getBody());
         model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
         return "teacherQuestionBank";
     }
+
     @GetMapping("/bank/delete/{id}")
-    public String deleteQuestionFromBank(@PathVariable Long id, Model model){
+    public String deleteQuestionFromBank(@PathVariable Long id, Model model) {
         questionResource.deleteById(id);
         model.addAttribute("questions", questionResource.findAllTeacherQuestions().getBody());
         model.addAttribute("name", teacherResource.findAllByUsername().getBody().getLastName());
@@ -131,6 +136,7 @@ public class TeacherQuestionController {
     }
 
     private void bindDataForAddQuestionPage(Long quizId, Model model) {
+        model.addAttribute("questionDTO", new QuestionDTO());
         model.addAttribute("quizId", quizId);
         model.addAttribute("questionBank", questionResource.findAllTeacherQuestions().getBody());
         model.addAttribute("idList", new QuestionBankDTO());

@@ -8,7 +8,9 @@ import lombok.*;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -32,4 +34,8 @@ public class QuestionDTO extends BaseDTO<Long> {
     private String questionType;
 
     private Set<AnswerDTO> answers = new HashSet<>();
+
+    private List<String> strings = new ArrayList<>();
+
+    private List<Integer> integers = new ArrayList<>();
 }
