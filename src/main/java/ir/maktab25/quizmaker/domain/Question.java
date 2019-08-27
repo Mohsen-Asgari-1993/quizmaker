@@ -2,9 +2,12 @@ package ir.maktab25.quizmaker.domain;
 
 import ir.maktab25.quizmaker.base.domain.BaseEntity;
 import ir.maktab25.quizmaker.base.seurity.domian.User;
+import ir.maktab25.quizmaker.domain.enumeration.QuesitonType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -32,4 +35,10 @@ public class Question extends BaseEntity<Long> {
 
     @OneToOne
     private User teacher;
+
+    @Enumerated(EnumType.STRING)
+    private QuesitonType questionType;
+
+    @OneToMany
+    private Set<Answer> answers = new HashSet<>();
 }
