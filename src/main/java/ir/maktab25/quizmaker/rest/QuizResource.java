@@ -18,43 +18,43 @@ public class QuizResource extends BaseRestFulService<Quiz, QuizDTO, Long, QuizSe
         super(baseService, baseMapper);
     }
 
-    @GetMapping("/findAllByTeacherId/{id}")
+    @GetMapping("/teachers/{id}")
     public ResponseEntity<List<QuizDTO>> findAllByTeacherId(@PathVariable Long id) {
         List<Quiz> quizList = baseService.findAllByTeacherId(id);
         return ResponseEntity.ok(baseMapper.entityToDTOList(quizList));
     }
 
-    @GetMapping("/countByTeacherUsername")
+    @GetMapping("/numbers/teachers/username")
     public ResponseEntity<Long> countByTeacherUsername() {
         Long count = baseService.countByTeacherUsername();
         return ResponseEntity.ok(count);
     }
 
-    @GetMapping("/countByStudentUsername")
+    @GetMapping("/numbers/students/username")
     public ResponseEntity<Long> countByStudentUsername() {
         Long count = baseService.countByStudentUsername();
         return ResponseEntity.ok(count);
     }
 
-    @PostMapping("/addQuestion/{quizId}")
+    @PostMapping("/{quizId}/questions")
     public ResponseEntity<QuizDTO> addQuestion(@PathVariable Long quizId, @RequestBody List<Long> questionIds) {
         Quiz quiz = baseService.addQuestion(quizId, questionIds);
         return ResponseEntity.ok(baseMapper.toDTO(quiz));
     }
 
-    @GetMapping("/changeState/{quizId}")
+    @GetMapping("/{quizId}/state/change")
     public ResponseEntity<QuizDTO> changeState(@PathVariable Long quizId) {
         Quiz quiz = baseService.changeState(quizId);
         return ResponseEntity.ok(baseMapper.toDTO(quiz));
     }
 
-    @GetMapping("/findAllByQuestionId/{questionId}")
+    @GetMapping("/questions/{questionId}")
     public ResponseEntity<List<QuizDTO>> findByQuestionId(@PathVariable Long questionId) {
         List<Quiz> quizzes = baseService.findAllByQuestionId(questionId);
         return ResponseEntity.ok(baseMapper.entityToDTOList(quizzes));
     }
 
-    @DeleteMapping("/deleteQuestion/{quizId}/{questionId}")
+    @DeleteMapping("/{quizId}/questions/{questionId}")
     public ResponseEntity<QuizDTO> deleteQuestion(@PathVariable Long quizId, @PathVariable Long questionId) {
         Quiz quiz = baseService.deleteQuestion(quizId, questionId);
         return ResponseEntity.ok(baseMapper.toDTO(quiz));

@@ -28,46 +28,46 @@ public class BasicUserResource<E extends BaseEntity<PK>, D extends BaseDTO<PK>, 
         return ResponseEntity.ok(baseMapper.toDTO(e));
     }
 
-    @GetMapping("/findAllEnable")
+    @GetMapping("/all/Enables")
     public ResponseEntity<List<D>> findAllEnables() {
         List<E> active = baseService.findAllByIsActive(true);
         return ResponseEntity.ok(baseMapper.entityToDTOList(active));
     }
 
-    @GetMapping("/findAllDisable")
+    @GetMapping("/all/disables")
     public ResponseEntity<List<D>> findAllDisable() {
         List<E> disable = baseService.findAllByIsActive(false);
         return ResponseEntity.ok(baseMapper.entityToDTOList(disable));
     }
 
-    @GetMapping("/countAllEnable")
+    @GetMapping("/numbers/all/enables")
     public ResponseEntity<Long> countAllEnables() {
         Long active = baseService.countAllByIsActive(true);
         return ResponseEntity.ok(active);
     }
 
-    @GetMapping("/countAllDisable")
+    @GetMapping("/numbers/all/disables")
     public ResponseEntity<Long> countAllDisable() {
         Long all = baseService.countAllByIsActive(false);
         return ResponseEntity.ok(all);
     }
 
-    @GetMapping("/getAllByRoleName/{name}")
+    @GetMapping("/all/role-name/{name}")
     public ResponseEntity<List<D>> findAllByRoleName(@PathVariable String name) {
         return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByRoleName(name)));
     }
 
-    @GetMapping("/getAllByFirstName/{name}")
+    @GetMapping("/all/first-name/{name}")
     public ResponseEntity<List<D>> findAllByFirstName(@PathVariable String name) {
         return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByFirstName(name)));
     }
 
-    @GetMapping("/getAllByLastName/{name}")
+    @GetMapping("/all/last-name/{name}")
     public ResponseEntity<List<D>> findAllByLastName(@PathVariable String name) {
         return ResponseEntity.ok(baseMapper.entityToDTOList(baseService.findAllByLastName(name)));
     }
 
-    @GetMapping("/getAllByUsername")
+    @GetMapping("/all/username")
     public ResponseEntity<D> findAllByUsername() {
         return ResponseEntity.ok(baseMapper.toDTO(baseService.findByUserName(CurrentUserDetail.getCurrentUsername())));
     }

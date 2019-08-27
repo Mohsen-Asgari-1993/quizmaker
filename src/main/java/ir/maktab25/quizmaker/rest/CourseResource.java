@@ -25,7 +25,7 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         super(baseService, baseMapper);
     }
 
-    @GetMapping("/findByTeacher/{id}")
+    @GetMapping("/teachers/{id}")
     public ResponseEntity<List<CourseDTO>> findAllByTeacherId(@PathVariable("id") Long id) {
         List<Course> courses = baseService.findAllByTeacherId(id);
         if (courses == null)
@@ -33,7 +33,7 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(baseMapper.entityToDTOList(courses));
     }
 
-    @GetMapping("/findByTeacherUsername")
+    @GetMapping("/teachers/username")
     public ResponseEntity<List<CourseDTO>> findAllByTeacherUserName() {
         List<Course> courses = baseService.findAllByTeacherUsername();
         if (courses == null)
@@ -41,25 +41,25 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(baseMapper.entityToDTOList(courses));
     }
 
-    @GetMapping("/countByTeacherUsername")
+    @GetMapping("/numbers/teachers/username")
     public ResponseEntity<Long> countByTeacherUserName() {
         Long count = baseService.countAllByTeacherUserName();
         return ResponseEntity.ok(count);
     }
 
-    @GetMapping("/countByStudentUsername")
+    @GetMapping("/numbers/students/username")
     public ResponseEntity<Long> countByStudentUserName() {
         Long count = baseService.countAllByStudentUserName();
         return ResponseEntity.ok(count);
     }
 
-    @GetMapping("/findAllByStudentUsername")
+    @GetMapping("/students/username")
     public ResponseEntity<List<CourseDTO>> findAllByStudentUserName() {
         List<Course> courses = baseService.findAllByStudentUsername();
         return ResponseEntity.ok(baseMapper.entityToDTOList(courses));
     }
 
-    @GetMapping("/findByStudent/{id}")
+    @GetMapping("/students/{id}")
     public ResponseEntity<List<CourseDTO>> findAllByStudents(@PathVariable Long id) {
         List<Course> courses = baseService.findAllByStudents(id);
         if (courses == null)
@@ -67,43 +67,43 @@ public class CourseResource extends BaseRestFulService<Course, CourseDTO, Long, 
         return ResponseEntity.ok(baseMapper.entityToDTOList(courses));
     }
 
-    @PostMapping("/addTeacher/{courseId}/{teacherId}")
+    @PostMapping("/{courseId}/teachers/{teacherId}")
     public ResponseEntity<CourseDTO> addTeacher(@PathVariable Long teacherId, @PathVariable("courseId") Long id) {
         Course course = baseService.addTeacher(teacherId, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
-    @GetMapping("/addSingleStudent/{courseId}/{studentId}")
+    @GetMapping("/{courseId}/students/{studentId}")
     public ResponseEntity<CourseDTO> addStudent(@PathVariable("courseId") Long id, @PathVariable Long studentId) {
         Course course = baseService.addStudent(studentId, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
-    @PostMapping("/addStudents/{courseId}")
+    @PostMapping("/{courseId}/students")
     public ResponseEntity<CourseDTO> addStudents(@RequestBody List<Long> studentsId, @PathVariable("courseId") Long id) {
         Course course = baseService.addStudents(studentsId, id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
-    @PostMapping("/addQuiz/{courseId}")
+    @PostMapping("{courseId}/quizzes/")
     public ResponseEntity<CourseDTO> addQuiz(@RequestBody QuizDTO quizDTO, @PathVariable("courseId") Long id) {
         Course course = baseService.addQuiz(quizMapper.toEntity(quizDTO), id);
         return ResponseEntity.ok(baseMapper.toDTO(course));
     }
 
-    @DeleteMapping("/deleteStudent/{courseId}/{studentId}")
+    @DeleteMapping("/{courseId}/students/{studentId}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long courseId, @PathVariable Long studentId) {
         baseService.deleteStudent(courseId, studentId);
         return ResponseEntity.ok().header("deleted", "successful").build();
     }
 
-    @DeleteMapping("/deleteQuiz/{courseId}/{quizId}")
+    @DeleteMapping("/{courseId}/quizzes/{quizId}")
     public ResponseEntity<Void> deleteQuiz(@PathVariable Long courseId, @PathVariable Long quizId) {
         baseService.deleteQuiz(courseId, quizId);
         return ResponseEntity.ok().header("deleted", "successful").build();
     }
 
-    @GetMapping("/countAll")
+    @GetMapping("/numbers")
     public ResponseEntity<Long> countAll() {
         return ResponseEntity.ok(baseService.countAll());
     }

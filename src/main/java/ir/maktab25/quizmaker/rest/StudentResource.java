@@ -22,7 +22,7 @@ public class StudentResource extends BasicUserResource<Student, StudentDTO, Long
         super(baseService, baseMapper);
     }
 
-    @PostMapping("/changeRole")
+    @PostMapping("/role-change")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<StudentDTO> changeRole(@RequestBody StudentDTO studentDTO) {
         Student student = baseService.changeRole(baseMapper.toEntity(studentDTO));
