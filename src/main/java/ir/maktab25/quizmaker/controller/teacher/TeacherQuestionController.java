@@ -25,31 +25,20 @@ public class TeacherQuestionController {
     QuestionResource questionResource;
 
     private final
-    DescriptiveQuestionResource descriptiveQuestionResource;
-
-    private final
-    MultipleChoiceQuestionResource multipleChoiceQuestionResource;
-
-    private final
     TeacherResource teacherResource;
 
     private final
     QuestionWrapperResource questionWrapperResource;
-
 
     private static List<AnswerDTO> dtoList = new ArrayList<>();
 
     @Autowired
     public TeacherQuestionController(QuizResource quizResource,
                                      QuestionResource questionResource,
-                                     DescriptiveQuestionResource descriptiveQuestionResource,
-                                     MultipleChoiceQuestionResource multipleChoiceQuestionResource,
                                      TeacherResource teacherResource,
                                      QuestionWrapperResource questionWrapperResource) {
         this.quizResource = quizResource;
         this.questionResource = questionResource;
-        this.descriptiveQuestionResource = descriptiveQuestionResource;
-        this.multipleChoiceQuestionResource = multipleChoiceQuestionResource;
         this.teacherResource = teacherResource;
         this.questionWrapperResource = questionWrapperResource;
     }
@@ -74,17 +63,14 @@ public class TeacherQuestionController {
     }
 
     @PostMapping("/addDescriptive/{quizId}")
-    public String addDescriptive(@PathVariable Long quizId, Model model, DescriptiveQuestionDTO questionDTO) {
-        descriptiveQuestionResource.addQuestion(quizId, questionDTO);
+    public String addDescriptive(@PathVariable Long quizId, Model model) {
 
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
     }
 
     @PostMapping("/addMulti/{quizId}")
-    public String addMulti(@PathVariable Long quizId, Model model, MultipleChoiceQuestionDTO multipleChoiceQuestionDTO) {
-        multipleChoiceQuestionDTO.setAnswers(dtoList);
-        multipleChoiceQuestionResource.addQuestion(quizId, multipleChoiceQuestionDTO);
+    public String addMulti(@PathVariable Long quizId, Model model) {
         dtoList.removeIf(Objects::nonNull);
         bindDataForTeacherQuestions(quizId, model);
         return "teacherQuestions";
@@ -145,8 +131,6 @@ public class TeacherQuestionController {
     }
 
     private void bindDataForAddQuestionPage(Long quizId, Model model) {
-        model.addAttribute("MultipleChoiceQuestion", new MultipleChoiceQuestionDTO());
-        model.addAttribute("DescriptiveQuestion", new DescriptiveQuestionDTO());
         model.addAttribute("quizId", quizId);
         model.addAttribute("questionBank", questionResource.findAllTeacherQuestions().getBody());
         model.addAttribute("idList", new QuestionBankDTO());
